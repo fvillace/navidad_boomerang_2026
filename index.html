@@ -4,555 +4,341 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cena de Navidad 2026</title>
-<meta name="description" content="Elige el día de la celebración de Navidad de Boomerang TV y reserva tu sitio en la mesa.">
+<meta name="description" content="Vota la fecha de la celebración de Navidad de Boomerang TV: cena el jueves 10 o comida el viernes 11 de diciembre.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Parisienne&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
 <style>
-/* Diseño: un salón en Nochebuena. Pared verde abeto con damasco, guirnalda encendida arriba,
-   la escena (chimenea, ventana nevada, árbol) y delante la mesa con mantel escocés
-   donde cada opción es una tarjeta de sitio. */
+/* Diseño: mesa de Navidad vista desde arriba. Barra verde abeto, fondo crema con destellos,
+   esquinas con pino, bolas, regalos y velas; guirnaldas de luces que se encienden y titilan;
+   en el centro, la tarjeta de votación blanca con acento granate. */
 :root {
-  --wall: #183322;
-  --wall-2: #1f3f2b;
-  --pine: #2d5a3b;
-  --red: #9e1b2c;
-  --red-deep: #6e1220;
-  --gold: #d4a94e;
-  --gold-soft: #f0d58c;
-  --paper: #f7f0e1;
-  --paper-2: #efe4cc;
-  --ink: #3b2416;
-  --ink-soft: #7a5a44;
-  --candle: #ffcf7a;
-  --snow: #ffffff;
-  --display: "IM Fell English", "Iowan Old Style", Georgia, serif;
-  --caps: "IM Fell English SC", "Iowan Old Style", Georgia, serif;
-  --hand: "Parisienne", "Snell Roundhand", cursive;
-  --body: "Crimson Pro", Georgia, "Times New Roman", serif;
-  color-scheme: dark;
+  --pine: #133b2c;
+  --pine-2: #1d5240;
+  --green: #2d6a4f;
+  --burgundy: #8b1a2b;
+  --burgundy-2: #a4243a;
+  --gold: #c9a24a;
+  --gold-soft: #e9cf8a;
+  --cream: #f6efe2;
+  --cream-2: #efe4d0;
+  --card: #fffdf9;
+  --ink: #163a2e;
+  --ink-soft: #6c6a62;
+  --line: #e7dfd0;
+  --font: "Nunito", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; }
 body {
-  min-height: 100vh; overflow-x: hidden;
-  font-family: var(--body); font-size: 18px; line-height: 1.55; color: var(--paper);
-  background-color: var(--wall);
-  background-image:
-    radial-gradient(1200px 600px at 50% 20%, rgba(255,190,90,.16), transparent 65%),
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,.035) 0 10px, transparent 11px),
-    radial-gradient(circle at 0 0, rgba(255,255,255,.03) 0 6px, transparent 7px),
-    linear-gradient(180deg, var(--wall-2), var(--wall) 60%);
-  background-size: auto, 56px 56px, 56px 56px, auto;
+  min-height: 100vh; font-family: var(--font); font-size: 17px; line-height: 1.5; color: var(--ink); overflow-x: hidden;
+  background: radial-gradient(1100px 700px at 50% 45%, #fbf6ec 0%, var(--cream) 55%, var(--cream-2) 100%);
+  background-color: var(--cream);
 }
 
-/* ---------- Guirnalda superior ---------- */
-.garland { position: relative; height: 84px; width: 100%; z-index: 2; }
-.garland svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.bulb { opacity: .18; }
-.lit .bulb { animation: bulb-on .35s ease-out forwards, bulb-glow 2.8s ease-in-out infinite alternate; animation-delay: var(--d), calc(var(--d) + .35s); }
-@keyframes bulb-on { from { opacity: .18; } to { opacity: 1; } }
-@keyframes bulb-glow { from { opacity: 1; } to { opacity: .72; } }
+/* ---------- Barra superior ---------- */
+.topbar { position: sticky; top: 0; z-index: 20; background: var(--pine); color: #f3ead6; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+.topbar-in { max-width: 1400px; margin: 0 auto; height: 72px; display: flex; align-items: center; gap: 24px; padding: 0 max(20px, env(safe-area-inset-right, 0px)) 0 max(20px, env(safe-area-inset-left, 0px)); }
+.brand { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 24px; white-space: nowrap; color: #f8f1e2; }
+.brand svg { width: 38px; height: 44px; flex: none; }
+.brand .y { color: var(--gold-soft); }
+.nav { display: flex; align-items: stretch; gap: 8px; margin: 0 auto; height: 100%; }
+.nav button { display: inline-flex; align-items: center; gap: 9px; height: 100%; padding: 0 16px; background: none; border: 0; border-bottom: 3px solid transparent; border-top: 3px solid transparent; color: rgba(243,234,214,.7); font: inherit; font-weight: 600; font-size: 16px; cursor: pointer; }
+.nav button svg { width: 22px; height: 22px; }
+.nav button:hover { color: #fff; }
+.nav button[aria-current="page"] { color: var(--gold-soft); border-bottom-color: var(--gold-soft); }
+.nav button:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: -4px; }
+.music { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.08); border: 1px solid rgba(233,207,138,.45); color: #f3ead6; border-radius: 999px; padding: 8px 16px 8px 10px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; white-space: nowrap; }
+.music:hover { background: rgba(255,255,255,.14); }
+.music:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 2px; }
+.music .disc { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: #5d6b63; color: #fff; }
+.music[aria-pressed="true"] .disc { background: var(--burgundy-2); }
+.eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.eq i { width: 3px; height: 4px; border-radius: 2px; background: #fff; }
+.music[aria-pressed="true"] .eq i { animation: eq .8s ease-in-out infinite alternate; }
+.music[aria-pressed="true"] .eq i:nth-child(2) { animation-delay: -.3s; } .music[aria-pressed="true"] .eq i:nth-child(3) { animation-delay: -.55s; }
+@keyframes eq { from { height: 3px; } to { height: 14px; } }
+@media (max-width: 900px) {
+  .nav button span { display: none; }
+  .brand { font-size: 19px; } .brand svg { width: 30px; height: 36px; }
+  .music .txt { display: none; } .music { padding: 6px; }
+  .topbar-in { gap: 8px; }
+}
+@media (max-width: 560px) { .brand .t2 { display: none; } .nav button { padding: 0 10px; } .topbar-in { padding: 0 12px; } .brand { font-size: 17px; gap: 8px; } }
 
-/* ---------- Cabecera ---------- */
-.wrap { position: relative; z-index: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-header { max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 6px; }
-.eyebrow { font-family: var(--caps); font-size: 17px; letter-spacing: .14em; color: var(--gold-soft); }
-.eyebrow::before, .eyebrow::after { content: "✦"; color: var(--gold); margin: 0 .6em; font-size: .8em; vertical-align: .1em; }
-h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(36px, 6.4vw, 64px); line-height: 1.05; color: var(--paper); text-wrap: balance; text-shadow: 0 2px 18px rgba(255,190,90,.25); }
-h1 em { font-style: italic; color: var(--gold-soft); }
-.lead { margin: 4px 0 0; max-width: 36rem; font-size: 20px; color: #e6dcc4; }
-.gratitude { position: relative; height: 1.6em; width: 100%; max-width: 36rem; margin-top: 2px; font-family: var(--display); font-style: italic; font-size: 19px; color: var(--gold-soft); }
-.gratitude span { position: absolute; left: 0; right: 0; opacity: 0; transition: opacity 1.2s ease; }
-.gratitude span.on { opacity: 1; }
-
-/* ---------- Escena del salón ---------- */
-.room { position: relative; width: 100%; max-width: 1040px; margin: 18px auto 0; aspect-ratio: 1200 / 440; }
-.room > svg, .room > canvas { position: absolute; }
-.room > svg { inset: 0; width: 100%; height: 100%; overflow: visible; }
-#snow { left: 38.33%; top: 11.36%; width: 23.34%; height: 54.55%; }
-.flame { transform-box: fill-box; transform-origin: 50% 100%; }
-.f1 { animation: fire1 .9s ease-in-out infinite alternate; }
-.f2 { animation: fire2 .7s ease-in-out infinite alternate; }
-.f3 { animation: fire3 1.1s ease-in-out infinite alternate; }
-@keyframes fire1 { 0% { transform: scale(1, 1) skewX(0); } 40% { transform: scale(.94, 1.08) skewX(3deg); } 100% { transform: scale(1.05, .92) skewX(-4deg); } }
-@keyframes fire2 { 0% { transform: scale(1, .9) skewX(-3deg); } 60% { transform: scale(.92, 1.12) skewX(4deg); } 100% { transform: scale(1.04, 1) skewX(-2deg); } }
-@keyframes fire3 { 0% { transform: scale(.9, 1); } 50% { transform: scale(1.06, 1.15) skewX(-3deg); } 100% { transform: scale(.96, .94) skewX(3deg); } }
-.fireglow { animation: fireglow 1.8s ease-in-out infinite alternate; }
-@keyframes fireglow { from { opacity: .55; } to { opacity: .9; } }
-.ember { animation: ember 3s ease-out infinite; opacity: 0; }
-@keyframes ember { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate(var(--dx, 6px), -90px); opacity: 0; } }
-.candle-flame { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(0); }
-.lit .candle-flame { animation: light .6s ease-out forwards 2.4s, flicker 1.6s ease-in-out infinite 3s; }
+/* ---------- Decoración ---------- */
+.decor { position: fixed; inset: 0; top: 72px; z-index: 0; pointer-events: none; overflow: hidden; }
+.bokeh { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,214,140,.85), rgba(255,214,140,0) 70%); filter: blur(2px); opacity: 0; }
+.lit .bokeh { animation: bokeh 4s ease-in-out infinite alternate; animation-delay: var(--d); }
+@keyframes bokeh { from { opacity: .15; } to { opacity: .7; } }
+.corner { position: absolute; width: clamp(200px, 30vw, 500px); height: auto; overflow: visible; }
+.corner.tl { left: 0; top: 0; } .corner.tr { right: 0; top: 0; }
+.corner.bl { left: 0; bottom: 0; } .corner.br { right: 0; bottom: 0; }
+.lights { position: absolute; left: 0; top: 0; width: 100%; height: 200px; overflow: visible; }
+.bulb { opacity: .12; }
+.lit .bulb { animation: on .25s ease-out forwards, tw var(--t, 2.4s) ease-in-out infinite alternate; animation-delay: var(--d), calc(var(--d) + .25s); }
+@keyframes on { to { opacity: 1; } }
+@keyframes tw { 0% { opacity: 1; } 60% { opacity: .9; } 100% { opacity: .3; } }
+.bulb-glow { opacity: 0; }
+.lit .bulb-glow { animation: glowon .25s ease-out forwards, twg var(--t, 2.4s) ease-in-out infinite alternate; animation-delay: var(--d), calc(var(--d) + .25s); }
+@keyframes glowon { to { opacity: .55; } }
+@keyframes twg { 0% { opacity: .55; } 100% { opacity: .08; } }
+.flame { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(0); }
+.lit .flame { animation: light .5s ease-out forwards 1.6s, flicker 1.4s ease-in-out infinite 2.1s; }
 @keyframes light { to { transform: scale(1); } }
-@keyframes flicker { 0%, 100% { transform: scale(1) skewX(0); } 20% { transform: scale(.94, 1.06) skewX(2deg); } 45% { transform: scale(1.03, .95) skewX(-2deg); } 70% { transform: scale(.97, 1.04) skewX(1deg); } }
-.candle-halo { opacity: 0; }
-.lit .candle-halo { animation: halo-on .8s ease-out forwards 2.4s, halo 2.4s ease-in-out infinite alternate 3.2s; }
-@keyframes halo-on { to { opacity: .55; } }
-@keyframes halo { from { opacity: .55; } to { opacity: .35; } }
-.tlight { opacity: .15; }
-.lit .tlight { animation: bulb-on .3s ease-out forwards, twinkle 2.6s ease-in-out infinite alternate; animation-delay: var(--d), calc(var(--d) + .3s); }
-@keyframes twinkle { 0% { opacity: 1; } 100% { opacity: .45; } }
-.tstar { transform-box: fill-box; transform-origin: 50% 50%; opacity: .3; }
-.lit .tstar { animation: bulb-on .6s ease-out forwards 2s, star 3s ease-in-out infinite alternate 2.6s; }
-@keyframes star { from { transform: scale(1); filter: drop-shadow(0 0 4px #ffd76a); } to { transform: scale(1.08); filter: drop-shadow(0 0 14px #ffd76a); } }
-.stocking { transform-box: fill-box; transform-origin: 50% 0; animation: hang 5s ease-in-out infinite alternate; }
-.stocking:nth-of-type(2) { animation-delay: -1.5s; } .stocking:nth-of-type(3) { animation-delay: -3s; } .stocking:nth-of-type(4) { animation-delay: -4.2s; }
-@keyframes hang { from { transform: rotate(-1.5deg); } to { transform: rotate(1.5deg); } }
-.windowstar { animation: wstar 4s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 50%; }
-@keyframes wstar { from { opacity: .75; transform: scale(.95); } to { opacity: 1; transform: scale(1.08); } }
+@keyframes flicker { 0%, 100% { transform: scale(1) skewX(0); } 25% { transform: scale(.94, 1.07) skewX(2deg); } 50% { transform: scale(1.04, .95) skewX(-2deg); } 75% { transform: scale(.97, 1.04) skewX(1deg); } }
+.candleglow { opacity: 0; }
+.lit .candleglow { animation: glowon2 .8s ease-out forwards 1.6s, cglow 2.2s ease-in-out infinite alternate 2.4s; }
+@keyframes glowon2 { to { opacity: .7; } }
+@keyframes cglow { from { opacity: .7; } to { opacity: .45; } }
+.swing { transform-box: fill-box; transform-origin: 50% 0; animation: swing 5s ease-in-out infinite alternate; }
+.swing.s2 { animation-duration: 6.5s; animation-delay: -2s; } .swing.s3 { animation-duration: 4.2s; animation-delay: -1s; }
+@keyframes swing { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+.star { transform-box: fill-box; transform-origin: 50% 50%; animation: star 3s ease-in-out infinite alternate; }
+@keyframes star { from { opacity: .55; transform: scale(.9); } to { opacity: 1; transform: scale(1.06); } }
 
-/* ---------- La mesa ---------- */
-.table {
-  position: relative; max-width: 860px; margin: -4.5% auto 0; z-index: 2;
-  border-radius: 14px; padding: clamp(14px, 3vw, 26px);
-  background-color: #8f1a29;
-  background-image:
-    repeating-linear-gradient(90deg, rgba(10,40,22,.45) 0 18px, transparent 18px 64px),
-    repeating-linear-gradient(0deg, rgba(10,40,22,.45) 0 18px, transparent 18px 64px),
-    repeating-linear-gradient(90deg, transparent 0 30px, rgba(240,213,140,.22) 30px 32px, transparent 32px 64px),
-    repeating-linear-gradient(0deg, transparent 0 30px, rgba(240,213,140,.22) 30px 32px, transparent 32px 64px);
-  box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06);
-}
-.centerpiece { position: absolute; z-index: 3; left: 50%; top: -58px; width: min(420px, 80%); transform: translateX(-50%); pointer-events: none; }
-.centerpiece svg { width: 100%; height: auto; overflow: visible; }
-.runner {
-  position: relative; background: var(--paper); color: var(--ink); border-radius: 6px;
-  padding: clamp(46px, 7vw, 64px) clamp(16px, 4vw, 40px) clamp(24px, 4vw, 34px);
-  box-shadow: inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--gold), inset 0 0 0 10px var(--paper), inset 0 0 0 11px rgba(212,169,78,.5);
-}
-form { display: flex; flex-direction: column; gap: 24px; }
+/* ---------- Tarjeta ---------- */
+main { position: relative; z-index: 2; padding: 56px max(16px, env(safe-area-inset-left, 0px)) calc(60px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.card { width: 100%; max-width: 640px; background: rgba(255,253,249,.97); border-radius: 26px; box-shadow: 0 30px 70px rgba(70,45,20,.18), 0 2px 0 rgba(255,255,255,.8) inset; padding: clamp(26px, 5vw, 44px) clamp(20px, 5vw, 52px) clamp(26px, 4vw, 40px); text-align: center; }
+.emblem { width: 220px; max-width: 70%; height: auto; margin: -6px auto 8px; display: block; overflow: visible; }
+.emblem .sp { transform-box: fill-box; transform-origin: 50% 50%; animation: star 1.8s ease-in-out infinite alternate; }
+.emblem .sp:nth-of-type(2) { animation-delay: -.6s; } .emblem .sp:nth-of-type(3) { animation-delay: -1.2s; }
+.emblem .g1 { transform-box: view-box; transform-origin: 98px 120px; animation: clink1 4s ease-in-out infinite; }
+.emblem .g2 { transform-box: view-box; transform-origin: 122px 120px; animation: clink2 4s ease-in-out infinite; }
+@keyframes clink1 { 0%, 70%, 100% { transform: rotate(0); } 78%, 84% { transform: rotate(4deg); } }
+@keyframes clink2 { 0%, 70%, 100% { transform: rotate(0); } 78%, 84% { transform: rotate(-4deg); } }
+h1 { margin: 0; font-weight: 900; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; color: var(--ink); text-wrap: balance; }
+.sub { margin: 10px 0 0; color: var(--ink-soft); font-size: 19px; }
+form { margin-top: 26px; display: flex; flex-direction: column; gap: 14px; text-align: left; }
 fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
-legend { display: block; width: 100%; text-align: center; font-family: var(--caps); font-size: 22px; letter-spacing: .1em; color: var(--red); margin-bottom: 18px; padding: 0; }
-.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-@media (max-width: 600px) { .cards { grid-template-columns: 1fr; } }
-.place { position: relative; display: block; cursor: pointer; min-width: 0; }
-.place input { position: absolute; opacity: 0; pointer-events: none; }
-.tent {
-  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px;
-  background: linear-gradient(180deg, #fffaf0, var(--paper-2));
-  border-radius: 4px; padding: 26px 16px 20px;
-  box-shadow: 0 2px 0 #d9c9a6, 0 14px 18px -10px rgba(59,36,22,.45);
-  border: 1px solid #e3d4b2;
-  transition: transform .35s cubic-bezier(.2,.8,.3,1), box-shadow .35s;
-}
-.tent::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: linear-gradient(180deg, rgba(59,36,22,.12), transparent); border-radius: 4px 4px 0 0; }
-.tent::after { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(212,169,78,.7); border-radius: 2px; pointer-events: none; }
-.place:hover .tent { transform: translateY(-4px); }
-.place input:focus-visible + .tent { outline: 3px solid var(--red); outline-offset: 4px; }
-.place input:checked + .tent { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 2px 0 #d9c9a6, 0 22px 26px -12px rgba(59,36,22,.55); border-color: var(--gold); }
-.place.comida input:checked + .tent { transform: translateY(-6px) rotate(1deg); }
-.place input:checked + .tent::after { border: 2px solid var(--gold); }
-.tent svg.icon { width: 74px; height: 58px; margin-bottom: 6px; }
-.t-kind { font-family: var(--caps); font-size: 16px; letter-spacing: .16em; color: var(--red); }
-.place.comida .t-kind { color: #2d6a43; }
-.t-date { font-family: var(--display); font-size: 27px; line-height: 1.15; color: var(--ink); }
-.t-note { font-style: italic; font-size: 16px; color: var(--ink-soft); }
-.yours { position: absolute; top: -14px; right: 12px; font-family: var(--hand); font-size: 22px; color: var(--red); background: var(--paper); padding: 0 8px; border-radius: 4px; opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s; }
-.place input:checked ~ .yours { opacity: 1; transform: translateY(0); }
-.holly { position: absolute; left: 10px; top: 8px; width: 34px; opacity: 0; transform: scale(.6) rotate(-20deg); transition: opacity .3s, transform .4s cubic-bezier(.3,1.6,.5,1); }
-.place input:checked + .tent .holly { opacity: 1; transform: scale(1) rotate(0); }
-
-.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; }
-@media (max-width: 600px) { .fields { grid-template-columns: 1fr; } }
-.field { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.lbl { font-family: var(--caps); font-size: 15px; letter-spacing: .1em; color: var(--ink-soft); }
-input[type="text"], input[type="email"], input[type="password"] {
-  font: inherit; font-size: 19px; color: var(--ink); background: transparent;
-  border: 0; border-bottom: 2px dotted var(--gold); border-radius: 0; padding: 8px 2px; width: 100%; min-width: 0;
-}
-#nombre { font-family: var(--hand); font-size: 30px; padding: 0 2px 2px; }
-input::placeholder { color: #b6a284; }
-#nombre::placeholder { font-family: var(--body); font-size: 19px; font-style: italic; }
-input:focus-visible { outline: none; border-bottom: 2px solid var(--red); }
-
-.actions { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
-.btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--caps); font-size: 22px; letter-spacing: .06em; color: #2a1a08;
-  background: linear-gradient(180deg, #f6dc94, var(--gold) 55%, #b98a2e); border: 0; border-radius: 6px;
-  padding: 14px 30px; cursor: pointer;
-  box-shadow: 0 3px 0 #8a6420, 0 10px 22px rgba(138,100,32,.35), inset 0 1px 0 rgba(255,255,255,.6);
-  transition: transform .15s, box-shadow .15s;
-}
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #8a6420; }
-.btn:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.opts { display: flex; flex-direction: column; gap: 14px; }
+.opt { position: relative; display: flex; align-items: center; gap: 16px; padding: 16px 20px; border: 1.5px solid var(--line); border-radius: 12px; background: #fffefb; cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s; }
+.opt:hover { border-color: #d4c7ad; }
+.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.cal { width: 30px; height: 30px; flex: none; color: var(--green); }
+.opt-t { display: flex; flex-direction: column; min-width: 0; }
+.opt-t b { font-weight: 700; font-size: 19px; color: var(--ink); }
+.opt-t small { font-size: 14px; color: var(--ink-soft); }
+.radio { margin-left: auto; flex: none; width: 26px; height: 26px; border-radius: 50%; border: 2px solid #c9c2b4; display: grid; place-items: center; background: #fff; }
+.radio::after { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--burgundy); transform: scale(0); transition: transform .2s cubic-bezier(.3,1.6,.5,1); }
+.opt:has(input:checked) { border-color: var(--burgundy); background: #f9e9ec; box-shadow: 0 0 0 1px var(--burgundy); }
+.opt:has(input:checked) .cal { color: var(--burgundy); }
+.opt:has(input:checked) .radio { border-color: var(--burgundy); }
+.opt:has(input:checked) .radio::after { transform: scale(1); }
+.opt:has(input:focus-visible) { outline: 3px solid var(--gold); outline-offset: 3px; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+@media (max-width: 560px) { .fields { grid-template-columns: 1fr; } }
+.field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.lbl { font-weight: 700; font-size: 14px; color: var(--ink-soft); padding-left: 2px; }
+input[type="text"], input[type="email"], input[type="password"] { font: inherit; font-size: 17px; color: var(--ink); background: #fffefb; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; width: 100%; min-width: 0; }
+input::placeholder { color: #aaa293; }
+input:focus-visible { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(45,106,79,.15); }
+.btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; margin-top: 6px; font: inherit; font-weight: 800; font-size: 21px; color: #fff; background: linear-gradient(180deg, var(--burgundy-2), var(--burgundy)); border: 0; border-radius: 12px; padding: 16px 20px; cursor: pointer; box-shadow: 0 10px 22px rgba(139,26,43,.28); transition: transform .12s, box-shadow .12s, filter .12s; }
+.btn svg { width: 24px; height: 24px; }
+.btn:hover { filter: brightness(1.06); }
+.btn:active { transform: translateY(2px); box-shadow: 0 4px 10px rgba(139,26,43,.28); }
+.btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 .btn[disabled] { opacity: .7; cursor: progress; }
-.btn .st { color: var(--red); }
-.hint { margin: 0; font-size: 15px; font-style: italic; color: var(--ink-soft); }
-.msg { margin: 0; min-height: 1.4em; text-align: center; font-weight: 600; }
-.msg.err { color: #b0182b; } .msg.ok { color: #2d6a43; }
+.hint { margin: 2px 0 0; text-align: center; font-size: 14px; color: var(--ink-soft); }
+.msg { margin: 0; min-height: 1.4em; text-align: center; font-weight: 700; }
+.msg.err { color: var(--burgundy); } .msg.ok { color: var(--green); }
 
-/* Confirmación: tu tarjeta en la mesa */
-.sealed { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; }
-.toast { width: 120px; height: auto; }
-.toast .gl { transform-box: view-box; }
-.toast .gl1 { transform-origin: 40px 110px; animation: clink1 3.2s ease-in-out infinite .4s; }
-.toast .gl2 { transform-origin: 80px 110px; animation: clink2 3.2s ease-in-out infinite .4s; }
-.toast .spark { opacity: 0; animation: spark 3.2s ease-out infinite .4s; transform-box: fill-box; transform-origin: 50% 50%; }
-@keyframes clink1 { 0%, 100% { transform: rotate(-14deg); } 30%, 40% { transform: rotate(6deg); } }
-@keyframes clink2 { 0%, 100% { transform: rotate(14deg); } 30%, 40% { transform: rotate(-6deg); } }
-@keyframes spark { 0%, 30% { opacity: 0; transform: scale(.4); } 34% { opacity: 1; transform: scale(1.1); } 50%, 100% { opacity: 0; transform: scale(1.4); } }
-.seal { position: relative; width: min(380px, 100%); background: linear-gradient(180deg, #fffaf0, var(--paper-2)); border: 1px solid #e3d4b2; border-radius: 4px; padding: 26px 20px 22px; box-shadow: 0 2px 0 #d9c9a6, 0 18px 24px -12px rgba(59,36,22,.5); animation: settle .9s cubic-bezier(.2,.8,.3,1) both; }
-.seal::after { content: ""; position: absolute; inset: 6px; border: 2px solid var(--gold); border-radius: 2px; pointer-events: none; }
-@keyframes settle { from { transform: translateY(-30px) rotate(-6deg); opacity: 0; } to { transform: none; opacity: 1; } }
-.seal .reservado { font-family: var(--caps); letter-spacing: .14em; color: var(--ink-soft); font-size: 15px; }
-.seal .nombre { display: block; font-family: var(--hand); font-size: 46px; line-height: 1.2; color: var(--red); min-height: 1.2em; overflow-wrap: anywhere; }
-.seal .nombre span { display: inline-block; clip-path: inset(0 100% 0 0); animation: write 1.6s ease-out forwards .5s; }
-@keyframes write { to { clip-path: inset(0 0 0 0); } }
-.seal .dia { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--red); color: var(--paper); display: grid; place-items: center; font-family: var(--display); font-size: 20px; box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--gold); }
-.seal.comida .dia { background: #2d6a43; }
-#sealed-text { margin: 4px 0 0; font-size: 18px; color: var(--ink); }
-.sealed h2 { margin: 6px 0 0; font-family: var(--display); font-weight: 400; font-size: 34px; color: var(--ink); }
+/* Voto registrado */
+.sealed { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.seal { position: relative; width: 84px; height: 84px; border-radius: 50%; background: var(--burgundy); display: grid; place-items: center; box-shadow: 0 0 0 7px #f9e9ec; animation: pop .5s cubic-bezier(.3,1.6,.5,1) both; }
+.seal.comida { background: var(--green); box-shadow: 0 0 0 7px #e4f0ea; }
+.seal svg { width: 40px; height: 40px; }
+.seal .d { position: absolute; right: -10px; bottom: -6px; background: #fff; color: var(--ink); font-weight: 800; font-size: 13px; border-radius: 999px; padding: 2px 8px; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+@keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+.sealed h2 { margin: 10px 0 0; font-weight: 900; font-size: 28px; }
 .sealed p { margin: 0; color: var(--ink-soft); }
-.thanks { font-style: italic; font-size: 19px; }
-.linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--red); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-.linkbtn:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+#sealed-text { color: var(--ink); font-weight: 700; font-size: 18px; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; color: var(--burgundy); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.linkbtn:focus-visible { outline: 2px solid var(--burgundy); outline-offset: 3px; }
+.foot { font-size: 14px; color: #7c7566; text-align: center; background: rgba(255,253,249,.75); padding: 6px 14px; border-radius: 999px; }
+.demo-banner { font-size: 13px; background: #fff3c4; color: #7a5a1c; border-radius: 8px; padding: 6px 10px; }
 
-footer { max-width: 860px; margin: 26px auto 0; padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; color: #d9cfb6; }
-.wish { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--gold-soft); }
-.ghost { font-family: var(--caps); font-size: 14px; letter-spacing: .1em; color: #d9cfb6; background: transparent; border: 1px solid rgba(212,169,78,.55); border-radius: 6px; padding: 8px 14px; cursor: pointer; }
-.ghost:hover { color: var(--paper); border-color: var(--gold); }
-.ghost:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.demo-banner { font-size: 14px; background: #3a2a0c; color: #ffd38a; border-radius: 6px; padding: 6px 12px; }
-
-/* ---------- Panel de organización ---------- */
-dialog { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 0; border: 0; border-radius: 10px; background: var(--paper); color: var(--ink); box-shadow: 0 30px 80px rgba(0,0,0,.5), inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--gold); }
-dialog::backdrop { background: rgba(12,26,16,.75); backdrop-filter: blur(3px); }
-.dlg { padding: 24px clamp(16px, 3vw, 30px) 28px; display: flex; flex-direction: column; gap: 20px; }
+/* ---------- Diálogos ---------- */
+dialog { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 0; border: 0; border-radius: 20px; background: var(--card); color: var(--ink); box-shadow: 0 30px 80px rgba(20,40,30,.35); }
+dialog.small { width: min(560px, calc(100vw - 24px)); }
+dialog::backdrop { background: rgba(19,59,44,.5); backdrop-filter: blur(3px); }
+.dlg { padding: 24px clamp(16px, 3vw, 30px) 28px; display: flex; flex-direction: column; gap: 18px; }
 .dlg-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.dlg-head h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 30px; color: var(--ink); }
-.x { background: none; border: 1px solid var(--gold); color: var(--ink); border-radius: 6px; width: 36px; height: 36px; font-size: 20px; cursor: pointer; flex: none; }
-.x:focus-visible { outline: 2px solid var(--red); }
-.login { display: flex; flex-direction: row; gap: 14px; flex-wrap: wrap; align-items: flex-end; }
+.dlg-head h2 { margin: 0; font-weight: 900; font-size: 26px; }
+.x { background: #f1ebdf; border: 0; color: var(--ink); border-radius: 10px; width: 38px; height: 38px; font-size: 22px; cursor: pointer; flex: none; }
+.x:focus-visible { outline: 2px solid var(--green); }
+.info p { margin: 0; color: var(--ink-soft); }
+.info ul { margin: 0; padding-left: 20px; color: var(--ink); }
+.info li { margin: 4px 0; }
+.login { display: flex; flex-direction: row; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
 .login .field { flex: 1 1 240px; }
-.btn.small { font-size: 18px; padding: 10px 20px; }
+.btn.small { width: auto; font-size: 16px; padding: 12px 20px; margin: 0; }
 .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width: 620px) { .summary { grid-template-columns: 1fr; } }
-.stat { background: #fffaf0; border: 1px solid #e3d4b2; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.stat .k { font-family: var(--caps); letter-spacing: .12em; font-size: 15px; }
-.stat.cena .k { color: var(--red); } .stat.comida .k { color: #2d6a43; }
-.stat .n { font-family: var(--display); font-size: 46px; line-height: 1; font-variant-numeric: tabular-nums; }
-.stat .n small { font-family: var(--body); font-size: 16px; color: var(--ink-soft); }
-.bar { height: 10px; border-radius: 6px; background: var(--paper-2); overflow: hidden; }
-.bar i { display: block; height: 100%; width: 0; transition: width .6s ease; }
-.stat.cena .bar i { background: var(--red); } .stat.comida .bar i { background: #2d6a43; }
-.verdict { margin: 0; }
+.stat { border: 1.5px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; background: #fffefb; }
+.stat .k { font-weight: 800; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.stat.cena .k { color: var(--burgundy); } .stat.comida .k { color: var(--green); }
+.stat .n { font-weight: 900; font-size: 42px; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat .n small { font-size: 15px; font-weight: 600; color: var(--ink-soft); }
+.bar { height: 10px; border-radius: 999px; background: #efe7d8; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; border-radius: 999px; transition: width .6s ease; }
+.stat.cena .bar i { background: var(--burgundy); } .stat.comida .bar i { background: var(--green); }
+.verdict { margin: 0; font-weight: 600; }
 .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.toolbar .ghost { color: var(--ink); }
-.toolbar .meta { font-size: 14px; color: var(--ink-soft); margin-left: auto; }
-h3 { margin: 0 0 8px; font-family: var(--display); font-weight: 400; font-size: 24px; color: var(--ink); }
-.tbl-wrap { overflow: auto; border: 1px solid #e3d4b2; border-radius: 6px; max-height: 360px; background: #fffaf0; }
-table { border-collapse: collapse; width: 100%; font-size: 15px; }
-th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #efe2c6; white-space: nowrap; }
-th { position: sticky; top: 0; background: var(--paper-2); font-family: var(--caps); font-weight: 400; letter-spacing: .08em; font-size: 13px; color: var(--ink-soft); }
+.ghost { font: inherit; font-weight: 700; font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+.ghost:hover { border-color: #d4c7ad; }
+.ghost:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.toolbar .meta { font-size: 13px; color: var(--ink-soft); margin-left: auto; }
+h3 { margin: 0 0 8px; font-weight: 900; font-size: 20px; }
+.tbl-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 12px; max-height: 360px; background: #fff; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid #f1ebdf; white-space: nowrap; }
+th { position: sticky; top: 0; background: #faf6ee; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
 td.mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; font-variant-numeric: tabular-nums; }
 td.ua { max-width: 280px; overflow: hidden; text-overflow: ellipsis; color: var(--ink-soft); }
-.tag { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 4px; color: #fff; }
-.tag.VOTO { background: #2d6a43; } .tag.CAMBIO { background: #b07a18; } .tag.CONFIRMACION { background: #9a8a74; }
-.tag.ACCESO_DENEGADO { background: var(--red); } .tag.CONSULTA_RESULTADOS { background: #4d6b8a; }
-.pill.cena-10 { color: var(--red); } .pill.comida-11 { color: #2d6a43; }
+.tag { display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 6px; color: #fff; }
+.tag.VOTO { background: var(--green); } .tag.CAMBIO { background: #c08a1e; } .tag.CONFIRMACION { background: #a39d8f; }
+.tag.ACCESO_DENEGADO { background: var(--burgundy); } .tag.CONSULTA_RESULTADOS { background: #3d6b8c; }
+.pill { font-weight: 700; } .pill.cena-10 { color: var(--burgundy); } .pill.comida-11 { color: var(--green); }
 .empty { color: var(--ink-soft); font-style: italic; margin: 0; padding: 12px; }
 
-/* ---------- Botón de música ---------- */
-.music {
-  position: fixed; z-index: 8;
-  right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--caps); font-size: 16px; letter-spacing: .06em; color: #2a1a08;
-  background: linear-gradient(180deg, #f6dc94, var(--gold)); border: 0; border-radius: 999px;
-  padding: 10px 18px 10px 12px; cursor: pointer; box-shadow: 0 3px 0 #8a6420, 0 10px 24px rgba(0,0,0,.35);
-}
-.music:hover { transform: translateY(-1px); }
-.music:focus-visible { outline: 3px solid var(--paper); outline-offset: 3px; }
-.eq { display: inline-flex; align-items: flex-end; gap: 3px; height: 16px; width: 20px; }
-.eq i { width: 3px; height: 5px; border-radius: 2px; background: var(--red-deep); }
-.music[aria-pressed="true"] .eq i { animation: eq 1.2s ease-in-out infinite alternate; }
-.music[aria-pressed="true"] .eq i:nth-child(2) { animation-delay: -.4s; }
-.music[aria-pressed="true"] .eq i:nth-child(3) { animation-delay: -.8s; }
-.music[aria-pressed="true"] .eq i:nth-child(4) { animation-delay: -.6s; }
-@keyframes eq { from { height: 4px; } to { height: 16px; } }
-
-@media (max-width: 600px) {
-  .garland { height: 60px; }
-  .lead { font-size: 18px; }
-  .gratitude { font-size: 17px; height: 3em; }
-  .table { margin-top: -2%; }
+@media (max-width: 700px) {
+  main { padding-top: 34px; }
+  .corner { opacity: .95; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; transition: none !important; }
-  .ember { display: none; }
 }
 </style>
 </head>
 <body>
 
-<div class="garland" aria-hidden="true"><svg id="garland-svg"></svg></div>
-
-<div class="wrap">
-  <header>
-    <span class="eyebrow">Navidad 2026 · Boomerang TV</span>
-    <h1>¿Cuándo nos sentamos <em>todos</em> a la mesa?</h1>
-    <p class="lead">Este año también queremos celebrarlo juntos. Elige el día que mejor te venga y te guardamos un sitio.</p>
-    <div class="gratitude" id="gratitude" aria-live="off">
-      <span class="on">Gracias por este año juntos.</span>
-      <span>Por los que están y por los que estuvieron.</span>
-      <span>Que nunca falte un sitio en la mesa.</span>
-      <span>Lo mejor de la Navidad es compartirla.</span>
-      <span>Paz, salud y un año lleno de buenas noticias.</span>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <svg viewBox="0 0 38 44" aria-hidden="true"><path d="M19 2l1.6 3.4 3.7.5-2.7 2.6.7 3.7L19 10.4l-3.3 1.8.7-3.7-2.7-2.6 3.7-.5z" fill="#e9cf8a"/><path d="M19 12l-8 10h5l-9 10h6L4 40h30l-9-8h6l-9-10h5z" fill="none" stroke="#e9cf8a" stroke-width="2" stroke-linejoin="round"/><path d="M19 40v3" stroke="#e9cf8a" stroke-width="2"/></svg>
+      <span><span class="t2">Cena de </span>Navidad <span class="y">2026</span></span>
     </div>
-  </header>
-
-  <div class="room" aria-hidden="true">
-    <!-- Fondo: cielo de la ventana -->
-    <svg viewBox="0 0 1200 440">
-      <defs>
-        <linearGradient id="night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1830"/><stop offset="1" stop-color="#29436b"/></linearGradient>
-        <radialGradient id="wglow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff6c8" stop-opacity=".9"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></radialGradient>
-      </defs>
-      <rect x="460" y="50" width="280" height="240" fill="url(#night)"/>
-      <circle cx="530" cy="98" r="34" fill="url(#wglow)"/>
-      <path class="windowstar" d="M530 82l4 12 12 4-12 4-4 12-4-12-12-4 12-4z" fill="#fff6c8"/>
-      <g fill="#fff" opacity=".7"><circle cx="610" cy="74" r="1.2"/><circle cx="680" cy="96" r="1.4"/><circle cx="716" cy="66" r="1"/><circle cx="640" cy="128" r="1"/><circle cx="486" cy="140" r="1.2"/></g>
-      <path d="M460 250l30-18 26 12 30-26 36 22 24-14 40 20 30-16 34 18 30-10v52H460z" fill="#132640"/>
-      <path d="M460 250l30-18 26 12 30-26 36 22 24-14 40 20 30-16 34 18 30-10" stroke="#eaf2fb" stroke-width="5" fill="none" stroke-linejoin="round"/>
-      <g fill="#ffcf6e"><rect x="500" y="256" width="8" height="10"/><rect x="560" y="250" width="8" height="10"/><rect x="636" y="262" width="8" height="10"/><rect x="700" y="254" width="8" height="10"/></g>
-      <path d="M460 278h280v12H460z" fill="#e6eef6"/>
-    </svg>
-
-    <canvas id="snow"></canvas>
-
-    <!-- Primer plano: salón -->
-    <svg viewBox="0 0 1200 440" id="salon">
-      <defs>
-        <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b3a22"/><stop offset="1" stop-color="#3e2716"/></linearGradient>
-        <linearGradient id="velvet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6e1220"/><stop offset=".5" stop-color="#a51e31"/><stop offset="1" stop-color="#6e1220"/></linearGradient>
-        <radialGradient id="fire" cx=".5" cy=".8" r=".7"><stop offset="0" stop-color="#ffb347" stop-opacity=".9"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></radialGradient>
-        <radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd98a" stop-opacity=".9"/><stop offset="1" stop-color="#ffd98a" stop-opacity="0"/></radialGradient>
-        <linearGradient id="brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9b7228"/><stop offset=".5" stop-color="#f0d58c"/><stop offset="1" stop-color="#9b7228"/></linearGradient>
-      </defs>
-
-      <!-- suelo y alfombra -->
-      <rect x="0" y="372" width="1200" height="68" fill="url(#wood)"/>
-      <g stroke="#2e1c0f" stroke-width="1.5" opacity=".6"><path d="M0 392h1200M0 414h1200M120 372v20M380 392v22M640 372v20M900 392v22M1080 372v20M260 414v26M760 414v26"/></g>
-      <ellipse cx="600" cy="412" rx="400" ry="24" fill="#7e1826"/>
-      <ellipse cx="600" cy="412" rx="380" ry="18" fill="none" stroke="#e8d3a6" stroke-width="2" stroke-dasharray="10 6" opacity=".7"/>
-
-      <!-- ventana: marco, cruz, corona -->
-      <rect x="440" y="30" width="320" height="280" rx="4" fill="none" stroke="#efe6d2" stroke-width="20"/>
-      <path d="M600 50v240M460 170h280" stroke="#efe6d2" stroke-width="9"/>
-      <path d="M462 52q30 6 34 34M738 52q-30 6-34 34M462 288q30-6 34-34M738 288q-30-6-34-34" stroke="#ffffff" stroke-width="3" fill="none" opacity=".5"/>
-      <rect x="426" y="304" width="348" height="16" rx="3" fill="#e3d7bd"/>
-      <g transform="translate(600 120)">
-        <circle r="34" fill="none" stroke="#2d5a3b" stroke-width="16"/>
-        <circle r="34" fill="none" stroke="#3f7a50" stroke-width="6" stroke-dasharray="6 7"/>
-        <g fill="#c8323f"><circle cx="-26" cy="-14" r="4"/><circle cx="24" cy="-20" r="4"/><circle cx="30" cy="10" r="4"/><circle cx="-30" cy="14" r="4"/><circle cx="-6" cy="33" r="4"/><circle cx="12" cy="-34" r="4"/></g>
-        <path d="M0 30c-14-8-24-4-22 4s16 6 22-4zM0 30c14-8 24-4 22 4s-16 6-22-4z" fill="#b51d30"/>
-        <path d="M-2 32l-8 26 6-2 4 6 2-26zM2 32l8 26-6-2-4 6-2-26z" fill="#9e1b2c"/>
-        <circle cy="31" r="5" fill="#9e1b2c"/>
-      </g>
-      <!-- cortinas -->
-      <rect x="380" y="16" width="440" height="8" rx="4" fill="url(#brass)"/>
-      <circle cx="380" cy="20" r="9" fill="#d4a94e"/><circle cx="820" cy="20" r="9" fill="#d4a94e"/>
-      <path d="M392 24h70q-8 120 18 210q-24 40-14 90h-70q-10-150-4-300z" fill="url(#velvet)"/>
-      <path d="M808 24h-70q8 120-18 210q24 40 14 90h70q10-150 4-300z" fill="url(#velvet)"/>
-      <path d="M404 230q34 4 74 2M796 230q-34 4-74 2" stroke="#d4a94e" stroke-width="6" stroke-linecap="round"/>
-
-      <!-- chimenea -->
-      <ellipse class="fireglow" cx="200" cy="380" rx="200" ry="50" fill="url(#fire)"/>
-      <rect x="70" y="156" width="260" height="216" fill="#d8c8a8"/>
-      <g stroke="#b9a582" stroke-width="2"><path d="M70 200h50M280 200h50M70 248h50M280 248h50M70 296h50M280 296h50M70 344h50M280 344h50M96 156v44M304 200v48M96 248v48M304 296v48"/></g>
-      <path d="M120 372V262q80-56 160 0v110z" fill="#1b0f09"/>
-      <path d="M120 262q80-56 160 0" stroke="#b9a582" stroke-width="10" fill="none"/>
-      <ellipse class="fireglow" cx="200" cy="352" rx="70" ry="24" fill="url(#fire)"/>
-      <path class="flame f3" d="M168 352c-6-22 8-30 4-50 14 12 22 26 18 50z" fill="#ff7a1a"/>
-      <path class="flame f1" d="M180 354c-10-34 14-44 8-80 22 22 34 44 24 80z" fill="#ff9d2e"/>
-      <path class="flame f2" d="M206 354c-6-26 12-36 10-62 16 18 22 38 14 62z" fill="#ff7a1a"/>
-      <path class="flame f3" d="M190 356c-4-20 8-26 6-44 12 12 16 28 10 44z" fill="#ffd36b"/>
-      <rect x="146" y="350" width="110" height="14" rx="7" fill="#5b3a22" transform="rotate(-6 200 357)"/>
-      <rect x="150" y="352" width="104" height="12" rx="6" fill="#6e4527" transform="rotate(7 200 357)"/>
-      <g fill="#ffb347"><circle class="ember" cx="196" cy="300" r="1.6" style="--dx:-8px"/><circle class="ember" cx="206" cy="296" r="1.3" style="--dx:10px;animation-delay:1s"/><circle class="ember" cx="190" cy="304" r="1.2" style="--dx:4px;animation-delay:2s"/></g>
-      <rect x="44" y="138" width="312" height="20" rx="3" fill="#6b4226"/>
-      <rect x="44" y="154" width="312" height="5" fill="#4e2f1a"/>
-      <!-- calcetines -->
-      <g class="stocking"><path d="M104 158h26v44q0 10 12 14t6 14h-30q-14-2-14-16z" fill="#a51e31"/><rect x="100" y="156" width="34" height="12" rx="4" fill="#f7f0e1"/></g>
-      <g class="stocking"><path d="M162 158h26v40q0 10 12 14t6 14h-30q-14-2-14-16z" fill="#2d6a43"/><rect x="158" y="156" width="34" height="12" rx="4" fill="#f7f0e1"/><path d="M166 182h18M166 190h18" stroke="#f7f0e1" stroke-width="2" opacity=".7"/></g>
-      <g class="stocking"><path d="M220 158h26v46q0 10 12 14t6 14h-30q-14-2-14-16z" fill="#f2e6cc"/><rect x="216" y="156" width="34" height="12" rx="4" fill="#a51e31"/><path d="M224 184h18" stroke="#a51e31" stroke-width="3"/></g>
-      <g class="stocking"><path d="M278 158h26v42q0 10 12 14t6 14h-30q-14-2-14-16z" fill="#a51e31"/><rect x="274" y="156" width="34" height="12" rx="4" fill="#f7f0e1"/><circle cx="291" cy="188" r="4" fill="#d4a94e"/></g>
-      <!-- repisa: velas y foto de familia -->
-      <circle class="candle-halo" cx="72" cy="88" r="34" fill="url(#halo)"/>
-      <circle class="candle-halo" cx="328" cy="88" r="34" fill="url(#halo)"/>
-      <rect x="64" y="96" width="16" height="42" rx="2" fill="#f7f0e1"/><path d="M58 138h28l-4-6H62z" fill="url(#brass)"/>
-      <path class="candle-flame" d="M72 80c4 5 5 9 3 13-1 2-5 2-6 0-2-4-1-8 3-13z" fill="#ffcf7a"/>
-      <rect x="320" y="96" width="16" height="42" rx="2" fill="#f7f0e1"/><path d="M314 138h28l-4-6h-20z" fill="url(#brass)"/>
-      <path class="candle-flame" d="M328 80c4 5 5 9 3 13-1 2-5 2-6 0-2-4-1-8 3-13z" fill="#ffcf7a"/>
-      <g transform="rotate(-3 200 96)">
-        <rect x="140" y="52" width="120" height="86" rx="3" fill="url(#brass)"/>
-        <rect x="150" y="62" width="100" height="66" fill="#efe2c4"/>
-        <g fill="#7a5a44" opacity=".85">
-          <circle cx="174" cy="92" r="8"/><path d="M162 128q0-24 12-24t12 24z"/>
-          <circle cx="198" cy="88" r="9"/><path d="M185 128q0-28 13-28t13 28z"/>
-          <circle cx="222" cy="94" r="7"/><path d="M212 128q0-22 10-22t10 22z"/>
-          <circle cx="238" cy="104" r="5"/><path d="M231 128q0-16 7-16t7 16z"/>
-        </g>
-        <path d="M150 62h100v66" fill="none" stroke="#fff" stroke-width="2" opacity=".35"/>
-      </g>
-      <path d="M44 138q60-14 120 0t120 0t72 0" stroke="#2d5a3b" stroke-width="8" fill="none" stroke-linecap="round"/>
-      <g fill="#c8323f"><circle cx="100" cy="134" r="3.5"/><circle cx="210" cy="136" r="3.5"/><circle cx="300" cy="135" r="3.5"/></g>
-
-      <!-- árbol -->
-      <g id="tree">
-        <rect x="976" y="330" width="28" height="40" fill="#5b3a22"/>
-        <path d="M940 362h100l-8 18h-84z" fill="#9e1b2c"/><path d="M940 362h100" stroke="#d4a94e" stroke-width="3"/>
-        <path d="M870 340q120 18 240 0L990 210z" fill="#1f5233"/>
-        <path d="M890 272q100 16 200 0L990 150z" fill="#246040"/>
-        <path d="M910 208q80 14 160 0L990 90z" fill="#2a6b48"/>
-        <path d="M930 148q60 10 120 0L990 52z" fill="#2f7650"/>
-        <path d="M884 330q106 20 212-14M900 264q90 18 180-12M918 200q72 14 144-10M936 142q54 10 108-8" stroke="#d4a94e" stroke-width="2.5" fill="none" opacity=".85"/>
-        <g id="tree-orn"></g>
-        <path class="tstar" d="M990 30l7 15 17 2-12 11 3 17-15-8-15 8 3-17-12-11 17-2z" fill="#ffd76a"/>
-      </g>
-      <!-- regalos -->
-      <rect x="868" y="342" width="56" height="40" rx="2" fill="#2d6a43"/><rect x="892" y="342" width="8" height="40" fill="#d4a94e"/><rect x="868" y="356" width="56" height="7" fill="#d4a94e"/>
-      <path d="M896 342c-10-14-22-8-16 0zM896 342c10-14 22-8 16 0z" fill="#d4a94e"/>
-      <rect x="1040" y="334" width="66" height="48" rx="2" fill="#a51e31"/><rect x="1068" y="334" width="9" height="48" fill="#f7f0e1"/><rect x="1040" y="352" width="66" height="8" fill="#f7f0e1"/>
-      <path d="M1072 334c-12-16-26-8-18 0zM1072 334c12-16 26-8 18 0z" fill="#f7f0e1"/>
-      <rect x="940" y="356" width="46" height="28" rx="2" fill="#efe2c4"/><rect x="958" y="356" width="7" height="28" fill="#a51e31"/>
-      <rect x="1004" y="362" width="34" height="22" rx="2" fill="#d4a94e"/><rect x="1018" y="362" width="6" height="22" fill="#2d6a43"/>
-    </svg>
+    <nav class="nav" aria-label="Secciones">
+      <button type="button" aria-current="page" id="nav-inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/></svg><span>Inicio</span></button>
+      <button type="button" id="abrir-admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 20v-4M10 20V11M15 20V7M20 20V4"/></svg><span>Resultados</span></button>
+      <button type="button" id="abrir-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>Información</span></button>
+    </nav>
+    <button type="button" class="music" id="musica" aria-pressed="false">
+      <span class="disc"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
+      <span class="txt" id="musica-txt">Poner música</span>
+    </button>
   </div>
+</header>
 
-  <section class="table" id="panel">
-    <div class="centerpiece" aria-hidden="true">
-      <svg viewBox="0 0 420 120">
-        <defs><radialGradient id="halo2" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd98a" stop-opacity=".8"/><stop offset="1" stop-color="#ffd98a" stop-opacity="0"/></radialGradient></defs>
-        <g class="lit-target">
-          <circle class="candle-halo" cx="150" cy="30" r="30" fill="url(#halo2)"/>
-          <circle class="candle-halo" cx="210" cy="16" r="34" fill="url(#halo2)"/>
-          <circle class="candle-halo" cx="270" cy="30" r="30" fill="url(#halo2)"/>
-        </g>
-        <rect x="143" y="40" width="14" height="56" rx="2" fill="#f7f0e1"/>
-        <rect x="202" y="26" width="16" height="70" rx="2" fill="#a51e31"/>
-        <rect x="263" y="40" width="14" height="56" rx="2" fill="#f7f0e1"/>
-        <path class="candle-flame" d="M150 24c4 5 5 9 3 13-1 2-5 2-6 0-2-4-1-8 3-13z" fill="#ffcf7a"/>
-        <path class="candle-flame" d="M210 8c4 5 5 9 3 13-1 2-5 2-6 0-2-4-1-8 3-13z" fill="#ffcf7a"/>
-        <path class="candle-flame" d="M270 24c4 5 5 9 3 13-1 2-5 2-6 0-2-4-1-8 3-13z" fill="#ffcf7a"/>
-        <g stroke="#2d5a3b" stroke-linecap="round">
-          <path d="M30 104q90-28 180-10t180 10" stroke-width="16" fill="none"/>
-          <path d="M40 100q80-22 170-6t170 8" stroke="#3f7a50" stroke-width="6" stroke-dasharray="4 6" fill="none"/>
-        </g>
-        <g fill="#6b4226"><ellipse cx="96" cy="96" rx="10" ry="13" transform="rotate(-30 96 96)"/><ellipse cx="320" cy="98" rx="10" ry="13" transform="rotate(30 320 98)"/></g>
-        <g fill="#4e2f1a" opacity=".6"><path d="M90 88l12 4M88 96l14 2M90 104l10 0M314 90l12-4M314 98l14-2M316 106l10 0"/></g>
-        <g><circle cx="128" cy="100" r="8" fill="#d4a94e"/><circle cx="244" cy="102" r="8" fill="#a51e31"/><circle cx="182" cy="104" r="7" fill="#a51e31"/><circle cx="292" cy="100" r="7" fill="#d4a94e"/></g>
-        <g fill="#c8323f"><circle cx="60" cy="98" r="4"/><circle cx="66" cy="104" r="4"/><circle cx="356" cy="100" r="4"/><circle cx="362" cy="94" r="4"/></g>
-      </svg>
-    </div>
+<div class="decor" aria-hidden="true">
+  <div id="bokeh"></div>
+  <svg class="lights" id="lights"></svg>
+  <svg class="corner tl" id="c-tl" viewBox="0 0 500 500"></svg>
+  <svg class="corner tr" id="c-tr" viewBox="0 0 500 500"></svg>
+  <svg class="corner bl" id="c-bl" viewBox="0 0 500 500"></svg>
+  <svg class="corner br" id="c-br" viewBox="0 0 500 500"></svg>
+</div>
 
-    <div class="runner">
-      <form id="form" novalidate>
-        <fieldset>
-          <legend>Elige tu día</legend>
-          <div class="cards">
-            <label class="place cena">
-              <input type="radio" name="opcion" id="op-cena" value="cena-10">
-              <span class="tent">
-                <svg class="holly" viewBox="0 0 40 30" aria-hidden="true"><path d="M18 18C12 10 6 12 1 8c3 5 0 8 4 10-3 1-2 4 2 4 3 3 7 0 11-4z" fill="#2d6a43"/><path d="M22 18c6-8 12-6 17-10-3 5 0 8-4 10 3 1 2 4-2 4-3 3-7 0-11-4z" fill="#3f7a50"/><circle cx="18" cy="19" r="3" fill="#c8323f"/><circle cx="23" cy="19" r="3" fill="#a51e31"/><circle cx="20.5" cy="15" r="3" fill="#c8323f"/></svg>
-                <svg class="icon" viewBox="0 0 74 58" aria-hidden="true">
-                  <circle cx="22" cy="14" r="12" fill="#ffd98a" opacity=".35"/><circle cx="52" cy="14" r="12" fill="#ffd98a" opacity=".35"/>
-                  <path d="M22 4c3 4 4 7 2 10-1 2-4 2-5 0-1-3 0-6 3-10zM52 4c3 4 4 7 2 10-1 2-4 2-5 0-1-3 0-6 3-10z" fill="#f2a93b"/>
-                  <rect x="17" y="17" width="10" height="30" rx="1.5" fill="#a51e31"/><rect x="47" y="17" width="10" height="30" rx="1.5" fill="#a51e31"/>
-                  <path d="M10 50h54" stroke="#d4a94e" stroke-width="4" stroke-linecap="round"/>
-                  <path d="M33 36c4-6 10-6 14-2M41 34l-2-6" stroke="#2d6a43" stroke-width="3" fill="none" stroke-linecap="round"/>
-                  <path d="M37 6a6 6 0 1 0 6 9a5 5 0 1 1-6-9z" fill="#d4a94e"/>
-                </svg>
-                <span class="t-kind">Cena</span>
-                <span class="t-date">Jueves 10 de diciembre</span>
-                <span class="t-note">Por la noche, a la luz de las velas</span>
-              </span>
-              <span class="yours">tu sitio</span>
-            </label>
-            <label class="place comida">
-              <input type="radio" name="opcion" id="op-comida" value="comida-11">
-              <span class="tent">
-                <svg class="holly" viewBox="0 0 40 30" aria-hidden="true"><path d="M18 18C12 10 6 12 1 8c3 5 0 8 4 10-3 1-2 4 2 4 3 3 7 0 11-4z" fill="#2d6a43"/><path d="M22 18c6-8 12-6 17-10-3 5 0 8-4 10 3 1 2 4-2 4-3 3-7 0-11-4z" fill="#3f7a50"/><circle cx="18" cy="19" r="3" fill="#c8323f"/><circle cx="23" cy="19" r="3" fill="#a51e31"/><circle cx="20.5" cy="15" r="3" fill="#c8323f"/></svg>
-                <svg class="icon" viewBox="0 0 74 58" aria-hidden="true">
-                  <rect x="12" y="4" width="50" height="44" rx="3" fill="#cfe2f2" stroke="#efe6d2" stroke-width="4"/>
-                  <circle cx="44" cy="20" r="8" fill="#ffd76a"/>
-                  <g stroke="#ffd76a" stroke-width="2" stroke-linecap="round"><path d="M44 6v4M56 20h-4M53 11l-3 3M35 11l3 3"/></g>
-                  <path d="M14 38l10-6 8 4 10-8 10 6 8-4v18H14z" fill="#fff"/>
-                  <path d="M37 6v42M14 26h46" stroke="#efe6d2" stroke-width="3"/>
-                  <path d="M6 52h62" stroke="#d4a94e" stroke-width="4" stroke-linecap="round"/>
-                </svg>
-                <span class="t-kind">Comida</span>
-                <span class="t-date">Viernes 11 de diciembre</span>
-                <span class="t-note">A mediodía, con luz de invierno</span>
-              </span>
-              <span class="yours">tu sitio</span>
-            </label>
-          </div>
-        </fieldset>
+<main>
+  <section class="card" id="panel">
+    <svg class="emblem" viewBox="0 0 220 130" aria-hidden="true">
+      <path class="sp" d="M110 2l2.5 6.5L119 11l-6.5 2.5L110 20l-2.5-6.5L101 11l6.5-2.5z" fill="#c9a24a"/>
+      <path class="sp" d="M58 34l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#c9a24a"/>
+      <path class="sp" d="M164 30l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#c9a24a"/>
+      <path class="sp" d="M30 84l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#c9a24a"/>
+      <path class="sp" d="M190 82l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#c9a24a"/>
+      <g id="emblem-pine"></g>
+      <g class="g1">
+        <path d="M84 26h24l-2 34q-10 9-20 0z" fill="rgba(255,250,235,.7)" stroke="#b58e3c" stroke-width="2"/>
+        <path d="M86 38h20l-1.4 22q-8.6 7-17.2 0z" fill="#e7c56c"/>
+        <circle cx="92" cy="48" r="1.3" fill="#fff"/><circle cx="98" cy="54" r="1" fill="#fff"/><circle cx="95" cy="42" r="1" fill="#fff"/>
+        <path d="M96 66v34M86 102h20" stroke="#b58e3c" stroke-width="2.6" stroke-linecap="round"/>
+      </g>
+      <g class="g2">
+        <path d="M112 26h24l-2 34q-10 9-20 0z" fill="rgba(255,250,235,.7)" stroke="#b58e3c" stroke-width="2"/>
+        <path d="M114 38h20l-1.4 22q-8.6 7-17.2 0z" fill="#e7c56c"/>
+        <circle cx="128" cy="48" r="1.3" fill="#fff"/><circle cx="122" cy="54" r="1" fill="#fff"/>
+        <path d="M124 66v34M114 102h20" stroke="#b58e3c" stroke-width="2.6" stroke-linecap="round"/>
+      </g>
+      <g transform="translate(110 106)">
+        <path d="M0 0c-12-10-24-6-20 2s16 4 20-2zM0 0c12-10 24-6 20 2s-16 4-20-2z" fill="#a4243a"/>
+        <path d="M-2 2l-7 20 5-2 3 5 3-23zM2 2l7 20-5-2-3 5-3-23z" fill="#8b1a2b"/>
+        <circle r="4.5" fill="#8b1a2b"/>
+      </g>
+    </svg>
 
-        <div class="fields">
-          <div class="field">
-            <label class="lbl" for="nombre">Tu nombre, para tu tarjeta</label>
-            <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="80" placeholder="Nombre y apellido" required>
-          </div>
-          <div class="field">
-            <label class="lbl" for="email">Tu email de la empresa</label>
-            <input type="email" id="email" name="email" autocomplete="email" maxlength="120" placeholder="nombre@empresa.com" required>
-          </div>
+    <h1>¿Cuándo celebramos la Navidad?</h1>
+    <p class="sub">¡Elige la fecha que mejor te venga!</p>
+
+    <form id="form" novalidate>
+      <fieldset>
+        <legend>Fecha preferida</legend>
+        <div class="opts">
+          <label class="opt cena">
+            <input type="radio" name="opcion" id="op-cena" value="cena-10">
+            <svg class="cal" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="6" width="22" height="20" rx="3"/><path d="M4 12h22M10 3v6M20 3v6" stroke-linecap="round"/><g fill="currentColor" stroke="none"><circle cx="10" cy="17" r="1.4"/><circle cx="15" cy="17" r="1.4"/><circle cx="20" cy="17" r="1.4"/><circle cx="10" cy="21.5" r="1.4"/><circle cx="15" cy="21.5" r="1.4"/></g></svg>
+            <span class="opt-t"><b>Jueves 10 de diciembre</b><small>Cena · por la noche</small></span>
+            <span class="radio" aria-hidden="true"></span>
+          </label>
+          <label class="opt comida">
+            <input type="radio" name="opcion" id="op-comida" value="comida-11">
+            <svg class="cal" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="6" width="22" height="20" rx="3"/><path d="M4 12h22M10 3v6M20 3v6" stroke-linecap="round"/><g fill="currentColor" stroke="none"><circle cx="10" cy="17" r="1.4"/><circle cx="15" cy="17" r="1.4"/><circle cx="20" cy="17" r="1.4"/><circle cx="10" cy="21.5" r="1.4"/><circle cx="15" cy="21.5" r="1.4"/></g></svg>
+            <span class="opt-t"><b>Viernes 11 de diciembre</b><small>Comida · a mediodía</small></span>
+            <span class="radio" aria-hidden="true"></span>
+          </label>
         </div>
+      </fieldset>
 
-        <div class="actions">
-          <button class="btn" type="submit" id="enviar"><span class="st" aria-hidden="true">✦</span><span>Reservar mi sitio</span></button>
-          <p class="hint">Un sitio por persona. Si cambias de idea, vuelve a elegir con el mismo email.</p>
+      <div class="fields">
+        <div class="field">
+          <label class="lbl" for="nombre">Tu nombre</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="80" placeholder="Nombre y apellido" required>
         </div>
-        <p class="msg" id="msg" role="status" aria-live="polite"></p>
-      </form>
-
-      <div class="sealed" id="sealed" hidden>
-        <svg class="toast" viewBox="0 0 120 120" aria-hidden="true">
-          <g class="gl gl1">
-            <path d="M28 14h24l-3 30q-9 8-18 0z" fill="rgba(255,250,240,.55)" stroke="#b9975a" stroke-width="2"/>
-            <path d="M30 26h20l-1 18q-9 7-18 0z" fill="#e9c46a"/>
-            <path d="M40 50v40M30 92h20" stroke="#b9975a" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="36" cy="34" r="1.4" fill="#fff"/><circle cx="42" cy="40" r="1" fill="#fff"/>
-          </g>
-          <g class="gl gl2">
-            <path d="M68 14h24l-3 30q-9 8-18 0z" fill="rgba(255,250,240,.55)" stroke="#b9975a" stroke-width="2"/>
-            <path d="M70 26h20l-1 18q-9 7-18 0z" fill="#e9c46a"/>
-            <path d="M80 50v40M70 92h20" stroke="#b9975a" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="84" cy="34" r="1.4" fill="#fff"/><circle cx="78" cy="40" r="1" fill="#fff"/>
-          </g>
-          <path class="spark" d="M60 2l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#d4a94e"/>
-        </svg>
-        <div class="seal" id="seal">
-          <span class="dia" id="seal-day">10</span>
-          <span class="reservado">Reservado para</span>
-          <span class="nombre" id="tarjeta-nombre"><span>Tu nombre</span></span>
-          <p id="sealed-text">Has elegido la cena del jueves 10 de diciembre.</p>
+        <div class="field">
+          <label class="lbl" for="email">Tu email de la empresa</label>
+          <input type="email" id="email" name="email" autocomplete="email" maxlength="120" placeholder="nombre@empresa.com" required>
         </div>
-        <h2>Te guardamos el sitio</h2>
-        <p class="thanks">Gracias por formar parte de esta familia. Nos vemos en la mesa.</p>
-        <p><button type="button" class="linkbtn" id="cambiar">Cambiar mi elección</button></p>
       </div>
+
+      <button class="btn" type="submit" id="enviar"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L3 10.5l7 2.5 2.5 7z"/><path d="M21 3L10 13"/></svg><span>Confirmar mi voto</span></button>
+      <p class="hint">Un voto por persona. Si cambias de idea, vuelve a votar con el mismo email.</p>
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="sealed" id="sealed" hidden>
+      <div class="seal" id="seal">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 21l7 7 13-15" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="d"><span id="seal-day">10</span> dic</span>
+      </div>
+      <h2>¡Voto registrado!</h2>
+      <p id="sealed-text">Has elegido la cena del jueves 10 de diciembre.</p>
+      <p>Gracias por participar. ¡Felices fiestas!</p>
+      <p><button type="button" class="linkbtn" id="cambiar">Cambiar mi voto</button></p>
     </div>
   </section>
 
-  <footer>
-    <span id="demo" class="demo-banner" hidden>Modo prueba: los votos solo se guardan en este navegador.</span>
-    <span class="wish">Paz, salud y felices fiestas</span>
-    <span id="footnote">Boomerang TV · Navidad 2026</span>
-    <button type="button" class="ghost" id="abrir-admin">Acceso organización</button>
-  </footer>
-</div>
+  <span id="demo" class="demo-banner" hidden>Modo prueba: los votos solo se guardan en este navegador.</span>
+  <span class="foot" id="footnote">Boomerang TV · Navidad 2026</span>
+</main>
 
-<button type="button" class="music" id="musica" aria-pressed="false">
-  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-  <span id="musica-txt">Poner música</span>
-</button>
+<dialog id="info" class="small" aria-labelledby="info-title">
+  <div class="dlg info">
+    <div class="dlg-head">
+      <h2 id="info-title">Información</h2>
+      <button type="button" class="x" id="cerrar-info" aria-label="Cerrar">×</button>
+    </div>
+    <p>Queremos celebrar la Navidad todos juntos y necesitamos tu opinión sobre la fecha.</p>
+    <ul>
+      <li><b>Jueves 10 de diciembre:</b> cena, por la noche.</li>
+      <li><b>Viernes 11 de diciembre:</b> comida, a mediodía.</li>
+    </ul>
+    <p>Cada persona vota una vez con su email de la empresa. Si cambias de idea, vuelve a votar con el mismo email y se guardará tu última elección. Ganará la fecha con más votos.</p>
+  </div>
+</dialog>
 
 <dialog id="admin" aria-labelledby="admin-title">
   <div class="dlg">
@@ -691,7 +477,7 @@ function mostrarSellado(opcion) {
   $("seal-day").textContent = o.dia;
   $("sealed-text").textContent = "Has elegido " + o.largo + ".";
   form.hidden = true; $("sealed").hidden = false;
-  if (window.alReservar) window.alReservar(opcion);
+  if (window.alResponder) window.alResponder(opcion);
 }
 
 form.addEventListener("submit", async (ev) => {
@@ -705,9 +491,9 @@ form.addEventListener("submit", async (ev) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fallo("email_invalido", $("email"));
   if (CONFIG.DOMINIO && !email.endsWith("@" + CONFIG.DOMINIO.toLowerCase())) return fallo("dominio_no_permitido", $("email"));
 
-  btn.disabled = true; btn.textContent = "Reservando tu sitio…";
+  btn.disabled = true; btn.querySelector("span").textContent = "Enviando…";
   const r = await api({ accion: "votar", opcion, nombre, email });
-  btn.disabled = false; btn.textContent = "Reservar mi sitio";
+  btn.disabled = false; btn.querySelector("span").textContent = "Confirmar mi voto";
   if (!r || !r.ok) return fallo((r && r.error) || "peticion_invalida");
   local.set("mi-voto", { opcion, nombre, email });
   mostrarSellado(opcion);
@@ -721,7 +507,7 @@ function fallo(code, campo) {
 
 $("cambiar").addEventListener("click", () => {
   $("sealed").hidden = true; form.hidden = false;
-  msg.className = "msg"; msg.textContent = "Elige la otra fecha y vuelve a reservar. Nos quedamos con tu última elección.";
+  msg.className = "msg"; msg.textContent = "Marca la otra fecha y vuelve a confirmar. Contará tu último voto.";
   const marcado = form.querySelector('input[name="opcion"]:checked');
   (marcado || $("op-cena")).focus();
 });
@@ -846,109 +632,216 @@ $("csv-audit").addEventListener("click", () => {
 
 
 
-/* ---------- Tarjeta con tu nombre al reservar ---------- */
-window.alReservar = function () {
-  const n = ($("nombre").value || "").trim();
-  const wrap = $("tarjeta-nombre"); wrap.textContent = "";
-  const sp = document.createElement("span"); sp.textContent = n || "Tu sitio";
-  wrap.append(sp);
-};
+/* ---------- Información y navegación ---------- */
+(function nav() {
+  const info = $("info");
+  $("abrir-info").addEventListener("click", () => info.showModal());
+  $("cerrar-info").addEventListener("click", () => info.close());
+  info.addEventListener("click", e => { if (e.target === info) info.close(); });
+  $("nav-inicio").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+})();
 
-/* ---------- Guirnalda: se dibuja según el ancho y se enciende bombilla a bombilla ---------- */
-(function guirnalda() {
-  const svg = $("garland-svg"), NS = "http://www.w3.org/2000/svg";
-  const COLORES = ["#ffcf6e", "#ff5a4f", "#7fd18b", "#ffcf6e", "#ffa94d", "#9ec9ff"];
-  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); (parent || svg).append(e); return e; };
-  function dibujar() {
-    svg.textContent = "";
-    const W = svg.clientWidth || window.innerWidth, H = svg.clientHeight || 84;
-    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-    const tramo = W < 600 ? 130 : 220, n = Math.max(2, Math.round(W / tramo)), paso = W / n, caida = H * .55;
-    let d = "M0 4";
-    for (let i = 0; i < n; i++) d += ` Q${i * paso + paso / 2} ${4 + caida * 2} ${(i + 1) * paso} 4`;
-    el("path", { d, stroke: "#1f4a2c", "stroke-width": 16, fill: "none", "stroke-linecap": "round" });
-    el("path", { d, stroke: "#2d6a43", "stroke-width": 9, fill: "none", "stroke-dasharray": "3 5", "stroke-linecap": "round" });
-    el("path", { d, stroke: "#3f8a58", "stroke-width": 4, fill: "none", "stroke-dasharray": "2 9", "stroke-linecap": "round", transform: "translate(0 3)" });
-    let k = 0;
+/* ================= Decoración navideña generada ================= */
+(function decoracion() {
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.append(e); return e; };
+  let seed = 1210; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const r = (a, b) => a + rnd() * (b - a);
+  const rad = d => d * Math.PI / 180;
+
+  // Degradados y texturas compartidos
+  const TL = $("c-tl");
+  const defs = el("defs", {}, TL);
+  defs.innerHTML = `
+    <radialGradient id="bRed" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#ff7a7a"/><stop offset=".45" stop-color="#c3152d"/><stop offset="1" stop-color="#5e0914"/></radialGradient>
+    <radialGradient id="bGold" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#fff4c9"/><stop offset=".45" stop-color="#d6a63a"/><stop offset="1" stop-color="#6e4e12"/></radialGradient>
+    <radialGradient id="bGreen" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#8fd0a8"/><stop offset=".5" stop-color="#1f6a45"/><stop offset="1" stop-color="#0b3020"/></radialGradient>
+    <radialGradient id="warm" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd27a" stop-opacity=".95"/><stop offset=".4" stop-color="#ffc35a" stop-opacity=".35"/><stop offset="1" stop-color="#ffc35a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bulbG" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff3c2" stop-opacity="1"/><stop offset=".35" stop-color="#ffd76a" stop-opacity=".6"/><stop offset="1" stop-color="#ffd76a" stop-opacity="0"/></radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c58a2c" stop-opacity=".55"/><stop offset=".3" stop-color="#ffe2a0" stop-opacity=".35"/><stop offset=".7" stop-color="#f0c060" stop-opacity=".4"/><stop offset="1" stop-color="#a87020" stop-opacity=".6"/></linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c72a3f"/><stop offset=".5" stop-color="#9b1728"/><stop offset="1" stop-color="#6e0b18"/></linearGradient>
+    <linearGradient id="goldStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1bf"/><stop offset=".5" stop-color="#d8ab45"/><stop offset="1" stop-color="#9a7224"/></linearGradient>
+    <pattern id="treesPat" width="34" height="34" patternUnits="userSpaceOnUse"><rect width="34" height="34" fill="#faf6ee"/><path d="M10 6l-6 10h4l-5 8h14l-5-8h4z" fill="#2d6a4f"/><path d="M27 20l-4 7h3l-3 5h9l-3-5h3z" fill="#2d6a4f" opacity=".8"/></pattern>
+    <pattern id="starsPat" width="30" height="30" patternUnits="userSpaceOnUse"><rect width="30" height="30" fill="#1d4d37"/><path d="M8 4l1.6 3.6 3.9.4-2.9 2.6.8 3.8L8 12.4 4.6 14.4l.8-3.8L2.5 8l3.9-.4z" fill="#d8ab45"/><path d="M23 17l1.2 2.6 2.8.3-2.1 1.9.6 2.8-2.5-1.4-2.5 1.4.6-2.8-2.1-1.9 2.8-.3z" fill="#d8ab45"/></pattern>`;
+
+  // Rama de pino con agujas
+  const VERDES = ["#173f2b", "#1f4d34", "#28603f", "#2f6f49", "#3b7f55"];
+  function rama(p, x, y, len, ang, esc = 1, curva = 0) {
+    const g = el("g", {}, p);
+    const a = rad(ang), ex = x + Math.cos(a) * len, ey = y + Math.sin(a) * len;
+    const cx = (x + ex) / 2 + Math.cos(a + Math.PI / 2) * curva, cy = (y + ey) / 2 + Math.sin(a + Math.PI / 2) * curva;
+    el("path", { d: `M${x} ${y}Q${cx} ${cy} ${ex} ${ey}`, stroke: "#5a3a22", "stroke-width": 3.2 * esc, fill: "none", "stroke-linecap": "round" }, g);
+    const pasos = Math.round(len / (5 * esc));
+    for (let i = 1; i <= pasos; i++) {
+      const t = i / pasos;
+      const px = (1 - t) * (1 - t) * x + 2 * (1 - t) * t * cx + t * t * ex, py = (1 - t) * (1 - t) * y + 2 * (1 - t) * t * cy + t * t * ey;
+      const tx = 2 * (1 - t) * (cx - x) + 2 * t * (ex - cx), ty = 2 * (1 - t) * (cy - y) + 2 * t * (ey - cy);
+      const th = Math.atan2(ty, tx), nl = (30 - 14 * t) * esc;
+      [-1, 1].forEach(lado => {
+        const na = th + lado * rad(r(42, 62));
+        el("line", { x1: px, y1: py, x2: px + Math.cos(na) * nl, y2: py + Math.sin(na) * nl, stroke: VERDES[Math.floor(rnd() * VERDES.length)], "stroke-width": 2.4 * esc, "stroke-linecap": "round" }, g);
+      });
+      if (i % 3 === 0) el("line", { x1: px, y1: py, x2: px + Math.cos(th) * nl * .8, y2: py + Math.sin(th) * nl * .8, stroke: VERDES[4], "stroke-width": 2 * esc, "stroke-linecap": "round" }, g);
+    }
+    return g;
+  }
+  function bola(p, cx, cy, rr, grad, colgarDesde, cls) {
+    const g = el("g", { class: "swing " + (cls || "") }, p);
+    if (colgarDesde != null) el("line", { x1: cx, y1: colgarDesde, x2: cx, y2: cy - rr - 6, stroke: "#b58e3c", "stroke-width": 1.4 }, g);
+    el("rect", { x: cx - rr * .22, y: cy - rr - 8, width: rr * .44, height: 10, rx: 2, fill: "url(#bGold)" }, g);
+    el("circle", { cx, cy, r: rr, fill: `url(#${grad})` }, g);
+    el("ellipse", { cx: cx - rr * .35, cy: cy - rr * .4, rx: rr * .22, ry: rr * .32, fill: "#fff", opacity: .35, transform: `rotate(30 ${cx - rr * .35} ${cy - rr * .4})` }, g);
+    if (grad === "bRed") el("path", { d: `M${cx - rr} ${cy}q${rr} ${rr * .25} ${rr * 2} 0`, stroke: "#e9cf8a", "stroke-width": 1.6, fill: "none", opacity: .6 }, g);
+    return g;
+  }
+  function bayas(p, x, y, n = 3) {
+    const g = el("g", {}, p);
+    el("path", { d: `M${x} ${y}c-10-12-22-8-30-14c4 8 0 12 6 16c-4 2-2 6 4 6c4 4 12 0 20-8z`, fill: "#2a6a46" }, g);
+    el("path", { d: `M${x} ${y}c10-12 22-8 30-14c-4 8 0 12-6 16c4 2 2 6-4 6c-4 4-12 0-20-8z`, fill: "#1f5a3a" }, g);
+    for (let i = 0; i < n; i++) { const bx = x + r(-8, 8), by = y + r(-6, 6); el("circle", { cx: bx, cy: by, r: 6, fill: "#b3172c" }, g); el("circle", { cx: bx - 2, cy: by - 2, r: 1.8, fill: "#fff", opacity: .55 }, g); }
+  }
+  function estrella(p, x, y, s) {
+    const pts = []; for (let i = 0; i < 10; i++) { const rr = i % 2 ? s * .45 : s, a = rad(-90 + i * 36); pts.push(`${(x + Math.cos(a) * rr).toFixed(1)},${(y + Math.sin(a) * rr).toFixed(1)}`); }
+    el("polygon", { class: "star", points: pts.join(" "), fill: "url(#goldStar)", style: `animation-delay:${-r(0, 3).toFixed(2)}s` }, p);
+  }
+  function confeti(p, n, x0, x1, y0, y1) { for (let i = 0; i < n; i++) estrella(p, r(x0, x1), r(y0, y1), r(4, 9)); }
+  function regalo(p, x, y, w, h, rot, relleno, cinta, lazo) {
+    const g = el("g", { transform: `rotate(${rot} ${x + w / 2} ${y + h / 2})` }, p);
+    el("rect", { x: x + 6, y: y + 10, width: w, height: h, rx: 4, fill: "rgba(60,30,10,.18)" }, g);
+    el("rect", { x, y, width: w, height: h, rx: 4, fill: relleno }, g);
+    el("rect", { x, y, width: w, height: h * .2, rx: 4, fill: "rgba(0,0,0,.08)" }, g);
+    el("rect", { x: x + w * .45, y, width: w * .1, height: h, fill: cinta }, g);
+    el("rect", { x, y: y + h * .45, width: w, height: h * .1, fill: cinta }, g);
+    if (lazo) {
+      const bx = x + w * .5, by = y + 2;
+      el("path", { d: `M${bx} ${by}c-${w * .32} -${h * .38} -${w * .5} -${h * .05} -${w * .36} ${h * .1}c${w * .1} ${h * .1} ${w * .26} ${h * .04} ${w * .36} -${h * .1}z`, fill: cinta }, g);
+      el("path", { d: `M${bx} ${by}c${w * .32} -${h * .38} ${w * .5} -${h * .05} ${w * .36} ${h * .1}c-${w * .1} ${h * .1} -${w * .26} ${h * .04} -${w * .36} -${h * .1}z`, fill: cinta }, g);
+      el("path", { d: `M${bx - 3} ${by + 4}l-${w * .14} ${h * .34} 7-3 4 7 ${w * .1} -${h * .38}zM${bx + 3} ${by + 4}l${w * .14} ${h * .34} -7-3 -4 7 -${w * .1} -${h * .38}z`, fill: cinta, opacity: .9 }, g);
+      el("ellipse", { cx: bx, cy: by + 2, rx: w * .06, ry: h * .05, fill: cinta, stroke: "rgba(0,0,0,.2)" }, g);
+    }
+    return g;
+  }
+  function vela(p, x, y, w, h) {
+    const g = el("g", {}, p);
+    el("circle", { class: "candleglow", cx: x + w / 2, cy: y + h * .28, r: w * 1.5, fill: "url(#warm)" }, g);
+    el("rect", { x: x + w * .2, y: y + h * .3, width: w * .6, height: h * .68, rx: 3, fill: "#fbf3e2" }, g);
+    el("rect", { x, y: y + h * .12, width: w, height: h * .88, rx: w * .14, fill: "url(#glass)", stroke: "rgba(201,162,74,.8)", "stroke-width": 1.4 }, g);
+    for (let i = 1; i < 6; i++) el("line", { x1: x + w * i / 6, y1: y + h * .16, x2: x + w * i / 6, y2: y + h * .96, stroke: "rgba(255,240,200,.35)", "stroke-width": 1.4 }, g);
+    el("ellipse", { cx: x + w / 2, cy: y + h * .12, rx: w / 2, ry: w * .1, fill: "none", stroke: "rgba(255,230,170,.8)", "stroke-width": 1.4 }, g);
+    el("path", { class: "flame", d: `M${x + w / 2} ${y + h * .08}c${w * .09} ${h * .08} ${w * .11} ${h * .14} ${w * .05} ${h * .2}c-${w * .03} ${h * .03} -${w * .08} ${h * .03} -${w * .11} 0c-${w * .06} -${h * .06} -${w * .03} -${h * .12} ${w * .06} -${h * .2}z`, fill: "#ffcf6e" }, g);
+    el("path", { d: `M${x + w / 2} ${y + h * .27}v${h * .04}`, stroke: "#3a2416", "stroke-width": 1.6 }, g);
+  }
+  // Guirnalda de lucecitas siguiendo un trazado
+  let orden = 0;
+  function luces(p, d, n) {
+    const guia = el("path", { d, fill: "none", stroke: "#4a3a22", "stroke-width": 1.1, opacity: .7 }, p);
+    const L = guia.getTotalLength();
     for (let i = 0; i < n; i++) {
-      const x0 = i * paso;
-      for (let j = 1; j < 6; j++) {
-        const t = j / 6, x = x0 + paso * t;
-        const yy = 4 + 4 * caida * t * (1 - t) + 6;
-        el("line", { x1: x, y1: yy - 6, x2: x, y2: yy, stroke: "#1f4a2c", "stroke-width": 2 });
-        const c = COLORES[k % COLORES.length];
-        el("ellipse", { class: "bulb", cx: x, cy: yy + 6, rx: 4.5, ry: 7, fill: c, style: `--d:${(k * .07).toFixed(2)}s;filter:drop-shadow(0 0 6px ${c})` });
-        k++;
-      }
-      // lazo rojo en cada punto alto
-      const bx = (i + 1) * paso;
-      if (i < n - 1) {
-        el("path", { d: `M${bx} 8c-12-12-24-4-16 4s14 0 16-4zM${bx} 8c12-12 24-4 16 4s-14 0-16-4z`, fill: "#a51e31" });
-        el("path", { d: `M${bx - 2} 10l-6 22 5-2 3 5 2-25zM${bx + 2} 10l6 22-5-2-3 5-2-25z`, fill: "#8a1626" });
-        el("circle", { cx: bx, cy: 9, r: 4, fill: "#8a1626" });
-      }
+      const pt = guia.getPointAtLength((i + .5) / n * L), dl = (.25 + orden * .045).toFixed(2), tw = r(1.4, 3.4).toFixed(2);
+      el("circle", { class: "bulb-glow", cx: pt.x, cy: pt.y, r: 11, fill: "url(#bulbG)", style: `--d:${dl}s;--t:${tw}s` }, p);
+      el("circle", { class: "bulb", cx: pt.x, cy: pt.y, r: 3, fill: "#fff6d6", style: `--d:${dl}s;--t:${tw}s` }, p);
+      orden++;
     }
   }
-  dibujar();
-  let t; window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(dibujar, 150); });
-})();
 
-/* ---------- Árbol: bolas y luces ---------- */
-(function arbol() {
-  const g = $("tree-orn"), NS = "http://www.w3.org/2000/svg";
-  let s = 1225; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
-  const capas = [[340, 210, 120], [272, 150, 100], [208, 90, 80], [148, 52, 60]];
-  const LUCES = ["#ffe6a0", "#ffcf6e", "#ff8a7a", "#9ec9ff", "#ffe6a0"];
-  let k = 0;
-  capas.forEach(([base, top, half]) => {
-    for (let i = 0; i < 9; i++) {
-      const y = top + (base - top) * (.35 + rnd() * .6), w = half * (y - top) / (base - top);
-      const x = 990 + (rnd() * 2 - 1) * w * .85;
-      const e = document.createElementNS(NS, "circle");
-      if (i % 3 === 0) { e.setAttribute("r", 6); e.setAttribute("fill", ["#a51e31", "#d4a94e", "#c8323f"][k % 3]); }
-      else {
-        const c = LUCES[k % LUCES.length];
-        e.setAttribute("r", 2.6); e.setAttribute("fill", c); e.setAttribute("class", "tlight");
-        e.setAttribute("style", `--d:${(1.1 + rnd() * 1.1).toFixed(2)}s;filter:drop-shadow(0 0 4px ${c})`);
+  // ---- Esquina superior izquierda ----
+  (function () {
+    const g = el("g", {}, TL);
+    [[15, 400, 30], [34, 430, -40], [52, 380, 30], [72, 320, -20], [-4, 300, 20], [88, 240, 10]].forEach(([a, l, c]) => rama(g, -30, -20, l, a, 1.05, c));
+    rama(g, -40, 210, 260, 2, .9, -30);
+    luces(g, "M0 70C110 170 230 40 360 130S470 90 500 60", 18);
+    bayas(g, 120, 150); bayas(g, 310, 250, 4); bayas(g, 60, 320);
+    bola(g, 258, 190, 48, "bRed", 0, "");
+    bola(g, 352, 120, 30, "bGold", 0, "s2");
+    bola(g, 150, 290, 26, "bRed", 150, "s3");
+    estrella(g, 410, 260, 22); estrella(g, 230, 340, 15);
+    confeti(g, 8, 150, 480, 280, 480);
+  })();
+
+  // ---- Esquina superior derecha (espejo) ----
+  (function () {
+    const TR = $("c-tr"), g = el("g", { transform: "translate(500 0) scale(-1 1)" }, TR);
+    [[12, 420, 40], [30, 400, -30], [50, 360, 30], [70, 300, -20], [-6, 320, 10], [86, 220, 20]].forEach(([a, l, c]) => rama(g, -30, -20, l, a, 1.05, c));
+    luces(g, "M0 40C140 160 250 30 360 150S460 200 500 120", 18);
+    bayas(g, 180, 120); bayas(g, 90, 280, 4);
+    bola(g, 210, 250, 54, "bRed", 0, "s2");
+    bola(g, 318, 150, 28, "bGold", 0, "");
+    bola(g, 120, 200, 22, "bGreen", 0, "s3");
+    estrella(g, 380, 330, 20); estrella(g, 300, 400, 13);
+    confeti(g, 7, 160, 480, 300, 490);
+  })();
+
+  // ---- Esquina inferior izquierda ----
+  (function () {
+    const BL = $("c-bl"), g = el("g", {}, BL);
+    [[-12, 380, 20], [-30, 400, -30], [-52, 360, 20], [-74, 300, -10], [4, 260, 10]].forEach(([a, l, c]) => rama(g, -30, 520, l, a, 1.05, c));
+    regalo(g, 40, 220, 220, 170, -8, "url(#treesPat)", "#9b1728", true);
+    regalo(g, -40, 370, 170, 150, 6, "url(#starsPat)", "#d8ab45", false);
+    vela(g, 250, 330, 78, 120);
+    el("path", { d: "M-20 470C80 400 160 520 260 470S400 380 520 450", stroke: "url(#ribbon)", "stroke-width": 26, fill: "none", "stroke-linecap": "round" }, g);
+    el("path", { d: "M-20 466C80 396 160 516 260 466S400 376 520 446", stroke: "#e2606f", "stroke-width": 4, fill: "none", opacity: .5, "stroke-linecap": "round" }, g);
+    bayas(g, 330, 300, 4); bayas(g, 40, 200);
+    estrella(g, 360, 230, 24); estrella(g, 190, 470, 14);
+    confeti(g, 9, 120, 490, 120, 480);
+    luces(g, "M0 160C120 120 200 230 330 200S470 150 500 210", 14);
+  })();
+
+  // ---- Esquina inferior derecha ----
+  (function () {
+    const BR = $("c-br"), g = el("g", {}, BR);
+    [[-168, 380, -20], [-150, 400, 30], [-128, 360, -20], [-106, 300, 10], [176, 260, -10]].forEach(([a, l, c]) => rama(g, 530, 520, l, a, 1.05, c));
+    vela(g, 300, 280, 84, 150);
+    vela(g, 400, 230, 70, 110);
+    vela(g, 200, 360, 64, 96);
+    bola(g, 120, 440, 42, "bRed", null, "");
+    bola(g, 60, 360, 26, "bGold", null, "s2");
+    bayas(g, 250, 300, 4); bayas(g, 420, 180);
+    estrella(g, 140, 300, 20); estrella(g, 360, 470, 14);
+    confeti(g, 9, 30, 480, 140, 480);
+    luces(g, "M0 230C100 170 220 280 330 220S460 120 500 150", 14);
+  })();
+
+  // ---- Guirnalda superior entre esquinas ----
+  (function () {
+    const svg = $("lights");
+    function dibujar() {
+      svg.textContent = "";
+      const W = svg.clientWidth || innerWidth;
+      svg.setAttribute("viewBox", `0 0 ${W} 200`);
+      const n = Math.max(1, Math.round(W / 520)), paso = W / n;
+      for (let i = 0; i < n; i++) {
+        const x0 = i * paso, x1 = x0 + paso;
+        luces(svg, `M${x0} 4Q${(x0 + x1) / 2} ${70} ${x1} 4`, Math.round(paso / 34));
       }
-      e.setAttribute("cx", x.toFixed(1)); e.setAttribute("cy", y.toFixed(1));
-      g.append(e); k++;
     }
-  });
-})();
+    dibujar();
+    let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => { orden = 0; dibujar(); }, 200); });
+  })();
 
-/* ---------- Encender la Navidad ---------- */
-requestAnimationFrame(() => setTimeout(() => document.body.classList.add("lit"), 250));
+  // ---- Pino del emblema ----
+  (function () {
+    const g = $("emblem-pine");
+    rama(g, 104, 104, 64, 192, .38, -8); rama(g, 104, 104, 54, 168, .34, 8);
+    rama(g, 116, 104, 64, -12, .38, 8); rama(g, 116, 104, 54, 12, .34, -8);
+    [[70, 104], [80, 112], [140, 104], [150, 112]].forEach(([x, y]) => { el("circle", { cx: x, cy: y, r: 4.2, fill: "#b3172c" }, g); el("circle", { cx: x - 1.4, cy: y - 1.4, r: 1.3, fill: "#fff", opacity: .55 }, g); });
+  })();
 
-/* ---------- Frases de gratitud ---------- */
-(function gratitud() {
-  const frases = [...document.querySelectorAll("#gratitude span")];
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  let i = 0;
-  setInterval(() => { frases[i].classList.remove("on"); i = (i + 1) % frases.length; frases[i].classList.add("on"); }, 4800);
-})();
-
-/* ---------- Nieve tras la ventana ---------- */
-(function nieve() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const c = $("snow"), ctx = c.getContext("2d");
-  let W, H, copos = [];
-  function size() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = c.clientWidth; H = c.clientHeight; c.width = W * dpr; c.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    copos = Array.from({ length: Math.round(W * H / 700) + 10 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.8 + .5, v: Math.random() * .35 + .15, f: Math.random() * 6.28 }));
-  }
-  function frame() {
-    ctx.clearRect(0, 0, W, H); ctx.fillStyle = "rgba(255,255,255,.9)";
-    for (const p of copos) {
-      p.y += p.v; p.f += .015; p.x += Math.sin(p.f) * .25;
-      if (p.y > H + 3) { p.y = -3; p.x = Math.random() * W; }
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.28); ctx.fill();
+  // ---- Destellos desenfocados ----
+  (function () {
+    const b = $("bokeh");
+    for (let i = 0; i < 22; i++) {
+      const s = r(16, 70), d = document.createElement("span");
+      d.className = "bokeh";
+      Object.assign(d.style, { width: s + "px", height: s + "px", left: r(0, 100) + "vw", top: r(0, 100) + "vh" });
+      d.style.setProperty("--d", (-r(0, 4)).toFixed(2) + "s");
+      b.append(d);
     }
-    requestAnimationFrame(frame);
-  }
-  size(); window.addEventListener("resize", size); requestAnimationFrame(frame);
+  })();
+
+  // Encender las luces
+  requestAnimationFrame(() => setTimeout(() => document.body.classList.add("lit"), 300));
 })();
+
 
 /* ---------- Música: «Noche de paz» (F. X. Gruber, 1818, dominio público) con arpa, celesta y campanas ---------- */
 (function musica() {
