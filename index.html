@@ -4,291 +4,978 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cena de Navidad 2026</title>
-<meta name="description" content="Vota la fecha de la celebración de Navidad de Boomerang TV: cena el jueves 10 o comida el viernes 11 de diciembre.">
+<meta name="description" content="Votación para elegir la fecha de la celebración de Navidad de Boomerang TV.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Spectral:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Diseño: mesa de Navidad vista desde arriba. Barra verde abeto, fondo crema con destellos,
-   esquinas con pino, bolas, regalos y velas; guirnaldas de luces que se encienden y titilan;
-   en el centro, la tarjeta de votación blanca con acento granate. */
+/* =========================================================
+   CONFIGURA AQUÍ ABAJO (en el <script>) LA URL DE APPS SCRIPT
+   ========================================================= */
+
+/* Diseño: Navidad gótica y caprichosa. Noche azul de nieve, luna enorme, pueblo torcido
+   y nevado, un panel "cosido a mano" con costura dorada y dos billetes torcidos: rojo y verde. */
 :root {
-  --pine: #133b2c;
-  --pine-2: #1d5240;
-  --green: #2d6a4f;
-  --burgundy: #8b1a2b;
-  --burgundy-2: #a4243a;
-  --gold: #c9a24a;
-  --gold-soft: #e9cf8a;
-  --cream: #f6efe2;
-  --cream-2: #efe4d0;
-  --card: #fffdf9;
-  --ink: #163a2e;
-  --ink-soft: #6c6a62;
-  --line: #e7dfd0;
-  --font: "Nunito", "Segoe UI", system-ui, sans-serif;
-  color-scheme: light;
+  --night: #07061a;
+  --night-2: #151236;
+  --panel: rgba(14, 11, 36, 0.88);
+  --moon: #f6f2e6;
+  --bone: #e2def0;
+  --muted: #aaa3cf;
+  --stitch: #c9a54a;
+  --ember: #e0414f;
+  --ember-deep: #8c1c2a;
+  --frost: #4cbb7f;
+  --frost-deep: #1d6b45;
+  --blood: #ff8f8f;
+  --display: "Mountains of Christmas", "Comic Sans MS", cursive;
+  --body: "Spectral", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; }
 body {
-  min-height: 100vh; font-family: var(--font); font-size: 17px; line-height: 1.5; color: var(--ink); overflow-x: hidden;
-  background: radial-gradient(1100px 700px at 50% 45%, #fbf6ec 0%, var(--cream) 55%, var(--cream-2) 100%);
-  background-color: var(--cream);
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 700px at 78% -10%, #3b2d72 0%, transparent 60%),
+    radial-gradient(900px 500px at 10% 100%, rgba(60,40,110,.35) 0%, transparent 70%),
+    linear-gradient(180deg, var(--night) 0%, var(--night-2) 70%, #0d0b26 100%);
+  background-color: var(--night);
+  color: var(--bone);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
 }
 
-/* ---------- Barra superior ---------- */
-.topbar { position: sticky; top: 0; z-index: 20; background: var(--pine); color: #f3ead6; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
-.topbar-in { max-width: 1400px; margin: 0 auto; height: 72px; display: flex; align-items: center; gap: 24px; padding: 0 max(20px, env(safe-area-inset-right, 0px)) 0 max(20px, env(safe-area-inset-left, 0px)); }
-.brand { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 24px; white-space: nowrap; color: #f8f1e2; }
-.brand svg { width: 38px; height: 44px; flex: none; }
-.brand .y { color: var(--gold-soft); }
-.nav { display: flex; align-items: stretch; gap: 8px; margin: 0 auto; height: 100%; }
-.nav button { display: inline-flex; align-items: center; gap: 9px; height: 100%; padding: 0 16px; background: none; border: 0; border-bottom: 3px solid transparent; border-top: 3px solid transparent; color: rgba(243,234,214,.7); font: inherit; font-weight: 600; font-size: 16px; cursor: pointer; }
-.nav button svg { width: 22px; height: 22px; }
-.nav button:hover { color: #fff; }
-.nav button[aria-current="page"] { color: var(--gold-soft); border-bottom-color: var(--gold-soft); }
-.nav button:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: -4px; }
-.music { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.08); border: 1px solid rgba(233,207,138,.45); color: #f3ead6; border-radius: 999px; padding: 8px 16px 8px 10px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; white-space: nowrap; }
-.music:hover { background: rgba(255,255,255,.14); }
-.music:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 2px; }
-.music .disc { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: #5d6b63; color: #fff; }
-.music[aria-pressed="true"] .disc { background: var(--burgundy-2); }
-.eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
-.eq i { width: 3px; height: 4px; border-radius: 2px; background: #fff; }
-.music[aria-pressed="true"] .eq i { animation: eq .8s ease-in-out infinite alternate; }
-.music[aria-pressed="true"] .eq i:nth-child(2) { animation-delay: -.3s; } .music[aria-pressed="true"] .eq i:nth-child(3) { animation-delay: -.55s; }
-@keyframes eq { from { height: 3px; } to { height: 14px; } }
-@media (max-width: 900px) {
-  .nav button span { display: none; }
-  .brand { font-size: 19px; } .brand svg { width: 30px; height: 36px; }
-  .music .txt { display: none; } .music { padding: 6px; }
-  .topbar-in { gap: 8px; }
+/* ---------- Escena de fondo ---------- */
+.scene { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.moon {
+  position: absolute; top: max(4vh, 24px); right: max(6vw, 16px);
+  width: clamp(160px, 28vw, 330px); aspect-ratio: 1; border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(0,0,0,.07) 0 9%, transparent 10%),
+    radial-gradient(circle at 62% 58%, rgba(0,0,0,.06) 0 12%, transparent 13%),
+    radial-gradient(circle at 70% 28%, rgba(0,0,0,.05) 0 6%, transparent 7%),
+    radial-gradient(circle at 40% 72%, rgba(0,0,0,.05) 0 5%, transparent 6%),
+    radial-gradient(circle at 40% 40%, #fdfaee 0%, #ece6d4 55%, #c4bcd6 100%);
+  box-shadow: 0 0 60px 12px rgba(225,215,255,.2), 0 0 220px 60px rgba(150,130,230,.12);
 }
-@media (max-width: 560px) { .brand .t2 { display: none; } .nav button { padding: 0 10px; } .topbar-in { padding: 0 12px; } .brand { font-size: 17px; gap: 8px; } }
+@media (max-width: 600px) { .moon { width: 110px; top: 8px; right: -20px; } main.wrap { padding-top: calc(118px + env(safe-area-inset-top, 0px)); } }
+#town { position: absolute; left: 0; bottom: 0; width: 100%; height: min(46vh, 420px); }
+#snow { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bat { position: absolute; width: 46px; height: 24px; color: #050308; opacity: .9; }
+.bat svg { width: 100%; height: 100%; animation: flap .28s ease-in-out infinite alternate; transform-origin: 50% 40%; }
+.bat.b1 { top: 18vh; animation: fly 19s linear infinite; }
+.bat.b2 { top: 9vh; width: 30px; height: 16px; animation: fly 26s linear infinite -9s; }
+.bat.b3 { top: 27vh; width: 36px; height: 19px; animation: fly 23s linear infinite -15s; }
+@keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(.45); } }
+@keyframes fly {
+  0%   { transform: translate(-80px, 0); }
+  25%  { transform: translate(25vw, -4vh); }
+  50%  { transform: translate(50vw, 3vh); }
+  75%  { transform: translate(75vw, -5vh); }
+  100% { transform: translate(calc(100vw + 80px), 0); }
+}
 
-/* ---------- Decoración ---------- */
-.decor { position: fixed; inset: 0; top: 72px; z-index: 0; pointer-events: none; overflow: hidden; }
-.bokeh { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,214,140,.85), rgba(255,214,140,0) 70%); filter: blur(2px); opacity: 0; }
-.lit .bokeh { animation: bokeh 4s ease-in-out infinite alternate; animation-delay: var(--d); }
-@keyframes bokeh { from { opacity: .15; } to { opacity: .7; } }
-.corner { position: absolute; width: clamp(200px, 30vw, 500px); height: auto; overflow: visible; }
-.corner.tl { left: 0; top: 0; } .corner.tr { right: 0; top: 0; }
-.corner.bl { left: 0; bottom: 0; } .corner.br { right: 0; bottom: 0; }
-.lights { position: absolute; left: 0; top: 0; width: 100%; height: 200px; overflow: visible; }
-.bulb { opacity: .12; }
-.lit .bulb { animation: on .25s ease-out forwards, tw var(--t, 2.4s) ease-in-out infinite alternate; animation-delay: var(--d), calc(var(--d) + .25s); }
-@keyframes on { to { opacity: 1; } }
-@keyframes tw { 0% { opacity: 1; } 60% { opacity: .9; } 100% { opacity: .3; } }
-.bulb-glow { opacity: 0; }
-.lit .bulb-glow { animation: glowon .25s ease-out forwards, twg var(--t, 2.4s) ease-in-out infinite alternate; animation-delay: var(--d), calc(var(--d) + .25s); }
-@keyframes glowon { to { opacity: .55; } }
-@keyframes twg { 0% { opacity: .55; } 100% { opacity: .08; } }
-.flame { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(0); }
-.lit .flame { animation: light .5s ease-out forwards 1.6s, flicker 1.4s ease-in-out infinite 2.1s; }
-@keyframes light { to { transform: scale(1); } }
-@keyframes flicker { 0%, 100% { transform: scale(1) skewX(0); } 25% { transform: scale(.94, 1.07) skewX(2deg); } 50% { transform: scale(1.04, .95) skewX(-2deg); } 75% { transform: scale(.97, 1.04) skewX(1deg); } }
-.candleglow { opacity: 0; }
-.lit .candleglow { animation: glowon2 .8s ease-out forwards 1.6s, cglow 2.2s ease-in-out infinite alternate 2.4s; }
-@keyframes glowon2 { to { opacity: .7; } }
-@keyframes cglow { from { opacity: .7; } to { opacity: .45; } }
-.swing { transform-box: fill-box; transform-origin: 50% 0; animation: swing 5s ease-in-out infinite alternate; }
-.swing.s2 { animation-duration: 6.5s; animation-delay: -2s; } .swing.s3 { animation-duration: 4.2s; animation-delay: -1s; }
-@keyframes swing { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
-.star { transform-box: fill-box; transform-origin: 50% 50%; animation: star 3s ease-in-out infinite alternate; }
-@keyframes star { from { opacity: .55; transform: scale(.9); } to { opacity: 1; transform: scale(1.06); } }
+/* ---------- Contenido ---------- */
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: calc(48px + env(safe-area-inset-top, 0px)) calc(56px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-direction: column; gap: 28px;
+}
+header { display: flex; flex-direction: column; gap: 6px; max-width: 34rem; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--stitch); }
+h1 {
+  font-family: var(--display); font-weight: 700; margin: 0;
+  font-size: clamp(44px, 9vw, 78px); line-height: .98; color: var(--moon);
+  text-shadow: 0 2px 0 #05031a, 0 0 28px rgba(200,185,255,.3);
+  text-wrap: balance; transform: rotate(-1.5deg); transform-origin: left;
+}
+.lead { margin: 10px 0 0; color: var(--muted); font-style: italic; font-size: 18px; max-width: 32rem; }
 
-/* ---------- Tarjeta ---------- */
-main { position: relative; z-index: 2; padding: 56px max(16px, env(safe-area-inset-left, 0px)) calc(60px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.card { width: 100%; max-width: 640px; background: rgba(255,253,249,.97); border-radius: 26px; box-shadow: 0 30px 70px rgba(70,45,20,.18), 0 2px 0 rgba(255,255,255,.8) inset; padding: clamp(26px, 5vw, 44px) clamp(20px, 5vw, 52px) clamp(26px, 4vw, 40px); text-align: center; }
-.emblem { width: 220px; max-width: 70%; height: auto; margin: -6px auto 8px; display: block; overflow: visible; }
-.emblem .sp { transform-box: fill-box; transform-origin: 50% 50%; animation: star 1.8s ease-in-out infinite alternate; }
-.emblem .sp:nth-of-type(2) { animation-delay: -.6s; } .emblem .sp:nth-of-type(3) { animation-delay: -1.2s; }
-.emblem .g1 { transform-box: view-box; transform-origin: 98px 120px; animation: clink1 4s ease-in-out infinite; }
-.emblem .g2 { transform-box: view-box; transform-origin: 122px 120px; animation: clink2 4s ease-in-out infinite; }
-@keyframes clink1 { 0%, 70%, 100% { transform: rotate(0); } 78%, 84% { transform: rotate(4deg); } }
-@keyframes clink2 { 0%, 70%, 100% { transform: rotate(0); } 78%, 84% { transform: rotate(-4deg); } }
-h1 { margin: 0; font-weight: 900; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; color: var(--ink); text-wrap: balance; }
-.sub { margin: 10px 0 0; color: var(--ink-soft); font-size: 19px; }
-form { margin-top: 26px; display: flex; flex-direction: column; gap: 14px; text-align: left; }
-fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
-legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.opts { display: flex; flex-direction: column; gap: 14px; }
-.opt { position: relative; display: flex; align-items: center; gap: 16px; padding: 16px 20px; border: 1.5px solid var(--line); border-radius: 12px; background: #fffefb; cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s; }
-.opt:hover { border-color: #d4c7ad; }
-.opt input { position: absolute; opacity: 0; pointer-events: none; }
-.cal { width: 30px; height: 30px; flex: none; color: var(--green); }
-.opt-t { display: flex; flex-direction: column; min-width: 0; }
-.opt-t b { font-weight: 700; font-size: 19px; color: var(--ink); }
-.opt-t small { font-size: 14px; color: var(--ink-soft); }
-.radio { margin-left: auto; flex: none; width: 26px; height: 26px; border-radius: 50%; border: 2px solid #c9c2b4; display: grid; place-items: center; background: #fff; }
-.radio::after { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--burgundy); transform: scale(0); transition: transform .2s cubic-bezier(.3,1.6,.5,1); }
-.opt:has(input:checked) { border-color: var(--burgundy); background: #f9e9ec; box-shadow: 0 0 0 1px var(--burgundy); }
-.opt:has(input:checked) .cal { color: var(--burgundy); }
-.opt:has(input:checked) .radio { border-color: var(--burgundy); }
-.opt:has(input:checked) .radio::after { transform: scale(1); }
-.opt:has(input:focus-visible) { outline: 3px solid var(--gold); outline-offset: 3px; }
-.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+.panel {
+  position: relative; background: var(--panel);
+  border-radius: 18px 26px 16px 24px;
+  padding: clamp(20px, 4vw, 34px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.55);
+  backdrop-filter: blur(3px);
+}
+.panel::before { /* costura */
+  content: ""; position: absolute; inset: 8px; border: 2px dashed var(--stitch);
+  border-radius: 14px 22px 12px 20px; pointer-events: none; opacity: .75;
+}
+form { display: flex; flex-direction: column; gap: 22px; position: relative; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+legend { font-family: var(--display); font-weight: 700; font-size: 28px; color: var(--moon); margin-bottom: 14px; padding: 0; }
+
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 560px) { .choices { grid-template-columns: 1fr; } }
+.choice { position: relative; display: block; cursor: pointer; min-width: 0; }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.ticket {
+  display: grid; grid-template-columns: 70px 1fr; gap: 14px; align-items: center;
+  padding: 18px 18px 18px 14px; border-radius: 12px;
+  background: #1b1840; border: 2px solid #3a3470;
+  transition: transform .2s ease, border-color .2s, background .2s, box-shadow .2s;
+}
+.choice:nth-child(1) .ticket { transform: rotate(-1.6deg); }
+.choice:nth-child(2) .ticket { transform: rotate(1.3deg); }
+.choice:hover .ticket { transform: rotate(0deg) translateY(-3px); }
+.choice input:focus-visible + .ticket { outline: 3px solid var(--moon); outline-offset: 4px; }
+.choice.cena input:checked + .ticket { border-color: var(--ember); background: linear-gradient(160deg, #3f1426, #1b1840 70%); box-shadow: 0 0 0 1px var(--ember), 0 0 32px rgba(236,122,48,.35); transform: rotate(0); }
+.choice.comida input:checked + .ticket { border-color: var(--frost); background: linear-gradient(160deg, #0f3127, #1b1840 70%); box-shadow: 0 0 0 1px var(--frost), 0 0 32px rgba(143,211,220,.3); transform: rotate(0); }
+.ticket svg { width: 70px; height: 84px; }
+.t-text { display: flex; flex-direction: column; min-width: 0; }
+.t-kind { font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.cena .t-kind { color: var(--ember); }
+.comida .t-kind { color: var(--frost); }
+.t-date { font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1; color: var(--moon); margin: 4px 0 2px; }
+.t-day { font-size: 15px; color: var(--bone); }
+.t-note { font-size: 14px; color: var(--muted); font-style: italic; }
+.t-check { position: absolute; top: -10px; right: -6px; width: 34px; height: 34px; border-radius: 50%; display: none; place-items: center; font-family: var(--display); font-weight: 700; font-size: 20px; color: #120c1c; transform: rotate(12deg); }
+.cena .t-check { background: var(--ember); }
+.comida .t-check { background: var(--frost); }
+.choice input:checked ~ .t-check { display: grid; }
+
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 560px) { .fields { grid-template-columns: 1fr; } }
-.field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.lbl { font-weight: 700; font-size: 14px; color: var(--ink-soft); padding-left: 2px; }
-input[type="text"], input[type="email"], input[type="password"] { font: inherit; font-size: 17px; color: var(--ink); background: #fffefb; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; width: 100%; min-width: 0; }
-input::placeholder { color: #aaa293; }
-input:focus-visible { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(45,106,79,.15); }
-.btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; margin-top: 6px; font: inherit; font-weight: 800; font-size: 21px; color: #fff; background: linear-gradient(180deg, var(--burgundy-2), var(--burgundy)); border: 0; border-radius: 12px; padding: 16px 20px; cursor: pointer; box-shadow: 0 10px 22px rgba(139,26,43,.28); transition: transform .12s, box-shadow .12s, filter .12s; }
-.btn svg { width: 24px; height: 24px; }
-.btn:hover { filter: brightness(1.06); }
-.btn:active { transform: translateY(2px); box-shadow: 0 4px 10px rgba(139,26,43,.28); }
-.btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
-.btn[disabled] { opacity: .7; cursor: progress; }
-.hint { margin: 2px 0 0; text-align: center; font-size: 14px; color: var(--ink-soft); }
-.msg { margin: 0; min-height: 1.4em; text-align: center; font-weight: 700; }
-.msg.err { color: var(--burgundy); } .msg.ok { color: var(--green); }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+label.lbl { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+input[type="text"], input[type="email"], input[type="password"] {
+  font: inherit; font-size: 17px; color: var(--moon);
+  background: #0f0d28; border: 2px solid #3a3470; border-radius: 10px;
+  padding: 11px 13px; width: 100%; min-width: 0;
+}
+input::placeholder { color: #7e78a8; }
+input:focus-visible { outline: none; border-color: var(--moon); }
 
-/* Voto registrado */
-.sealed { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.seal { position: relative; width: 84px; height: 84px; border-radius: 50%; background: var(--burgundy); display: grid; place-items: center; box-shadow: 0 0 0 7px #f9e9ec; animation: pop .5s cubic-bezier(.3,1.6,.5,1) both; }
-.seal.comida { background: var(--green); box-shadow: 0 0 0 7px #e4f0ea; }
-.seal svg { width: 40px; height: 40px; }
-.seal .d { position: absolute; right: -10px; bottom: -6px; background: #fff; color: var(--ink); font-weight: 800; font-size: 13px; border-radius: 999px; padding: 2px 8px; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
-@keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
-.sealed h2 { margin: 10px 0 0; font-weight: 900; font-size: 28px; }
-.sealed p { margin: 0; color: var(--ink-soft); }
-#sealed-text { color: var(--ink); font-weight: 700; font-size: 18px; }
-.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; color: var(--burgundy); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-.linkbtn:focus-visible { outline: 2px solid var(--burgundy); outline-offset: 3px; }
-.foot { font-size: 14px; color: #7c7566; text-align: center; background: rgba(255,253,249,.75); padding: 6px 14px; border-radius: 999px; }
-.demo-banner { font-size: 13px; background: #fff3c4; color: #7a5a1c; border-radius: 8px; padding: 6px 10px; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.btn {
+  font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1;
+  color: #0c0a20; background: var(--moon); border: 0; border-radius: 999px 999px 999px 999px / 60% 70% 60% 70%;
+  padding: 14px 28px 12px; cursor: pointer;
+  box-shadow: 0 4px 0 #8f8566, 0 0 26px rgba(241,234,210,.25);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover { transform: translateY(-2px) rotate(-1deg); }
+.btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #8f8566; }
+.btn:focus-visible { outline: 3px solid var(--ember); outline-offset: 4px; }
+.btn[disabled] { opacity: .6; cursor: progress; }
+.hint { margin: 0; font-size: 14px; color: var(--muted); max-width: 30rem; }
+.msg { margin: 0; min-height: 1.4em; font-size: 16px; }
+.msg.err { color: var(--blood); }
+.msg.ok { color: var(--frost); }
 
-/* ---------- Diálogos ---------- */
-dialog { width: min(980px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 0; border: 0; border-radius: 20px; background: var(--card); color: var(--ink); box-shadow: 0 30px 80px rgba(20,40,30,.35); }
-dialog.small { width: min(560px, calc(100vw - 24px)); }
-dialog::backdrop { background: rgba(19,59,44,.5); backdrop-filter: blur(3px); }
-.dlg { padding: 24px clamp(16px, 3vw, 30px) 28px; display: flex; flex-direction: column; gap: 18px; }
+/* Confirmación */
+.sealed { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; position: relative; }
+.seal {
+  width: 112px; height: 112px; flex: none; border-radius: 47% 53% 50% 50% / 52% 48% 52% 48%;
+  display: grid; place-items: center; text-align: center;
+  font-family: var(--display); font-weight: 700; color: #fff3f0; line-height: .95;
+  background: radial-gradient(circle at 35% 30%, #ff9aa2, var(--ember) 45%, var(--ember-deep) 100%);
+  box-shadow: inset 0 -6px 12px rgba(0,0,0,.35), 0 6px 20px rgba(0,0,0,.5);
+  transform: rotate(-8deg); animation: stamp .45s cubic-bezier(.2,1.6,.4,1) both;
+}
+.seal.comida { background: radial-gradient(circle at 35% 30%, #b4f0cc, var(--frost) 45%, var(--frost-deep) 100%); color: #eafff2; }
+.seal b { display: block; font-size: 40px; }
+.seal span { font-size: 15px; }
+@keyframes stamp { from { transform: scale(2.2) rotate(-25deg); opacity: 0; } to { transform: scale(1) rotate(-8deg); opacity: 1; } }
+.sealed h2 { font-family: var(--display); font-size: 34px; margin: 0; color: var(--moon); line-height: 1.05; }
+.sealed p { margin: 6px 0 0; color: var(--bone); }
+.sealed-text { flex: 1 1 260px; min-width: 0; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--ember); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.linkbtn:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted); }
+.ghost { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; background: rgba(14,12,34,.7); color: var(--muted); border: 1px dashed var(--stitch); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.ghost:hover { color: var(--moon); border-color: var(--moon); }
+.ghost:focus-visible { outline: 2px solid var(--moon); outline-offset: 2px; }
+.demo-banner { font-family: var(--mono); font-size: 12px; background: #3a2a0c; color: #ffd38a; border: 1px solid #7a5a1c; border-radius: 8px; padding: 8px 12px; }
+
+/* ---------- Panel de organización ---------- */
+dialog {
+  width: min(980px, calc(100vw - 24px)); max-height: calc(100vh - 24px);
+  padding: 0; border: 2px dashed var(--stitch); border-radius: 16px;
+  background: #110e2c; color: var(--bone);
+}
+dialog::backdrop { background: rgba(6,4,18,.8); backdrop-filter: blur(3px); }
+.dlg { padding: 22px clamp(16px, 3vw, 28px) 26px; display: flex; flex-direction: column; gap: 20px; }
 .dlg-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.dlg-head h2 { margin: 0; font-weight: 900; font-size: 26px; }
-.x { background: #f1ebdf; border: 0; color: var(--ink); border-radius: 10px; width: 38px; height: 38px; font-size: 22px; cursor: pointer; flex: none; }
-.x:focus-visible { outline: 2px solid var(--green); }
-.info p { margin: 0; color: var(--ink-soft); }
-.info ul { margin: 0; padding-left: 20px; color: var(--ink); }
-.info li { margin: 4px 0; }
+.dlg-head h2 { font-family: var(--display); font-size: 32px; margin: 0; color: var(--moon); }
+.x { background: none; border: 1px solid #3a3470; color: var(--bone); border-radius: 8px; width: 36px; height: 36px; font-size: 20px; cursor: pointer; flex: none; }
+.x:focus-visible { outline: 2px solid var(--moon); }
 .login { display: flex; flex-direction: row; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
 .login .field { flex: 1 1 240px; }
-.btn.small { width: auto; font-size: 16px; padding: 12px 20px; margin: 0; }
+.btn.small { font-size: 20px; padding: 11px 20px 9px; }
 .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width: 620px) { .summary { grid-template-columns: 1fr; } }
-.stat { border: 1.5px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; background: #fffefb; }
-.stat .k { font-weight: 800; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
-.stat.cena .k { color: var(--burgundy); } .stat.comida .k { color: var(--green); }
-.stat .n { font-weight: 900; font-size: 42px; line-height: 1; font-variant-numeric: tabular-nums; }
-.stat .n small { font-size: 15px; font-weight: 600; color: var(--ink-soft); }
-.bar { height: 10px; border-radius: 999px; background: #efe7d8; overflow: hidden; }
-.bar i { display: block; height: 100%; width: 0; border-radius: 999px; transition: width .6s ease; }
-.stat.cena .bar i { background: var(--burgundy); } .stat.comida .bar i { background: var(--green); }
-.verdict { margin: 0; font-weight: 600; }
+.stat { background: #1a1738; border: 1px solid #322d5e; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.stat .k { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+.stat.cena .k { color: var(--ember); } .stat.comida .k { color: var(--frost); }
+.stat .n { font-family: var(--display); font-weight: 700; font-size: 46px; line-height: 1; color: var(--moon); font-variant-numeric: tabular-nums; }
+.stat .n small { font-family: var(--body); font-size: 16px; color: var(--muted); font-weight: 400; }
+.bar { height: 10px; border-radius: 6px; background: #28234d; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; border-radius: 6px; transition: width .6s ease; }
+.stat.cena .bar i { background: var(--ember); } .stat.comida .bar i { background: var(--frost); }
+.verdict { margin: 0; font-size: 16px; }
 .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.ghost { font: inherit; font-weight: 700; font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; cursor: pointer; }
-.ghost:hover { border-color: #d4c7ad; }
-.ghost:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
-.toolbar .meta { font-size: 13px; color: var(--ink-soft); margin-left: auto; }
-h3 { margin: 0 0 8px; font-weight: 900; font-size: 20px; }
-.tbl-wrap { overflow: auto; border: 1px solid var(--line); border-radius: 12px; max-height: 360px; background: #fff; }
+.toolbar .meta { font-size: 13px; color: var(--muted); margin-left: auto; }
+h3 { font-family: var(--display); font-size: 26px; color: var(--moon); margin: 0 0 8px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid #322d5e; border-radius: 10px; max-height: 360px; overflow-y: auto; }
 table { border-collapse: collapse; width: 100%; font-size: 14px; }
-th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid #f1ebdf; white-space: nowrap; }
-th { position: sticky; top: 0; background: #faf6ee; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
-td.mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; font-variant-numeric: tabular-nums; }
-td.ua { max-width: 280px; overflow: hidden; text-overflow: ellipsis; color: var(--ink-soft); }
-.tag { display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 6px; color: #fff; }
-.tag.VOTO { background: var(--green); } .tag.CAMBIO { background: #c08a1e; } .tag.CONFIRMACION { background: #a39d8f; }
-.tag.ACCESO_DENEGADO { background: var(--burgundy); } .tag.CONSULTA_RESULTADOS { background: #3d6b8c; }
-.pill { font-weight: 700; } .pill.cena-10 { color: var(--burgundy); } .pill.comida-11 { color: var(--green); }
-.empty { color: var(--ink-soft); font-style: italic; margin: 0; padding: 12px; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #231f48; white-space: nowrap; }
+th { position: sticky; top: 0; background: #1a1738; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+td.mono { font-family: var(--mono); font-size: 12.5px; }
+td.ua { max-width: 280px; overflow: hidden; text-overflow: ellipsis; color: var(--muted); }
+.tag { display: inline-block; font-family: var(--mono); font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid currentColor; }
+.tag.VOTO { color: var(--frost); } .tag.CAMBIO { color: var(--ember); } .tag.CONFIRMACION { color: var(--muted); }
+.tag.ACCESO_DENEGADO { color: var(--blood); } .tag.CONSULTA_RESULTADOS { color: #9fc4ff; }
+.pill { font-family: var(--mono); font-size: 12px; }
+.pill.cena-10 { color: var(--ember); } .pill.comida-11 { color: var(--frost); }
+.empty { color: var(--muted); font-style: italic; margin: 0; padding: 12px; }
 
-@media (max-width: 700px) {
-  main { padding-top: 34px; }
-  .corner { opacity: .95; }
+/* ---------- Personajes ---------- */
+.critter { position: absolute; pointer-events: none; }
+.critter svg { display: block; width: 100%; height: auto; overflow: visible; }
+.bubble {
+  position: absolute; left: 50%; top: -30px; transform: translateX(-50%) scale(0);
+  font-family: var(--display); font-weight: 700; font-size: 17px; line-height: 1; white-space: nowrap;
+  color: #0c0a20; background: var(--moon); padding: 5px 10px 4px; border-radius: 12px 14px 12px 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.4);
 }
+.bubble::after { content: ""; position: absolute; left: 44%; bottom: -6px; border: 6px solid transparent; border-top-color: var(--moon); border-bottom: 0; }
+.flap { transform-box: fill-box; transform-origin: 50% 70%; animation: flap .3s ease-in-out infinite alternate; }
+
+/* Trineo de renos patilargos cruzando la luna */
+.sleigh { width: 62%; left: 0; top: 56%; animation: waiter-x 24s linear infinite; }
+.sleigh > div { animation: bob 1.4s ease-in-out infinite alternate; }
+.sleigh .rleg1 { animation: legs .32s steps(1) infinite; }
+.sleigh .rleg2 { animation: legs .32s steps(1) infinite reverse; }
+@keyframes waiter-x { 0% { transform: translateX(-170%); } 55%, 100% { transform: translateX(260%); } }
+@keyframes bob { from { transform: translateY(-6%); } to { transform: translateY(8%); } }
+.moontree { position: absolute; left: 12%; bottom: 6%; width: 27%; }
+.moontree svg { display: block; width: 100%; height: auto; overflow: visible; }
+.moontree .mstar { transform-box: fill-box; transform-origin: 50% 50%; animation: mstar 2s ease-in-out infinite alternate; }
+@keyframes mstar { from { opacity: .7; transform: rotate(-14deg) scale(.95); } to { opacity: 1; transform: rotate(-14deg) scale(1.1); } }
+
+/* Murciélago despistado: se estampa contra la luna */
+.bonk { width: 17%; left: 46%; top: 44%; animation: bonk 15s ease-in-out infinite 3s; transform: translate(-500%, -400%); }
+.bonk .bubble { animation: toc 15s linear infinite 3s; top: -34px; }
+.bonk .stars { position: absolute; left: 50%; top: -20%; width: 120%; height: 60%; transform: translateX(-50%); opacity: 0; animation: stars-on 15s linear infinite 3s; }
+.bonk .stars span { position: absolute; color: #ffd36b; font-size: 14px; animation: orbit 1s linear infinite; }
+.bonk .stars span:nth-child(2) { animation-delay: -.33s; } .bonk .stars span:nth-child(3) { animation-delay: -.66s; }
+@keyframes bonk {
+  0%   { transform: translate(-500%, -400%) rotate(-20deg); }
+  22%  { transform: translate(0, 0) rotate(0); }
+  24%  { transform: translate(0, 0) scale(1.4, .5); }
+  28%  { transform: translate(0, 0) scale(1); }
+  45%  { transform: translate(-10%, 160%) rotate(170deg); }
+  60%  { transform: translate(-10%, 170%) rotate(180deg); }
+  66%  { transform: translate(0, 140%) rotate(0deg); }
+  85%, 100% { transform: translate(700%, -500%) rotate(15deg); }
+}
+@keyframes toc { 0%, 21% { transform: translateX(-50%) scale(0); } 23% { transform: translateX(-50%) scale(1.25) rotate(-8deg); } 32% { transform: translateX(-50%) scale(1) rotate(-8deg); } 36%, 100% { transform: translateX(-50%) scale(0); } }
+@keyframes stars-on { 0%, 44% { opacity: 0; } 46%, 64% { opacity: 1; } 66%, 100% { opacity: 0; } }
+@keyframes orbit { from { transform: rotate(0deg) translateX(18px) rotate(0deg); } to { transform: rotate(360deg) translateX(18px) rotate(-360deg); } }
+
+/* Bolas alargadas colgando */
+.ornaments { left: 3vw; top: 0; width: 140px; height: 48vh; }
+.ornaments .str { position: absolute; top: 0; width: 1.5px; background: linear-gradient(rgba(201,165,74,.2), #c9a54a); transform-origin: 50% 0; animation: sway 3.4s ease-in-out infinite alternate; }
+.ornaments .str:nth-child(2) { animation-duration: 2.8s; animation-delay: -1s; }
+.ornaments .str:nth-child(3) { animation-duration: 3.9s; animation-delay: -2s; }
+.ornaments .str svg { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); }
+.ornaments .tw { animation: blink 1.4s steps(2) infinite; }
+@keyframes sway { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+
+/* Papá Noel volando con cámara de cine */
+.santa-fly { left: 3vw; top: 46vh; width: clamp(124px, 10vw, 156px); animation: float 4s ease-in-out infinite alternate; }
+.santa-fly .b1 { animation: chin 7s linear infinite; }
+.santa-fly .b2 { animation: hip 7s linear infinite; }
+.reel { transform-box: fill-box; transform-origin: 50% 50%; animation: reel 1.4s linear infinite; }
+.rec { animation: rec 1s steps(1) infinite; }
+.beam-cam { animation: beamcam 2.4s ease-in-out infinite alternate; }
+@keyframes blink { 0% { opacity: 1; } 50% { opacity: .3; } }
+@keyframes reel { to { transform: rotate(360deg); } }
+@keyframes rec { 0% { opacity: 1; } 50% { opacity: .15; } }
+@keyframes beamcam { from { opacity: .35; } to { opacity: .8; } }
+@keyframes float { from { transform: translateY(-10px) rotate(-3deg); } to { transform: translateY(12px) rotate(3deg); } }
+@keyframes drink { 0%, 30% { transform: rotate(0); } 40%, 58% { transform: rotate(-62deg); } 68%, 100% { transform: rotate(0); } }
+@keyframes blush { 0%, 55% { opacity: 0; } 65%, 92% { opacity: .85; } 100% { opacity: 0; } }
+@keyframes chin { 0%, 4% { transform: translateX(-50%) scale(0); } 8%, 26% { transform: translateX(-50%) scale(1); } 30%, 100% { transform: translateX(-50%) scale(0); } }
+@keyframes hip { 0%, 66% { transform: translateX(-20%) scale(0); } 70% { transform: translateX(-20%) scale(1.2) rotate(6deg); } 74%, 86% { transform: translateX(-20%) scale(1) rotate(6deg); } 90%, 100% { transform: translateX(-20%) scale(0); } }
+
+/* Suelo del pueblo */
+.ground { bottom: calc(min(46vh, 420px) * .04); }
+
+/* Farola retorcida y nevada con cuervo */
+.lamp { left: 2vw; width: clamp(78px, 7vw, 100px); }
+.lamp .halo { position: absolute; left: 62%; top: 26%; width: 180%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,206,120,.42) 0%, rgba(255,206,120,.12) 35%, transparent 65%); animation: glow 3.2s ease-in-out infinite alternate; }
+.lamp .lantern { transform-box: view-box; transform-origin: 70px 40px; animation: swing 2.6s ease-in-out infinite alternate; }
+.lamp .flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flick .18s steps(2) infinite alternate; }
+.lamp .head { transform-box: view-box; transform-origin: 36px 22px; animation: peck 5s ease-in-out infinite; }
+.lamp .wing { transform-box: view-box; transform-origin: 30px 26px; animation: ruffle 9s ease-in-out infinite; }
+.lamp .scarf { transform-box: fill-box; transform-origin: 0 0; animation: tail .5s ease-in-out infinite alternate; }
+.lamp .bubble { top: -24px; left: 30%; animation: caw 9s linear infinite; }
+@keyframes glow { from { opacity: .7; transform: translate(-50%, -50%) scale(.94); } to { opacity: 1; transform: translate(-50%, -50%) scale(1.06); } }
+@keyframes swing { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+@keyframes flick { from { transform: scaleY(1); } to { transform: scaleY(.82) skewX(4deg); } }
+@keyframes peck { 0%, 40%, 100% { transform: rotate(0); } 46% { transform: rotate(-22deg); } 52% { transform: rotate(4deg); } 70% { transform: rotate(14deg); } 78% { transform: rotate(0); } }
+@keyframes ruffle { 0%, 80%, 100% { transform: rotate(0); } 83% { transform: rotate(-40deg); } 86% { transform: rotate(-5deg); } 89% { transform: rotate(-40deg); } 92% { transform: rotate(0); } }
+@keyframes caw { 0%, 80% { transform: translateX(-50%) scale(0); } 83%, 93% { transform: translateX(-50%) scale(1) rotate(-6deg); } 96%, 100% { transform: translateX(-50%) scale(0); } }
+@keyframes tail { from { transform: rotate(-14deg); } to { transform: rotate(18deg); } }
+
+/* Pareja pálida y espigada bailando bajo el muérdago */
+.couple { right: 1.5vw; width: clamp(140px, 12vw, 180px); bottom: calc(min(46vh, 420px) * .04 + 70px); }
+.couple .beam { position: absolute; left: 50%; bottom: 8%; width: 180%; height: 78vh; transform: translateX(-50%);
+  background: linear-gradient(to bottom, rgba(241,234,210,0), rgba(241,234,210,.14));
+  clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%); animation: beam 6s ease-in-out infinite alternate; }
+.couple .floor { position: absolute; left: 50%; bottom: -2%; width: 150%; height: 18%; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(241,234,210,.22), transparent 70%); }
+.couple .spin { position: relative; animation: turn 12s ease-in-out infinite; }
+.couple .dance { transform-box: view-box; transform-origin: 75px 198px; animation: waltz 1.2s ease-in-out infinite alternate; }
+.couple .skirt { transform-box: fill-box; transform-origin: 50% 0; animation: swish .6s ease-in-out infinite alternate; }
+.couple .coat { transform-box: fill-box; transform-origin: 50% 0; animation: swish .6s ease-in-out infinite alternate-reverse; }
+.couple .mistle { position: absolute; left: 50%; top: -14%; width: 34px; transform-origin: 50% 0; animation: sway 2.6s ease-in-out infinite alternate; }
+.couple .ff { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #ffe6a8; box-shadow: 0 0 8px 2px rgba(255,214,120,.7); animation: ff 5s ease-in-out infinite alternate; }
+.couple .heart { position: absolute; left: 46%; top: 2%; color: #e0566e; font-size: 18px; opacity: 0; animation: note 6s ease-out infinite 2s; }
+@keyframes beam { from { opacity: .65; } to { opacity: 1; } }
+@keyframes turn { 0%, 42% { transform: scaleX(1); } 50%, 92% { transform: scaleX(-1); } 100% { transform: scaleX(1); } }
+@keyframes waltz { from { transform: rotate(-4deg) translateY(0); } to { transform: rotate(4deg) translateY(-3px); } }
+@keyframes swish { from { transform: skewX(-6deg); } to { transform: skewX(6deg); } }
+@keyframes ff { 0% { transform: translate(0, 0); opacity: .3; } 50% { opacity: 1; } 100% { transform: translate(14px, -24px); opacity: .4; } }
+
+/* Villanos encapuchados que cruzan cantando */
+.carol { left: 0; width: clamp(150px, 13vw, 190px); animation: walk-r 44s linear infinite; }
+.carol .fig { transform-box: fill-box; transform-origin: 50% 100%; animation: step .55s ease-in-out infinite alternate; }
+.carol .fig:nth-of-type(2) { animation-delay: -.2s; } .carol .fig:nth-of-type(3) { animation-delay: -.38s; }
+.carol .lg { animation: glow2 1.4s ease-in-out infinite alternate; }
+.carol .note { position: absolute; top: 0; color: var(--moon); font-size: 18px; opacity: 0; animation: note 3s ease-out infinite; }
+.carol .note:nth-of-type(1) { left: 22%; } .carol .note:nth-of-type(2) { left: 52%; animation-delay: 1s; color: var(--ember); } .carol .note:nth-of-type(3) { left: 78%; animation-delay: 2s; color: var(--frost); }
+@keyframes walk-r { 0% { transform: translateX(-220px); } 62%, 100% { transform: translateX(calc(100vw + 60px)); } }
+@keyframes step { from { transform: translateY(0) rotate(-2.5deg); } to { transform: translateY(-3px) rotate(2.5deg); } }
+@keyframes glow2 { from { opacity: .55; } to { opacity: 1; } }
+@keyframes note { 0% { transform: translate(0, 0) rotate(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(16px, -60px) rotate(20deg); opacity: 0; } }
+
+/* Gato ladrón de salchichas */
+.cat { left: 0; width: clamp(110px, 10vw, 140px); animation: run-l 31s linear infinite 9s; transform: translateX(calc(100vw + 40px)); }
+.cat svg { animation: gallop .32s ease-in-out infinite alternate; }
+.cat .legs1 { animation: legs .32s steps(1) infinite; }
+.cat .legs2 { animation: legs .32s steps(1) infinite reverse; }
+@keyframes run-l { 0% { transform: translateX(calc(100vw + 40px)); } 32%, 100% { transform: translateX(-180px); } }
+@keyframes gallop { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-6px) rotate(2deg); } }
+@keyframes legs { 0% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Papá Noel que asoma grabando */
+.peek { left: 17vw; bottom: 0; width: 82px; transform: translateY(110%); animation: peek 13s ease-in-out infinite 5s; }
+.peek .bubble { animation: bu 13s linear infinite 5s; }
+@keyframes peek { 0%, 8% { transform: translateY(110%); } 14%, 26% { transform: translateY(18%); } 32%, 100% { transform: translateY(110%); } }
+@keyframes bu { 0%, 14% { transform: translateX(-50%) scale(0); } 16%, 25% { transform: translateX(-50%) scale(1.15) rotate(-6deg); } 27%, 100% { transform: translateX(-50%) scale(0); } }
+
+/* Los tres Reyes Magos con guiones de series */
+.kings { left: 0; width: clamp(210px, 17vw, 260px); animation: walk-l 54s linear infinite 16s; transform: translateX(calc(100vw + 40px)); }
+.kings .king { transform-box: fill-box; transform-origin: 50% 100%; animation: step .6s ease-in-out infinite alternate; }
+.kings .king:nth-of-type(2) { animation-delay: -.2s; } .kings .king:nth-of-type(3) { animation-delay: -.4s; }
+.kings .page { transform-box: fill-box; transform-origin: 0 50%; animation: flip 3s ease-in-out infinite; }
+.kings .gem { animation: blink 1.6s steps(2) infinite; }
+.kings .bubble { animation: temporada 6s linear infinite; left: 46%; }
+@keyframes walk-l { 0% { transform: translateX(calc(100vw + 40px)); } 56%, 100% { transform: translateX(-280px); } }
+@keyframes flip { 0%, 60%, 100% { transform: scaleX(1); } 70%, 80% { transform: scaleX(.15); } }
+@keyframes temporada { 0%, 30% { transform: translateX(-50%) scale(0); } 34%, 58% { transform: translateX(-50%) scale(1) rotate(-4deg); } 62%, 100% { transform: translateX(-50%) scale(0); } }
+
+/* Muñeco de nieve larguirucho con chocolate */
+.snowman { left: 10vw; width: clamp(74px, 6.5vw, 96px); }
+.snowman .sm-arm { transform-box: view-box; transform-origin: 62px 112px; animation: sip 7s ease-in-out infinite; }
+.snowman .sm-scarf { transform-box: fill-box; transform-origin: 0 0; animation: flutter .5s ease-in-out infinite alternate; }
+.snowman .steam { animation: steam 2.4s ease-out infinite; }
+.snowman .steam + .steam { animation-delay: 1.2s; }
+.snowman .sm-hat { transform-box: view-box; transform-origin: 50px 56px; animation: hattip 9s ease-in-out infinite 2s; }
+@keyframes sip { 0%, 30% { transform: rotate(0); } 38%, 52% { transform: rotate(-38deg); } 60%, 100% { transform: rotate(0); } }
+@keyframes flutter { from { transform: rotate(-8deg); } to { transform: rotate(12deg); } }
+@keyframes steam { 0% { transform: translate(0, 0); opacity: 0; } 30% { opacity: .8; } 100% { transform: translate(4px, -16px); opacity: 0; } }
+@keyframes hattip { 0%, 80%, 100% { transform: rotate(0); } 85%, 92% { transform: rotate(-18deg) translateY(-6px); } }
+
+/* Caja sorpresa entre los regalos */
+.jbox { right: calc(1.5vw + 196px); width: 58px; }
+.jbox .lid { transform-box: view-box; transform-origin: 6px 70px; animation: jlid 9s ease-in-out infinite 3s; }
+.jbox .pop { animation: jpop 9s cubic-bezier(.3,1.7,.5,1) infinite 3s; transform: translateY(62px); }
+.jbox .bubble { animation: boing 9s linear infinite 3s; top: -36px; }
+@keyframes jlid { 0%, 8% { transform: rotate(0); } 12%, 44% { transform: rotate(-110deg); } 50%, 100% { transform: rotate(0); } }
+@keyframes jpop { 0%, 10% { transform: translateY(62px); } 16%, 40% { transform: translateY(0); } 47%, 100% { transform: translateY(62px); } }
+@keyframes boing { 0%, 15% { transform: translateX(-50%) scale(0); } 17%, 32% { transform: translateX(-50%) scale(1.1) rotate(-6deg); } 35%, 100% { transform: translateX(-50%) scale(0); } }
+
+/* Niebla baja que se arrastra entre las casas */
+.fog { position: absolute; left: -50%; width: 200%; bottom: 0; height: 34vh; pointer-events: none;
+  background: radial-gradient(ellipse 30% 45% at 25% 75%, rgba(160,150,215,.22), transparent 70%),
+              radial-gradient(ellipse 26% 40% at 62% 85%, rgba(160,150,215,.18), transparent 70%),
+              radial-gradient(ellipse 30% 40% at 88% 78%, rgba(160,150,215,.2), transparent 70%);
+  animation: fog 46s ease-in-out infinite alternate; }
+.fog.f2 { bottom: 5vh; opacity: .75; animation-duration: 64s; animation-direction: alternate-reverse; }
+@keyframes fog { from { transform: translateX(-12%); } to { transform: translateX(12%); } }
+
+/* Animaciones del pueblo */
+#town .smoke { animation: smoke 6s ease-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+@keyframes smoke { 0% { transform: translate(0, 0) scale(.6); opacity: 0; } 20% { opacity: .5; } 100% { transform: translate(14px, -60px) scale(1.8); opacity: 0; } }
+#town .bulb { animation: blink 1.6s steps(2) infinite; }
+#town .bulb.b2 { animation-delay: -.8s; } #town .bulb.b3 { animation-delay: -.4s; }
+#town .tlight { animation: twinkle 2.2s ease-in-out infinite alternate; }
+@keyframes twinkle { from { opacity: 1; } to { opacity: .35; } }
+#town .tstar { transform-box: fill-box; transform-origin: 50% 50%; animation: tstar 1.8s ease-in-out infinite alternate; }
+@keyframes tstar { from { filter: drop-shadow(0 0 3px #ffd76a); } to { filter: drop-shadow(0 0 12px #ffd76a); } }
+
+@media (max-width: 760px) {
+  .ornaments, .santa-fly, .snowman, .jbox { display: none; }
+  .lamp { display: none; }
+  .couple { right: auto; left: 4px; width: 124px; bottom: calc(min(46vh, 420px) * .04); }
+  .peek { left: 46vw; }
+}
+
+/* ---------- Botón de música ---------- */
+.music {
+  position: fixed; z-index: 5;
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--display); font-weight: 700; font-size: 19px; line-height: 1;
+  color: var(--moon); background: rgba(16, 13, 40, .94);
+  border: 2px dashed var(--stitch); border-radius: 999px;
+  padding: 10px 16px 9px 12px; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
+  transition: border-color .2s, transform .15s;
+}
+.music:hover { border-color: var(--moon); transform: translateY(-2px) rotate(-2deg); }
+.music:focus-visible { outline: 3px solid var(--ember); outline-offset: 3px; }
+.music[aria-pressed="true"] { border-color: var(--ember); border-style: solid; }
+.eq { display: inline-flex; align-items: flex-end; gap: 3px; height: 18px; width: 22px; }
+.eq i { width: 4px; height: 6px; border-radius: 2px; background: var(--ember); }
+.music[aria-pressed="true"] .eq i { animation: eq .9s ease-in-out infinite alternate; }
+.music[aria-pressed="true"] .eq i:nth-child(2) { animation-delay: -.3s; }
+.music[aria-pressed="true"] .eq i:nth-child(3) { animation-delay: -.6s; }
+.music[aria-pressed="true"] .eq i:nth-child(4) { animation-delay: -.45s; }
+@keyframes eq { from { height: 4px; } to { height: 18px; } }
+.wrap { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; transition: none !important; }
+  .music[aria-pressed="true"] .eq i { animation: none; height: 12px; }
+  .bat, .bat svg, .seal { animation: none !important; }
+  .critter, .critter * { animation: none !important; }
+  .sleigh, .bonk, .carol, .cat, .peek, .kings, .bubble, .ring, .note, .steam { display: none; }
+  .bat { display: none; }
+  .ticket, .btn, .bar i { transition: none; }
 }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-in">
-    <div class="brand">
-      <svg viewBox="0 0 38 44" aria-hidden="true"><path d="M19 2l1.6 3.4 3.7.5-2.7 2.6.7 3.7L19 10.4l-3.3 1.8.7-3.7-2.7-2.6 3.7-.5z" fill="#e9cf8a"/><path d="M19 12l-8 10h5l-9 10h6L4 40h30l-9-8h6l-9-10h5z" fill="none" stroke="#e9cf8a" stroke-width="2" stroke-linejoin="round"/><path d="M19 40v3" stroke="#e9cf8a" stroke-width="2"/></svg>
-      <span><span class="t2">Cena de </span>Navidad <span class="y">2026</span></span>
+<div class="scene" aria-hidden="true">
+  <div class="moon">
+    <!-- Abeto torcido recortado contra la luna -->
+    <div class="moontree">
+      <svg viewBox="0 0 120 220">
+        <path d="M58 220q4-30-2-54" stroke="#0c0a20" stroke-width="7" fill="none"/>
+        <path d="M14 176q30 10 70-8q-14-12-18-22q20 4 30-6q-18-10-22-24q16 2 22-8q-16-8-20-22q12 0 16-8q-14-8-18-20q8-2 10-8q-12-4-16-16q-6 14-14 18q4 4 10 4q-8 10-18 14q6 4 14 2q-10 12-24 18q8 4 18 2q-12 14-28 22q10 4 22 2q-14 14-38 22q22 12 38 6z" fill="#0c0a20"/>
+        <path class="mstar" d="M86 8l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z" fill="#ffd76a"/>
+      </svg>
     </div>
-    <nav class="nav" aria-label="Secciones">
-      <button type="button" aria-current="page" id="nav-inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/></svg><span>Inicio</span></button>
-      <button type="button" id="abrir-admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 20v-4M10 20V11M15 20V7M20 20V4"/></svg><span>Resultados</span></button>
-      <button type="button" id="abrir-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>Información</span></button>
-    </nav>
-    <button type="button" class="music" id="musica" aria-pressed="false">
-      <span class="disc"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
-      <span class="txt" id="musica-txt">Poner música</span>
-    </button>
+    <!-- Trineo destartalado con renos patilargos -->
+    <div class="critter sleigh"><div>
+      <svg viewBox="0 0 220 80">
+        <g fill="#0c0a20" stroke="#0c0a20" stroke-linecap="round">
+          <!-- trineo con patines en espiral -->
+          <path d="M6 44h44q8 0 10-14h5q-2 24-17 26H8z" stroke="none"/>
+          <path d="M2 62h58q10 0 12-8q2-8-6-8q-6 0-5 6" fill="none" stroke-width="2.6"/>
+          <path d="M14 56v6M46 56v6" stroke-width="2"/>
+          <circle cx="16" cy="36" r="9" stroke="none"/><circle cx="34" cy="38" r="8" stroke="none"/>
+          <circle cx="36" cy="26" r="5" stroke="none"/><path d="M33 23q6-12 14-3z" stroke="none"/><circle cx="48" cy="20" r="2.4" stroke="none"/>
+          <path d="M40 30q4 6 10 4" fill="none" stroke-width="2"/>
+          <path d="M60 40l46-6M120 34l42-6" fill="none" stroke-width="1"/>
+          <!-- reno 1 -->
+          <ellipse cx="116" cy="36" rx="15" ry="6" stroke="none"/>
+          <path d="M128 32q6-10 10-12" fill="none" stroke-width="4"/>
+          <ellipse cx="140" cy="18" rx="6" ry="4" stroke="none"/>
+          <path d="M138 14q-4-8-2-14M137 9l-5-3M137 5l-4-4M142 14q3-8 8-10M146 8l4 1" fill="none" stroke-width="1.6"/>
+          <g class="rleg1" fill="none" stroke-width="2"><path d="M106 40l-8 18M110 41l-3 19M122 41l4 19M126 40l9 17"/></g>
+          <g class="rleg2" fill="none" stroke-width="2"><path d="M106 40l-3 20M110 41l-7 17M122 41l9 16M126 40l3 20"/></g>
+          <!-- reno 2 -->
+          <ellipse cx="172" cy="30" rx="15" ry="6" stroke="none"/>
+          <path d="M184 26q6-10 10-12" fill="none" stroke-width="4"/>
+          <ellipse cx="196" cy="12" rx="6" ry="4" stroke="none"/>
+          <path d="M194 8q-4-8-2-12M193 4l-5-3M198 8q3-8 8-10M202 2l4 1" fill="none" stroke-width="1.6"/>
+          <g class="rleg2" fill="none" stroke-width="2"><path d="M162 34l-8 18M166 35l-3 19M178 35l4 19M182 34l9 17"/></g>
+          <g class="rleg1" fill="none" stroke-width="2"><path d="M162 34l-3 20M166 35l-7 17M178 35l9 16M182 34l3 20"/></g>
+        </g>
+        <circle cx="201" cy="13" r="2.2" fill="#e0414f"/>
+      </svg>
+    </div></div>
+    <!-- Reno despistado: se estampa contra la luna -->
+    <div class="critter bonk">
+      <span class="bubble">¡TOC!</span>
+      <div class="stars"><span>✦</span><span>✦</span><span>✦</span></div>
+      <svg viewBox="0 0 60 40"><g fill="#0c0a20"><ellipse cx="26" cy="24" rx="13" ry="6"/><path d="M36 21q6-7 9-7" stroke="#0c0a20" stroke-width="4" stroke-linecap="round"/><ellipse cx="47" cy="13" rx="5" ry="3.6"/></g>
+        <g stroke="#0c0a20" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M45 10q-3-6-1-10M44 6l-4-2M44 3l-3-3M48 10q2-6 6-8M51 6l3 0"/><path d="M17 28l-6 11M21 29l-2 11M31 29l3 11M35 28l7 10"/></g>
+        <circle cx="51" cy="14" r="1.8" fill="#e0414f"/><circle cx="46" cy="12" r="1" fill="#fff"/></svg>
+    </div>
   </div>
-</header>
 
-<div class="decor" aria-hidden="true">
-  <div id="bokeh"></div>
-  <svg class="lights" id="lights"></svg>
-  <svg class="corner tl" id="c-tl" viewBox="0 0 500 500"></svg>
-  <svg class="corner tr" id="c-tr" viewBox="0 0 500 500"></svg>
-  <svg class="corner bl" id="c-bl" viewBox="0 0 500 500"></svg>
-  <svg class="corner br" id="c-br" viewBox="0 0 500 500"></svg>
-</div>
+  <!-- Bolas alargadas colgando -->
+  <div class="critter ornaments">
+    <span class="str" style="left:14px;height:24vh">
+      <svg style="width:34px;height:auto" width="34" height="74" viewBox="0 0 34 74"><rect x="12" y="0" width="10" height="7" rx="1.5" fill="#c9a54a"/><path d="M17 7C2 18 2 40 17 74C32 40 32 18 17 7z" fill="#c8323f"/><path d="M8 24q9 6 18 0M6 36q11 7 22 0M9 48q8 6 16 0" stroke="#f0c35a" stroke-width="1.6" fill="none"/><ellipse cx="11" cy="22" rx="3" ry="7" fill="#fff" opacity=".35"/></svg>
+    </span>
+    <span class="str" style="left:62px;height:34vh">
+      <svg style="width:30px;height:auto" width="30" height="60" viewBox="0 0 30 60"><rect x="10" y="0" width="10" height="7" rx="1.5" fill="#c9a54a"/><circle cx="15" cy="22" r="14" fill="#1f7a4f"/><path d="M15 36l-5 10 5 14 5-14z" fill="#1f7a4f"/><path d="M3 18q12 8 24 0" stroke="#f0c35a" stroke-width="1.6" fill="none"/><circle class="tw" cx="15" cy="26" r="2.4" fill="#f6f2e6"/><ellipse cx="9" cy="17" rx="3" ry="5" fill="#fff" opacity=".35"/></svg>
+    </span>
+    <span class="str" style="left:108px;height:18vh">
+      <svg style="width:40px;height:auto" width="40" height="46" viewBox="0 0 40 46"><rect x="15" y="0" width="10" height="7" rx="1.5" fill="#c9a54a"/><path d="M20 6l5 12 13 1-10 8 4 13-12-8-12 8 4-13-10-8 13-1z" fill="#f0c35a" transform="rotate(-12 20 24)"/><circle class="tw" cx="20" cy="24" r="2.4" fill="#fff"/></svg>
+    </span>
+  </div>
 
-<main>
-  <section class="card" id="panel">
-    <svg class="emblem" viewBox="0 0 220 130" aria-hidden="true">
-      <path class="sp" d="M110 2l2.5 6.5L119 11l-6.5 2.5L110 20l-2.5-6.5L101 11l6.5-2.5z" fill="#c9a24a"/>
-      <path class="sp" d="M58 34l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#c9a24a"/>
-      <path class="sp" d="M164 30l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#c9a24a"/>
-      <path class="sp" d="M30 84l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#c9a24a"/>
-      <path class="sp" d="M190 82l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#c9a24a"/>
-      <g id="emblem-pine"></g>
-      <g class="g1">
-        <path d="M84 26h24l-2 34q-10 9-20 0z" fill="rgba(255,250,235,.7)" stroke="#b58e3c" stroke-width="2"/>
-        <path d="M86 38h20l-1.4 22q-8.6 7-17.2 0z" fill="#e7c56c"/>
-        <circle cx="92" cy="48" r="1.3" fill="#fff"/><circle cx="98" cy="54" r="1" fill="#fff"/><circle cx="95" cy="42" r="1" fill="#fff"/>
-        <path d="M96 66v34M86 102h20" stroke="#b58e3c" stroke-width="2.6" stroke-linecap="round"/>
-      </g>
-      <g class="g2">
-        <path d="M112 26h24l-2 34q-10 9-20 0z" fill="rgba(255,250,235,.7)" stroke="#b58e3c" stroke-width="2"/>
-        <path d="M114 38h20l-1.4 22q-8.6 7-17.2 0z" fill="#e7c56c"/>
-        <circle cx="128" cy="48" r="1.3" fill="#fff"/><circle cx="122" cy="54" r="1" fill="#fff"/>
-        <path d="M124 66v34M114 102h20" stroke="#b58e3c" stroke-width="2.6" stroke-linecap="round"/>
-      </g>
-      <g transform="translate(110 106)">
-        <path d="M0 0c-12-10-24-6-20 2s16 4 20-2zM0 0c12-10 24-6 20 2s-16 4-20-2z" fill="#a4243a"/>
-        <path d="M-2 2l-7 20 5-2 3 5 3-23zM2 2l7 20-5-2-3 5-3-23z" fill="#8b1a2b"/>
-        <circle r="4.5" fill="#8b1a2b"/>
+  <!-- Papá Noel volando con cámara de cine: largo, flaco y ojeroso -->
+  <div class="critter santa-fly">
+    <span class="bubble b1">¡Acción!</span>
+    <span class="bubble b2">¡Corten!</span>
+    <svg viewBox="0 0 124 142">
+      <path class="beam-cam" d="M98 32L128 12V58Z" fill="rgba(255,232,170,.55)"/>
+      <!-- piernas largas y botas de punta enroscada -->
+      <path d="M36 104l-4 26M46 104l3 26" stroke="#e2dfee" stroke-width="4" stroke-linecap="round"/>
+      <path d="M36 104l-4 26M46 104l3 26" stroke="#a51e31" stroke-width="4" stroke-dasharray="3 3"/>
+      <path d="M29 128h7v6h-9q-7 0-7-7q3 3 9 1z" fill="#0c0a20" stroke="#6a5f9e" stroke-width=".8"/>
+      <path d="M47 128h7q1 6 8 5q-1 4-7 4h-8z" fill="#0c0a20" stroke="#6a5f9e" stroke-width=".8"/>
+      <!-- abrigo estrecho y largo -->
+      <path d="M34 50q-7 28-9 54l8 4 8-4 8 4 8-4q-2-26-9-54z" fill="#a51e31" stroke="#5e0f1c" stroke-width="1"/>
+      <path d="M24 103l9 4 8-4 8 4 9-4v5l-9 4-8-4-8 4-9-4z" fill="#e2dfee"/>
+      <path d="M41 52v51" stroke="#e2dfee" stroke-width="2.4"/>
+      <rect x="27" y="78" width="28" height="4" fill="#0c0a20"/>
+      <rect x="38" y="76.5" width="6" height="7" rx="1" fill="none" stroke="#c9a54a" stroke-width="1.5"/>
+      <!-- brazo colgando con dedos largos -->
+      <path d="M34 56q-9 16-7 36" stroke="#a51e31" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M27 92l-2 7M28 93l0 7M29.5 92l2 6" stroke="#e6eaf2" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- cabeza alargada -->
+      <rect x="38" y="43" width="5" height="9" fill="#e6eaf2"/>
+      <ellipse cx="40" cy="31" rx="8.5" ry="13.5" fill="#e6eaf2"/>
+      <ellipse cx="43.5" cy="28" rx="3.8" ry="4.6" fill="#3a4766"/>
+      <circle cx="44.2" cy="28.4" r="1.15" fill="#fff"/>
+      <path d="M39 22q4-2 8 0" stroke="#3a4766" stroke-width="1" fill="none"/>
+      <path d="M46 31l8 3.4-7 1.2" fill="#d6d9e8"/>
+      <path d="M35 36q2 4 6 4" stroke="#b9bdd2" stroke-width="1" fill="none"/>
+      <!-- barba larga y puntiaguda -->
+      <path d="M32 35q2 13 6 31q2 8 4 15q2-13 4-19q3-14 5-27q-6 6-10 6t-9-6z" fill="#ecebf4"/>
+      <path d="M37 47l1 13M42 49l0 16M46 46l-1 10" stroke="#c9c8dc" stroke-width=".8"/>
+      <!-- gorro larguísimo caído hacia atrás -->
+      <path d="M31 22Q33 7 44 7Q52 9 50 21Z" fill="#a51e31" stroke="#5e0f1c" stroke-width="1"/>
+      <path d="M38 10Q22 -1 10 7Q1 13 3 30Q7 19 17 14Q27 11 39 16Z" fill="#a51e31" stroke="#5e0f1c" stroke-width="1"/>
+      <circle cx="3" cy="31" r="3.6" fill="#e2dfee"/>
+      <rect x="29" y="18" width="23" height="5" rx="2.5" fill="#e2dfee"/>
+      <!-- cámara de cine antigua -->
+      <g>
+        <path d="M44 60q9-6 14-22" stroke="#a51e31" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <rect x="56" y="22" width="30" height="20" rx="3" fill="#2a2040" stroke="#7b66a3" stroke-width="1"/>
+        <path d="M86 26h8l4-3v18l-4-3h-8z" fill="#3b2a52" stroke="#7b66a3" stroke-width="1"/>
+        <circle cx="98" cy="32" r="3" fill="#8fd3dc"/>
+        <g class="reel"><circle cx="63" cy="14" r="9" fill="#3b2a52" stroke="#7b66a3" stroke-width="1"/><circle cx="63" cy="14" r="2" fill="#7b66a3"/><circle cx="63" cy="8.5" r="2" fill="#120c1c"/><circle cx="67.8" cy="16.8" r="2" fill="#120c1c"/><circle cx="58.2" cy="16.8" r="2" fill="#120c1c"/></g>
+        <g class="reel"><circle cx="80" cy="14" r="9" fill="#3b2a52" stroke="#7b66a3" stroke-width="1"/><circle cx="80" cy="14" r="2" fill="#7b66a3"/><circle cx="80" cy="8.5" r="2" fill="#120c1c"/><circle cx="84.8" cy="16.8" r="2" fill="#120c1c"/><circle cx="75.2" cy="16.8" r="2" fill="#120c1c"/></g>
+        <circle class="rec" cx="61" cy="27" r="2.2" fill="#ff3b4e"/>
+        <path d="M57 40l-3 5M60 41l-2 6M63 41l-1 6" stroke="#e6eaf2" stroke-width="1.3" stroke-linecap="round"/>
       </g>
     </svg>
+  </div>
+  <canvas id="snow"></canvas>
+  <svg id="town" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice"></svg>
+  <div class="fog f1"></div><div class="fog f2"></div>
 
-    <h1>¿Cuándo celebramos la Navidad?</h1>
-    <p class="sub">¡Elige la fecha que mejor te venga!</p>
+  <!-- Farola retorcida y nevada con cuervo -->
+  <div class="critter ground lamp">
+    <span class="halo"></span>
+    <span class="bubble">¡Cruac!</span>
+    <svg viewBox="0 0 100 180">
+      <path d="M22 178c-2-30 8-46 2-74s6-48 0-70c-2-8 4-14 12-12" stroke="#1c1838" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M22 178c-2-30 8-46 2-74s6-48 0-70c-2-8 4-14 12-12" stroke="#6a5f9e" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".7" transform="translate(2.5 0)"/>
+      <path d="M26 40q20-14 44-4" stroke="#1c1838" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M14 178q10-8 20 0" fill="#1c1838"/>
+      <path d="M28 34c-2-8 4-14 12-12" stroke="#d3d4ec" stroke-width="3" fill="none" stroke-linecap="round" transform="translate(-4 -3)"/>
+      <path d="M30 37q20-14 42-4" stroke="#d3d4ec" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="25" cy="112" r="10" fill="none" stroke="#1f6b45" stroke-width="6"/>
+      <circle cx="25" cy="112" r="10" fill="none" stroke="#2f8a5a" stroke-width="2" stroke-dasharray="3 4"/>
+      <g fill="#e0414f"><circle cx="17" cy="106" r="2"/><circle cx="33" cy="108" r="2"/><circle cx="20" cy="120" r="2"/></g>
+      <path d="M25 121c-6-6-11-3-9 1s7 2 9-1zM25 121c6-6 11-3 9 1s-7 2-9-1z" fill="#c8323f"/>
+      <g class="lantern">
+        <path d="M70 36v8" stroke="#1c1838" stroke-width="2"/>
+        <path d="M62 44h16l-3 4H65z" fill="#1c1838"/>
+        <path d="M61 44q9-6 18 0" stroke="#d3d4ec" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+        <path d="M64 48h12l2 20H62z" fill="rgba(255,214,140,.4)" stroke="#1c1838" stroke-width="2"/>
+        <path class="flame" d="M70 52c3 4 4 7 2 10q-2 2-4 0c-2-3-1-6 2-10z" fill="#ffc27a"/>
+        <path d="M60 68h20l-3 4H63z" fill="#1c1838"/>
+      </g>
+      <!-- cuervo -->
+      <g>
+        <path d="M30 34q-6 8-16 10l8-6" fill="#0d0a15"/>
+        <ellipse cx="32" cy="29" rx="10" ry="7" fill="#0d0a15"/>
+        <path class="wing" d="M28 26q10-2 14 6q-8 2-14-6z" fill="#2a2040"/>
+        <path d="M30 35l-2 4M34 35l1 4" stroke="#e2b34a" stroke-width="1.3" stroke-linecap="round"/>
+        <g class="head">
+          <circle cx="40" cy="21" r="6" fill="#0d0a15"/>
+          <path d="M45 19l8 2.5-8 2z" fill="#e2b34a"/>
+          <circle cx="41.5" cy="19.5" r="1.4" fill="#f1ead2"/>
+          <path d="M28 6c4 0 10 2 12 9" stroke="#0d0a15" stroke-width="1.5" fill="none" opacity="0"/>
+        </g>
+        <path d="M35 25q4 3 9 1" stroke="#c43a4b" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+        <path class="scarf" d="M37 27q-2 6-8 8" stroke="#c43a4b" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
 
+  <!-- Muñeco de nieve larguirucho con chocolate -->
+  <div class="critter ground snowman">
+    <svg viewBox="0 0 96 200">
+      <ellipse cx="46" cy="196" rx="30" ry="4" fill="rgba(90,80,150,.35)"/>
+      <path d="M26 118q-14-12-22-34M10 94l-8 0M8 90l-2-8M6 84l-5-4" stroke="#4a3322" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="46" cy="172" rx="26" ry="24" fill="#e7e8f4" stroke="#a6a6cf" stroke-width="2"/>
+      <ellipse cx="46" cy="124" rx="19" ry="27" fill="#e7e8f4" stroke="#a6a6cf" stroke-width="2" transform="rotate(4 46 124)"/>
+      <ellipse cx="49" cy="76" rx="15" ry="18" fill="#e7e8f4" stroke="#a6a6cf" stroke-width="2" transform="rotate(-6 49 76)"/>
+      <g fill="#1a2433"><circle cx="46" cy="112" r="3"/><circle cx="47" cy="126" r="3"/><circle cx="48" cy="140" r="3"/><circle cx="46" cy="164" r="3.2"/></g>
+      <!-- ojos de botón cosidos -->
+      <circle cx="43" cy="72" r="4.4" fill="#1a2433"/><circle cx="56" cy="70" r="4.4" fill="#1a2433"/>
+      <path d="M41 70l4 4M45 70l-4 4M54 68l4 4M58 68l-4 4" stroke="#e7e8f4" stroke-width="1"/>
+      <path d="M52 78q14-2 22 2q6 2 12 8q-10-2-14-3q-10-2-20-3z" fill="#e8792b"/>
+      <path d="M42 86q8 4 15 0" stroke="#1a2433" stroke-width="1.6" fill="none" stroke-dasharray="1.6 2.4" stroke-linecap="round"/>
+      <!-- bufanda larguísima -->
+      <path d="M32 94q16 8 32-2l0 7q-16 9-32 1z" fill="#c8323f"/>
+      <path class="sm-scarf" d="M60 96q14 6 20 22q4 10 12 14l-4 4q-10-6-14-16q-6-14-18-18z" fill="#c8323f"/>
+      <path d="M74 120l6 4M78 128l6 2" stroke="#f6f2e6" stroke-width="1.6"/>
+      <!-- chistera torcida -->
+      <g class="sm-hat">
+        <path d="M36 58q14 4 28-2l-4-30q-10 2-20 0z" fill="#151230" transform="rotate(-8 50 44)"/>
+        <rect x="32" y="54" width="36" height="5" rx="2.5" fill="#151230" transform="rotate(-8 50 56)"/>
+        <rect x="38" y="48" width="24" height="4" fill="#c8323f" transform="rotate(-8 50 50)"/>
+        <circle cx="60" cy="46" r="2.6" fill="#2a8a59"/><circle cx="62" cy="49" r="1.6" fill="#e0414f"/>
+      </g>
+      <!-- brazo con la taza -->
+      <g class="sm-arm">
+        <path d="M62 112q12-6 20-14" stroke="#4a3322" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path class="steam" d="M82 80q2-3 0-6" stroke="#fff" stroke-width="1.4" fill="none" opacity=".75"/>
+        <path class="steam" d="M87 80q2-3 0-6" stroke="#fff" stroke-width="1.4" fill="none" opacity=".75"/>
+        <rect x="78" y="84" width="12" height="13" rx="2" fill="#c8323f"/>
+        <path d="M90 87q5 1 0 7" stroke="#c8323f" stroke-width="2" fill="none"/>
+        <rect x="78" y="84" width="12" height="2.6" fill="#5a3426"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Caja sorpresa -->
+  <div class="critter ground jbox">
+    <span class="bubble">¡Boing!</span>
+    <svg viewBox="0 0 58 112">
+      <g class="pop">
+        <path d="M29 74l-9-6 18-6-18-6 18-6-18-6 9-4" stroke="#c9a54a" stroke-width="2.4" fill="none" stroke-linejoin="round"/>
+        <circle cx="29" cy="26" r="12" fill="#f4f1ea"/>
+        <circle cx="25" cy="25" r="1.8" fill="#1a2433"/><circle cx="33" cy="25" r="1.8" fill="#1a2433"/>
+        <path d="M24 30q5 5 10 0" stroke="#1a2433" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <circle cx="21" cy="29" r="2.6" fill="#ff9aa2" opacity=".7"/><circle cx="37" cy="29" r="2.6" fill="#ff9aa2" opacity=".7"/>
+        <path d="M17 20q-6-14-14-12q8 4 6 14zM41 20q6-14 14-12q-8 4-6 14z" fill="#c8323f"/>
+        <path d="M18 19q11-16 22 0" fill="#1f7a4f"/>
+        <circle cx="3" cy="8" r="3" fill="#f0c35a"/><circle cx="55" cy="8" r="3" fill="#f0c35a"/>
+      </g>
+      <rect x="6" y="72" width="46" height="38" rx="2" fill="#c8323f" stroke="#8c1c2a" stroke-width="1.4"/>
+      <path d="M6 82h46M6 100h46" stroke="#f0c35a" stroke-width="3"/>
+      <path d="M29 85l2.6 5.4 6 .8-4.3 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.3-4.2 6-.8z" fill="#f0c35a"/>
+      <path class="lid" d="M4 66h50v7H4z" fill="#a51e31" stroke="#8c1c2a" stroke-width="1.4"/>
+    </svg>
+  </div>
+
+  <!-- Pareja pálida y espigada bailando bajo el muérdago -->
+  <div class="critter ground couple">
+    <span class="beam"></span>
+    <span class="floor"></span>
+    <svg class="mistle" viewBox="0 0 34 40" aria-hidden="true"><path d="M17 0v14" stroke="#c9a54a" stroke-width="1.2"/><path d="M17 16q-12-4-16 4q8 4 16-4zM17 16q12-4 16 4q-8 4-16-4zM17 18q-4 10 0 18q4-8 0-18z" fill="#3f8f5f"/><circle cx="14" cy="19" r="2.6" fill="#fff"/><circle cx="20" cy="19" r="2.6" fill="#fff"/><circle cx="17" cy="23" r="2.6" fill="#fff"/><path d="M17 14c-6-6-10-2-8 1s6 2 8-1zM17 14c6-6 10-2 8 1s-6 2-8-1z" fill="#c8323f"/></svg>
+    <span class="ff" style="left:4%;top:30%"></span>
+    <span class="ff" style="left:88%;top:22%;animation-delay:-1.6s"></span>
+    <span class="ff" style="left:72%;top:58%;animation-delay:-3s"></span>
+    <span class="ff" style="left:14%;top:66%;animation-delay:-2.2s"></span>
+    <span class="heart">♥</span>
+    <div class="spin">
+    <svg viewBox="0 0 150 200">
+      <g class="dance">
+        <!-- él: abrigo largo rojo y chistera -->
+        <path d="M49 126l-3 62h7l5-48 5 48h7l-3-62z" fill="#1a1636"/>
+        <path d="M42 188h12v5H42zM60 188h12v5H60z" fill="#0c0a20"/>
+        <path d="M70 86q14 12 22 18" stroke="#9e1b2c" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="93" cy="104" r="2.8" fill="#e6eaf2"/>
+        <path d="M44 80q14-6 28 0l3 44l6 20q-12 6-22-2q-10 8-22 2l6-20z" fill="#9e1b2c" stroke="#6e1220" stroke-width="1"/>
+        <path d="M58 82v58" stroke="#6e1220" stroke-width="1.2"/>
+        <g fill="#c9a54a"><circle cx="61" cy="94" r="1.6"/><circle cx="61" cy="104" r="1.6"/><circle cx="61" cy="114" r="1.6"/></g>
+        <path d="M48 78q10 6 20 0v6q-10 6-20 0z" fill="#f6f2e6"/>
+        <rect x="55" y="68" width="6" height="12" fill="#e6eaf2"/>
+        <ellipse cx="58" cy="57" rx="11" ry="14" fill="#e6eaf2"/>
+        <ellipse cx="53.5" cy="55" rx="3.6" ry="4.2" fill="#3a4766"/><ellipse cx="62.5" cy="55" rx="3.6" ry="4.2" fill="#3a4766"/>
+        <circle cx="54" cy="55.5" r="1.2" fill="#fff"/><circle cx="63" cy="55.5" r="1.2" fill="#fff"/>
+        <path d="M54 64q4 3 8 0" stroke="#3a4766" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+        <g transform="rotate(-8 58 44)">
+          <rect x="49" y="18" width="18" height="26" rx="1" fill="#0c0a20" stroke="#5a7397" stroke-width="1"/>
+          <rect x="49" y="36" width="18" height="3.4" fill="#c8323f"/>
+          <circle cx="63" cy="35" r="2.2" fill="#2a8a59"/>
+          <rect x="43" y="43" width="30" height="3.4" rx="1.7" fill="#0c0a20" stroke="#5a7397" stroke-width="1"/>
+        </g>
+        <!-- ella: abrigo largo verde con ribete blanco y moño alto -->
+        <path class="skirt" d="M86 106q-12 42-20 84q14-6 22 2q10-8 20 0q10-8 22-2q-8-42-24-84z" fill="#1f6b45" stroke="#14532f" stroke-width="1"/>
+        <path d="M66 190q14-6 22 2q10-8 20 0q10-8 22-2" stroke="#f6f2e6" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M88 84q8-4 16 0l3 24H85z" fill="#1f6b45" stroke="#14532f" stroke-width="1"/>
+        <path d="M88 82q8 5 16 0v6q-8 5-16 0z" fill="#c8323f"/>
+        <path class="coat" d="M102 86q6 10 4 24l-4 2q0-12-4-22z" fill="#c8323f"/>
+        <rect x="93" y="72" width="6" height="11" fill="#e6eaf2"/>
+        <ellipse cx="96" cy="62" rx="10" ry="12.5" fill="#e6eaf2"/>
+        <path d="M86 60q0-14 10-14t10 14q-3-8-10-8t-10 8z" fill="#1a1d2e"/>
+        <ellipse cx="97" cy="42" rx="7" ry="8" fill="#1a1d2e"/>
+        <g transform="translate(103 44)"><path d="M0 0c-4-6-9-3-7 0s5 2 7 0zM0 0c5-5 9-1 6 2s-5 1-6-2z" fill="#2a8a59"/><circle cx="0" cy="1" r="2" fill="#e0414f"/></g>
+        <ellipse cx="92" cy="61" rx="3.2" ry="3.8" fill="#3a4766"/><ellipse cx="100" cy="61" rx="3.2" ry="3.8" fill="#3a4766"/>
+        <circle cx="92.3" cy="61.4" r="1.1" fill="#fff"/><circle cx="100.3" cy="61.4" r="1.1" fill="#fff"/>
+        <path d="M89 57.5l-2-1.6M103 57.5l2-1.6" stroke="#1a1d2e" stroke-width=".9" stroke-linecap="round"/>
+        <path d="M94 68.5q2 1.6 4 0" stroke="#c8323f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <path d="M88 86q-10-6-18-4" stroke="#1f6b45" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="70" cy="82" r="2.4" fill="#e6eaf2"/>
+        <path d="M88 90q-28 2-56-22" stroke="#1f6b45" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- manos unidas -->
+        <path d="M46 86q-12-2-16-18" stroke="#9e1b2c" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="31" cy="67" r="3.4" fill="#e6eaf2"/>
+      </g>
+    </svg>
+    </div>
+  </div>
+
+  <!-- Los tres Reyes Magos con guiones de series: largos, flacos y ojerosos -->
+  <div class="critter ground kings">
+    <span class="bubble">¡Nueva temporada!</span>
+    <svg viewBox="0 0 240 150">
+      <!-- Melchor -->
+      <g class="king">
+        <path d="M27 56q-6 40-11 92h40q-5-52-11-92z" fill="#b8862e" stroke="#7a5a1c" stroke-width="1"/>
+        <path d="M36 58v88" stroke="#7a5a1c" stroke-width="1.2" opacity=".7"/>
+        <path d="M25 72h22v4h-22z" fill="#a51e31"/>
+        <path d="M16 146h40" stroke="#a51e31" stroke-width="3" opacity=".8"/>
+        <rect x="33.5" y="48" width="5" height="10" fill="#e6eaf2"/>
+        <ellipse cx="36" cy="36" rx="8.5" ry="13" fill="#e6eaf2"/>
+        <ellipse cx="32.4" cy="33" rx="2.9" ry="3.8" fill="#3a4766"/><ellipse cx="39.6" cy="33" rx="2.9" ry="3.8" fill="#3a4766"/>
+        <circle cx="32.7" cy="33.4" r=".95" fill="#fff"/><circle cx="39.9" cy="33.4" r=".95" fill="#fff"/>
+        <path d="M36 35l-1.6 7h3.2z" fill="#d0d3e3"/>
+        <path d="M28 42q2 16 8 36q6-22 8-36q-4 5-8 5t-8-5z" fill="#ecebf4"/>
+        <path d="M33 50l1 14M38 50l-1 16" stroke="#c9c8dc" stroke-width=".8"/>
+        <g transform="rotate(-6 36 24)">
+          <path d="M28 26l-1-22 5 9 4-15 3 13 4-11 2 26z" fill="#c9a54a" stroke="#7a5a1c" stroke-width="1"/>
+          <circle class="gem" cx="36" cy="18" r="2" fill="#ff3b4e" style="animation-delay:0s"/>
+        </g>
+        <path d="M28 60q-8 14-14 28" stroke="#b8862e" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <g transform="rotate(-10 12 96)">
+          <rect x="2" y="84" width="20" height="26" rx="1" fill="#f4efe0" stroke="#8a7a5a" stroke-width="1"/>
+          <circle cx="5" cy="90" r="1.3" fill="#c9a54a"/><circle cx="5" cy="104" r="1.3" fill="#c9a54a"/>
+          <text x="13" y="95" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="4.6" font-weight="700" fill="#2a2040">GUION</text>
+          <text x="13" y="102" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="3.8" fill="#6e1220">T1 · EP1</text>
+        </g>
+        <path d="M14 88l-3 4M15 90l-2 5" stroke="#e6eaf2" stroke-width="1.1" stroke-linecap="round"/>
+      </g>
+      <!-- Gaspar: va leyendo -->
+      <g class="king">
+        <path d="M109 56q-6 40-11 92h40q-5-52-11-92z" fill="#1c5843" stroke="#0f3127" stroke-width="1"/>
+        <path d="M118 58v88" stroke="#0f3127" stroke-width="1.2" opacity=".7"/>
+        <path d="M107 72h22v4h-22z" fill="#c9a54a"/>
+        <path d="M98 146h40" stroke="#c9a54a" stroke-width="3" opacity=".8"/>
+        <rect x="115.5" y="48" width="5" height="10" fill="#e6e3ee"/>
+        <ellipse cx="118" cy="36" rx="8.5" ry="13" fill="#e6e3ee"/>
+        <ellipse cx="114.4" cy="33" rx="2.9" ry="3.8" fill="#3a4766"/><ellipse cx="121.6" cy="33" rx="2.9" ry="3.8" fill="#3a4766"/>
+        <circle cx="114.7" cy="33.4" r=".95" fill="#fff"/><circle cx="121.9" cy="33.4" r=".95" fill="#fff"/>
+        <path d="M118 35l-1.6 7h3.2z" fill="#d0d3e3"/>
+        <path d="M110 42q2 16 8 36q6-22 8-36q-4 5-8 5t-8-5z" fill="#6b4a33"/>
+        <path d="M115 50l1 14M120 50l-1 16" stroke="#4a3322" stroke-width=".8"/>
+        <g transform="rotate(5 118 24)">
+          <path d="M110 26l-1-22 5 9 4-15 3 13 4-11 2 26z" fill="#c9a54a" stroke="#7a5a1c" stroke-width="1"/>
+          <circle class="gem" cx="118" cy="18" r="2" fill="#8fd3dc" style="animation-delay:-.5s"/>
+        </g>
+        <path d="M110 60q-8 12-10 26M126 60q-2 12-8 26" stroke="#1c5843" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <rect x="100" y="84" width="18" height="22" rx="1" fill="#f4efe0" stroke="#8a7a5a" stroke-width="1"/>
+        <rect class="page" x="118" y="84" width="18" height="22" rx="1" fill="#fbf8ee" stroke="#8a7a5a" stroke-width="1"/>
+        <path d="M103 89h12M103 93h9M103 97h12M103 101h7M121 89h12M121 93h8M121 97h12M121 101h10" stroke="#9a8ab0" stroke-width="1"/>
+        <text x="118" y="113" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="4" fill="#c9a54a">T2 · EP4</text>
+      </g>
+      <!-- Baltasar -->
+      <g class="king">
+        <path d="M191 56q-6 40-11 92h40q-5-52-11-92z" fill="#4a2f7a" stroke="#2a1a4a" stroke-width="1"/>
+        <path d="M200 58v88" stroke="#2a1a4a" stroke-width="1.2" opacity=".7"/>
+        <path d="M189 72h22v4h-22z" fill="#c9a54a"/>
+        <path d="M180 146h40" stroke="#c9a54a" stroke-width="3" opacity=".8"/>
+        <rect x="197.5" y="48" width="5" height="10" fill="#6b4a3a"/>
+        <ellipse cx="200" cy="36" rx="8.5" ry="13" fill="#6b4a3a"/>
+        <ellipse cx="196.4" cy="33" rx="2.9" ry="3.8" fill="#2a1c18"/><ellipse cx="203.6" cy="33" rx="2.9" ry="3.8" fill="#2a1c18"/>
+        <circle cx="196.7" cy="33.4" r=".95" fill="#fff"/><circle cx="203.9" cy="33.4" r=".95" fill="#fff"/>
+        <path d="M200 35l-1.6 7h3.2z" fill="#5a3c2e"/>
+        <path d="M192 42q2 16 8 36q6-22 8-36q-4 5-8 5t-8-5z" fill="#1a1220"/>
+        <path d="M197 50l1 14M202 50l-1 16" stroke="#3a2a2a" stroke-width=".8"/>
+        <g transform="rotate(-4 200 24)">
+          <path d="M192 26l-1-22 5 9 4-15 3 13 4-11 2 26z" fill="#c9a54a" stroke="#7a5a1c" stroke-width="1"/>
+          <circle class="gem" cx="200" cy="18" r="2" fill="#5cc28c" style="animation-delay:-1s"/>
+        </g>
+        <path d="M192 60q-8 14-14 26" stroke="#3d2668" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <g transform="rotate(8 176 98)">
+          <rect x="164" y="90" width="22" height="24" rx="1" fill="#ddd6c4" stroke="#8a7a5a" stroke-width="1"/>
+          <rect x="162" y="86" width="22" height="24" rx="1" fill="#f4efe0" stroke="#8a7a5a" stroke-width="1"/>
+          <circle cx="165" cy="92" r="1.3" fill="#c9a54a"/><circle cx="165" cy="105" r="1.3" fill="#c9a54a"/>
+          <text x="174" y="97" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="4.6" font-weight="700" fill="#2a2040">GUION</text>
+          <text x="174" y="104" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="3.8" fill="#6e1220">T3 · EP8</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Villanos encapuchados con farolillos -->
+  <div class="critter ground carol">
+    <span class="note">♪</span><span class="note">♫</span><span class="note">♪</span>
+    <svg viewBox="0 0 190 100">
+      <g class="fig">
+        <path d="M18 98c-2-26 4-48 12-60q-8-8-2-26q8 2 12 14q8 4 6 16c6 14 8 34 6 56z" fill="#251c38" stroke="#7b66a3" stroke-width="1"/>
+        <ellipse cx="38" cy="34" rx="5" ry="6" fill="#0d0a15"/>
+        <circle cx="36.5" cy="33.5" r="1.1" fill="#ffc27a"/><circle cx="40" cy="33.5" r="1.1" fill="#ffc27a"/>
+        <path d="M46 52l14-6" stroke="#7b66a3" stroke-width="2" stroke-linecap="round"/>
+        <circle class="lg" cx="62" cy="50" r="9" fill="rgba(236,122,48,.35)"/>
+        <rect x="58.5" y="45" width="7" height="9" rx="2" fill="#ffc27a" stroke="#251c38" stroke-width="1.4"/>
+      </g>
+      <g class="fig">
+        <path d="M76 98c-4-16 0-30 10-38q-4-6 0-14q6-2 10 4q10 2 10 12c8 6 10 22 6 36z" fill="#2c2142" stroke="#7b66a3" stroke-width="1"/>
+        <ellipse cx="99" cy="58" rx="5" ry="5.5" fill="#0d0a15"/>
+        <circle cx="97.5" cy="57.5" r="1.1" fill="#ffc27a"/><circle cx="101" cy="57.5" r="1.1" fill="#ffc27a"/>
+        <rect x="90" y="70" width="18" height="12" rx="1" fill="#f1ead2" transform="rotate(-8 99 76)"/>
+        <path d="M93 74h12M93 78h9" stroke="#6f5d8c" stroke-width="1" transform="rotate(-8 99 76)"/>
+      </g>
+      <g class="fig">
+        <path d="M128 98c-2-30 2-52 10-62q-10-16 4-32q2 12 8 16q10 6 6 18c6 16 8 38 6 60z" fill="#251c38" stroke="#7b66a3" stroke-width="1"/>
+        <ellipse cx="148" cy="44" rx="5" ry="6" fill="#0d0a15"/>
+        <circle cx="146.5" cy="43.5" r="1.1" fill="#ffc27a"/><circle cx="150" cy="43.5" r="1.1" fill="#ffc27a"/>
+        <path d="M156 60l16-14v-8" stroke="#7b66a3" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle class="lg" cx="172" cy="44" r="9" fill="rgba(236,122,48,.35)"/>
+        <path d="M172 38v2" stroke="#7b66a3" stroke-width="1.5"/>
+        <rect x="168.5" y="40" width="7" height="9" rx="2" fill="#ffc27a" stroke="#251c38" stroke-width="1.4"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Gato con gorro navideño robando salchichas -->
+  <div class="critter ground cat">
+    <svg viewBox="0 0 140 64">
+      <path d="M96 30q16-16 24-2" stroke="#3a3050" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <g class="legs1" stroke="#3a3050" stroke-width="5" stroke-linecap="round"><path d="M54 42l-8 14M88 42l8 14"/></g>
+      <g class="legs2" stroke="#3a3050" stroke-width="5" stroke-linecap="round"><path d="M56 42l4 15M86 42l-4 15"/></g>
+      <ellipse cx="72" cy="34" rx="26" ry="12" fill="#3a3050"/>
+      <circle cx="42" cy="28" r="12" fill="#3a3050"/>
+      <path d="M33 20l2-10 6 7zM46 17l6-8 2 10z" fill="#3a3050"/>
+      <ellipse cx="37" cy="27" rx="2.4" ry="2" fill="#ffd36b"/><ellipse cx="45" cy="27" rx="2.4" ry="2" fill="#ffd36b"/>
+      <path d="M34 18q10-16 26-6l-4 6z" fill="#c43a4b"/>
+      <rect x="32" y="16" width="22" height="5" rx="2.5" fill="#f1ead2"/>
+      <circle cx="61" cy="12" r="3.5" fill="#f1ead2"/>
+      <g fill="#c8743a">
+        <ellipse cx="34" cy="37" rx="5" ry="3.4" transform="rotate(60 34 37)"/>
+        <ellipse cx="40" cy="46" rx="5" ry="3.4" transform="rotate(40 40 46)"/>
+        <ellipse cx="50" cy="52" rx="5" ry="3.4" transform="rotate(15 50 52)"/>
+        <ellipse cx="62" cy="55" rx="5" ry="3.4"/>
+        <ellipse cx="74" cy="55" rx="5" ry="3.4"/>
+        <ellipse cx="86" cy="54" rx="5" ry="3.4" transform="rotate(-8 86 54)"/>
+        <ellipse cx="98" cy="52" rx="5" ry="3.4" transform="rotate(-10 98 52)"/>
+        <ellipse cx="110" cy="52" rx="5" ry="3.4" transform="rotate(8 110 52)"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Papá Noel que asoma grabando: largo, flaco y ojeroso -->
+  <div class="critter peek">
+    <span class="bubble">¡Sonríe!</span>
+    <svg viewBox="0 0 74 96">
+      <path d="M14 96q2-24 22-28q20 4 22 28z" fill="#a51e31" stroke="#5e0f1c" stroke-width="1"/>
+      <path d="M36 70v26" stroke="#e2dfee" stroke-width="2.4"/>
+      <rect x="31" y="54" width="6" height="14" fill="#e6eaf2"/>
+      <ellipse cx="34" cy="38" rx="11" ry="17.5" fill="#e6eaf2"/>
+      <ellipse cx="28.5" cy="34" rx="4.6" ry="5.6" fill="#3a4766"/>
+      <circle cx="29.2" cy="34.6" r="1.35" fill="#fff"/>
+      <path d="M23 27q5-3 11 0" stroke="#3a4766" stroke-width="1" fill="none"/>
+      <path d="M33 38l-3 10h5z" fill="#d0d3e3"/>
+      <path d="M25 44q1 4 4 6" stroke="#b9bdd2" stroke-width="1" fill="none"/>
+      <path d="M23 44q2 15 11 36q8-21 10-36q-4 6-10 6t-11-6z" fill="#ecebf4"/>
+      <path d="M29 52l2 14M34 54l0 18" stroke="#c9c8dc" stroke-width=".8"/>
+      <path d="M24 22Q26 4 40 6Q48 8 46 22Z" fill="#a51e31" stroke="#5e0f1c" stroke-width="1"/>
+      <path d="M30 8Q14 -2 6 10Q0 18 4 31Q8 18 16 14Q24 12 32 14Z" fill="#a51e31" stroke="#5e0f1c" stroke-width="1"/>
+      <circle cx="4" cy="33" r="4" fill="#e2dfee"/>
+      <rect x="22" y="19" width="26" height="6" rx="3" fill="#e2dfee"/>
+      <!-- cámara apuntando al público -->
+      <g>
+        <g class="reel"><circle cx="51" cy="28" r="8" fill="#3b2a52" stroke="#7b66a3" stroke-width="1"/><circle cx="51" cy="23" r="1.8" fill="#120c1c"/><circle cx="55.3" cy="30.5" r="1.8" fill="#120c1c"/><circle cx="46.7" cy="30.5" r="1.8" fill="#120c1c"/></g>
+        <rect x="38" y="34" width="26" height="18" rx="3" fill="#2a2040" stroke="#7b66a3" stroke-width="1"/>
+        <circle cx="51" cy="43" r="7" fill="#3b2a52" stroke="#7b66a3" stroke-width="1.4"/>
+        <circle cx="51" cy="43" r="4" fill="#8fd3dc"/><circle cx="49.5" cy="41.5" r="1.3" fill="#fff"/>
+        <circle class="rec" cx="42" cy="38" r="1.8" fill="#ff3b4e"/>
+      </g>
+      <path d="M18 92q6-22 20-40" stroke="#a51e31" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M38 51l-3 7M41 52l-1 7M44 52l1 6" stroke="#e6eaf2" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
+
+<main class="wrap">
+  <header>
+    <span class="eyebrow">Navidad 2026 · Votación Boomerang TV</span>
+    <h1>¿Cuándo nos reunimos esta Navidad?</h1>
+    <p class="lead">Dos fechas, una sola celebración. Elige la tuya antes de que se derrita el muñeco de nieve.</p>
+  </header>
+
+  <section class="panel" id="panel">
     <form id="form" novalidate>
       <fieldset>
-        <legend>Fecha preferida</legend>
-        <div class="opts">
-          <label class="opt cena">
+        <legend>Elige fecha</legend>
+        <div class="choices">
+          <label class="choice cena">
             <input type="radio" name="opcion" id="op-cena" value="cena-10">
-            <svg class="cal" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="6" width="22" height="20" rx="3"/><path d="M4 12h22M10 3v6M20 3v6" stroke-linecap="round"/><g fill="currentColor" stroke="none"><circle cx="10" cy="17" r="1.4"/><circle cx="15" cy="17" r="1.4"/><circle cx="20" cy="17" r="1.4"/><circle cx="10" cy="21.5" r="1.4"/><circle cx="15" cy="21.5" r="1.4"/></g></svg>
-            <span class="opt-t"><b>Jueves 10 de diciembre</b><small>Cena · por la noche</small></span>
-            <span class="radio" aria-hidden="true"></span>
+            <span class="ticket">
+              <svg viewBox="0 0 70 84" aria-hidden="true">
+                <ellipse cx="35" cy="22" rx="7" ry="13" fill="#ffd76a" opacity=".3"><animate attributeName="ry" values="13;15;12;14;13" dur="1.6s" repeatCount="indefinite"/></ellipse>
+                <path d="M35 10c4 5 5 9 3 13-1 2-5 2-6 0-2-4-1-8 3-13z" fill="#ffb36b"><animateTransform attributeName="transform" type="rotate" values="-4 35 24;5 35 24;-2 35 24;-4 35 24" dur="1.3s" repeatCount="indefinite"/></path>
+                <path d="M35 25v4" stroke="#1a1020" stroke-width="2"/>
+                <path d="M24 30c2-2 20-2 22 1l2 44c-6 4-20 4-26 0z" fill="#c8323f" transform="rotate(-4 35 52)"/>
+                <path d="M27 31c0 6 2 8 3 9 1 1 0-5 2-8M41 31c0 4-1 10 1 12 1 1 1-6 2-11" stroke="#ff9aa2" stroke-width="2.4" fill="none" stroke-linecap="round" transform="rotate(-4 35 52)"/>
+                <path d="M12 78q8-10 18-4q-4 8-18 4zM58 78q-8-10-18-4q4 8 18 4z" fill="#2a8a59"/><circle cx="31" cy="76" r="3.4" fill="#e0414f"/><circle cx="38" cy="77" r="3.4" fill="#c8323f"/><circle cx="35" cy="72" r="3.4" fill="#e0414f"/>
+              </svg>
+              <span class="t-text">
+                <span class="t-kind">Cena</span>
+                <span class="t-date">10 de diciembre</span>
+                <span class="t-day">Jueves por la noche</span>
+                <span class="t-note">A la luz de las velas</span>
+              </span>
+            </span>
+            <span class="t-check" aria-hidden="true">✓</span>
           </label>
-          <label class="opt comida">
+          <label class="choice comida">
             <input type="radio" name="opcion" id="op-comida" value="comida-11">
-            <svg class="cal" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="6" width="22" height="20" rx="3"/><path d="M4 12h22M10 3v6M20 3v6" stroke-linecap="round"/><g fill="currentColor" stroke="none"><circle cx="10" cy="17" r="1.4"/><circle cx="15" cy="17" r="1.4"/><circle cx="20" cy="17" r="1.4"/><circle cx="10" cy="21.5" r="1.4"/><circle cx="15" cy="21.5" r="1.4"/></g></svg>
-            <span class="opt-t"><b>Viernes 11 de diciembre</b><small>Comida · a mediodía</small></span>
-            <span class="radio" aria-hidden="true"></span>
+            <span class="ticket">
+              <svg viewBox="0 0 70 84" aria-hidden="true">
+                <g transform="translate(35 30)">
+                  <g stroke="#f0c35a" stroke-width="2.6" stroke-linecap="round" fill="none">
+                    <path d="M0-26q3 5 0 9"/><path d="M18-18q0 6-5 7"/><path d="M26 0q-5 3-9 0"/><path d="M18 18q-6 0-7-5"/>
+                    <path d="M0 26q-3-5 0-9"/><path d="M-18 18q0-6 5-7"/><path d="M-26 0q5-3 9 0"/><path d="M-18-18q6 0 7 5"/>
+                    <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="40s" repeatCount="indefinite"/>
+                  </g>
+                  <circle r="12" fill="#ffe7a0"/><path d="M-12-6q10-20 24-8l-5 4z" fill="#c8323f"/><rect x="-13" y="-9" width="22" height="4.5" rx="2.2" fill="#f6f2e6" transform="rotate(-10)"/><circle cx="13" cy="-15" r="3.2" fill="#f6f2e6"/>
+                  <circle cx="-4" cy="-2" r="1.6" fill="#1a1020"/><circle cx="4" cy="-2" r="1.6" fill="#1a1020"/>
+                  <path d="M-4 4q4 3 8 0" stroke="#1a1020" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+                </g>
+                <path d="M10 74c8-3 42-3 50 0" stroke="#efe6cc" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <path d="M18 74l-3 8M52 74l3 8" stroke="#2a8a59" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+              <span class="t-text">
+                <span class="t-kind">Comida</span>
+                <span class="t-date">11 de diciembre</span>
+                <span class="t-day">Viernes a mediodía</span>
+                <span class="t-note">Antes de que oscurezca</span>
+              </span>
+            </span>
+            <span class="t-check" aria-hidden="true">✓</span>
           </label>
         </div>
       </fieldset>
@@ -304,41 +991,34 @@ td.ua { max-width: 280px; overflow: hidden; text-overflow: ellipsis; color: var(
         </div>
       </div>
 
-      <button class="btn" type="submit" id="enviar"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L3 10.5l7 2.5 2.5 7z"/><path d="M21 3L10 13"/></svg><span>Confirmar mi voto</span></button>
-      <p class="hint">Un voto por persona. Si cambias de idea, vuelve a votar con el mismo email.</p>
+      <div class="actions">
+        <button class="btn" type="submit" id="enviar">Sellar mi voto</button>
+        <p class="hint">Un voto por email. Si cambias de idea, vuelve a votar con el mismo email y se actualizará.</p>
+      </div>
       <p class="msg" id="msg" role="status" aria-live="polite"></p>
     </form>
 
     <div class="sealed" id="sealed" hidden>
-      <div class="seal" id="seal">
-        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 21l7 7 13-15" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="d"><span id="seal-day">10</span> dic</span>
+      <div class="seal" id="seal"><div><b id="seal-day">10</b><span>dic</span></div></div>
+      <div class="sealed-text">
+        <h2>Voto sellado</h2>
+        <p id="sealed-text">Has elegido la cena del jueves 10 de diciembre.</p>
+        <p><button type="button" class="linkbtn" id="cambiar">Cambiar mi voto</button></p>
       </div>
-      <h2>¡Voto registrado!</h2>
-      <p id="sealed-text">Has elegido la cena del jueves 10 de diciembre.</p>
-      <p>Gracias por participar. ¡Felices fiestas!</p>
-      <p><button type="button" class="linkbtn" id="cambiar">Cambiar mi voto</button></p>
     </div>
   </section>
 
-  <span id="demo" class="demo-banner" hidden>Modo prueba: los votos solo se guardan en este navegador.</span>
-  <span class="foot" id="footnote">Boomerang TV · Navidad 2026</span>
+  <footer>
+    <span id="demo" class="demo-banner" hidden>Modo prueba: los votos solo se guardan en este navegador. Configura la URL de Apps Script para usarla de verdad.</span>
+    <span id="footnote">Navidad 2026</span>
+    <button type="button" class="ghost" id="abrir-admin">Acceso organización</button>
+  </footer>
 </main>
 
-<dialog id="info" class="small" aria-labelledby="info-title">
-  <div class="dlg info">
-    <div class="dlg-head">
-      <h2 id="info-title">Información</h2>
-      <button type="button" class="x" id="cerrar-info" aria-label="Cerrar">×</button>
-    </div>
-    <p>Queremos celebrar la Navidad todos juntos y necesitamos tu opinión sobre la fecha.</p>
-    <ul>
-      <li><b>Jueves 10 de diciembre:</b> cena, por la noche.</li>
-      <li><b>Viernes 11 de diciembre:</b> comida, a mediodía.</li>
-    </ul>
-    <p>Cada persona vota una vez con su email de la empresa. Si cambias de idea, vuelve a votar con el mismo email y se guardará tu última elección. Ganará la fecha con más votos.</p>
-  </div>
-</dialog>
+<button type="button" class="music" id="musica" aria-pressed="false">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span id="musica-txt">Poner música</span>
+</button>
 
 <dialog id="admin" aria-labelledby="admin-title">
   <div class="dlg">
@@ -346,6 +1026,7 @@ td.ua { max-width: 280px; overflow: hidden; text-overflow: ellipsis; color: var(
       <h2 id="admin-title">Resultados y auditoría</h2>
       <button type="button" class="x" id="cerrar-admin" aria-label="Cerrar">×</button>
     </div>
+
     <form class="login" id="login">
       <div class="field">
         <label class="lbl" for="clave">Clave de organización</label>
@@ -354,6 +1035,7 @@ td.ua { max-width: 280px; overflow: hidden; text-overflow: ellipsis; color: var(
       <button class="btn small" type="submit" id="entrar">Ver resultados</button>
     </form>
     <p class="msg" id="admin-msg" role="status" aria-live="polite"></p>
+
     <div id="resultados" hidden>
       <div style="display:flex;flex-direction:column;gap:20px">
         <div class="summary" id="summary"></div>
@@ -475,9 +1157,8 @@ function mostrarSellado(opcion) {
   const o = OPCIONES[opcion];
   $("seal").className = "seal" + (opcion === "comida-11" ? " comida" : "");
   $("seal-day").textContent = o.dia;
-  $("sealed-text").textContent = "Has elegido " + o.largo + ".";
+  $("sealed-text").textContent = "Has elegido " + o.largo + ". Gracias por votar.";
   form.hidden = true; $("sealed").hidden = false;
-  if (window.alResponder) window.alResponder(opcion);
 }
 
 form.addEventListener("submit", async (ev) => {
@@ -491,9 +1172,9 @@ form.addEventListener("submit", async (ev) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fallo("email_invalido", $("email"));
   if (CONFIG.DOMINIO && !email.endsWith("@" + CONFIG.DOMINIO.toLowerCase())) return fallo("dominio_no_permitido", $("email"));
 
-  btn.disabled = true; btn.querySelector("span").textContent = "Enviando…";
+  btn.disabled = true; btn.textContent = "Sellando…";
   const r = await api({ accion: "votar", opcion, nombre, email });
-  btn.disabled = false; btn.querySelector("span").textContent = "Confirmar mi voto";
+  btn.disabled = false; btn.textContent = "Sellar mi voto";
   if (!r || !r.ok) return fallo((r && r.error) || "peticion_invalida");
   local.set("mi-voto", { opcion, nombre, email });
   mostrarSellado(opcion);
@@ -507,7 +1188,7 @@ function fallo(code, campo) {
 
 $("cambiar").addEventListener("click", () => {
   $("sealed").hidden = true; form.hidden = false;
-  msg.className = "msg"; msg.textContent = "Marca la otra fecha y vuelve a confirmar. Contará tu último voto.";
+  msg.className = "msg"; msg.textContent = "Elige la otra fecha y vuelve a sellar. Se guardará solo tu último voto.";
   const marcado = form.querySelector('input[name="opcion"]:checked');
   (marcado || $("op-cena")).focus();
 });
@@ -630,319 +1311,223 @@ $("csv-audit").addEventListener("click", () => {
     .concat((ultimos.auditoria || []).map(x => [fecha(x.fecha), x.accion, x.email, x.nombre, etiquetaOpcion(x.anterior), etiquetaOpcion(x.nueva), x.navegador, x.id])));
 });
 
-
-
-/* ---------- Información y navegación ---------- */
-(function nav() {
-  const info = $("info");
-  $("abrir-info").addEventListener("click", () => info.showModal());
-  $("cerrar-info").addEventListener("click", () => info.close());
-  info.addEventListener("click", e => { if (e.target === info) info.close(); });
-  $("nav-inicio").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-})();
-
-/* ================= Decoración navideña generada ================= */
-(function decoracion() {
-  const NS = "http://www.w3.org/2000/svg";
-  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.append(e); return e; };
-  let seed = 1210; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+/* ---------- Escena: pueblo torcido y nevado con abetos inclinados (generado) ---------- */
+(function escena() {
+  const svg = $("town"), NS = "http://www.w3.org/2000/svg";
+  let s = 20261210;
+  const rnd = () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
   const r = (a, b) => a + rnd() * (b - a);
-  const rad = d => d * Math.PI / 180;
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); (parent || svg).append(e); return e; };
+  const LUCES = ["#ff5a64", "#ffd76a", "#5cd18e", "#ffd76a"];
 
-  // Degradados y texturas compartidos
-  const TL = $("c-tl");
-  const defs = el("defs", {}, TL);
-  defs.innerHTML = `
-    <radialGradient id="bRed" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#ff7a7a"/><stop offset=".45" stop-color="#c3152d"/><stop offset="1" stop-color="#5e0914"/></radialGradient>
-    <radialGradient id="bGold" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#fff4c9"/><stop offset=".45" stop-color="#d6a63a"/><stop offset="1" stop-color="#6e4e12"/></radialGradient>
-    <radialGradient id="bGreen" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#8fd0a8"/><stop offset=".5" stop-color="#1f6a45"/><stop offset="1" stop-color="#0b3020"/></radialGradient>
-    <radialGradient id="warm" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd27a" stop-opacity=".95"/><stop offset=".4" stop-color="#ffc35a" stop-opacity=".35"/><stop offset="1" stop-color="#ffc35a" stop-opacity="0"/></radialGradient>
-    <radialGradient id="bulbG" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff3c2" stop-opacity="1"/><stop offset=".35" stop-color="#ffd76a" stop-opacity=".6"/><stop offset="1" stop-color="#ffd76a" stop-opacity="0"/></radialGradient>
-    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c58a2c" stop-opacity=".55"/><stop offset=".3" stop-color="#ffe2a0" stop-opacity=".35"/><stop offset=".7" stop-color="#f0c060" stop-opacity=".4"/><stop offset="1" stop-color="#a87020" stop-opacity=".6"/></linearGradient>
-    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c72a3f"/><stop offset=".5" stop-color="#9b1728"/><stop offset="1" stop-color="#6e0b18"/></linearGradient>
-    <linearGradient id="goldStar" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1bf"/><stop offset=".5" stop-color="#d8ab45"/><stop offset="1" stop-color="#9a7224"/></linearGradient>
-    <pattern id="treesPat" width="34" height="34" patternUnits="userSpaceOnUse"><rect width="34" height="34" fill="#faf6ee"/><path d="M10 6l-6 10h4l-5 8h14l-5-8h4z" fill="#2d6a4f"/><path d="M27 20l-4 7h3l-3 5h9l-3-5h3z" fill="#2d6a4f" opacity=".8"/></pattern>
-    <pattern id="starsPat" width="30" height="30" patternUnits="userSpaceOnUse"><rect width="30" height="30" fill="#1d4d37"/><path d="M8 4l1.6 3.6 3.9.4-2.9 2.6.8 3.8L8 12.4 4.6 14.4l.8-3.8L2.5 8l3.9-.4z" fill="#d8ab45"/><path d="M23 17l1.2 2.6 2.8.3-2.1 1.9.6 2.8-2.5-1.4-2.5 1.4.6-2.8-2.1-1.9 2.8-.3z" fill="#d8ab45"/></pattern>`;
+  // Colinas nevadas lejanas
+  el("path", { d: "M0 330 Q180 270 360 310 T720 300 T1080 290 T1440 300 V420 H0Z", fill: "#221c4a" });
+  el("path", { d: "M0 330 Q180 270 360 310 T720 300 T1080 290 T1440 300", stroke: "#b4b0dc", "stroke-width": 3, fill: "none", opacity: .55 });
 
-  // Rama de pino con agujas
-  const VERDES = ["#173f2b", "#1f4d34", "#28603f", "#2f6f49", "#3b7f55"];
-  function rama(p, x, y, len, ang, esc = 1, curva = 0) {
-    const g = el("g", {}, p);
-    const a = rad(ang), ex = x + Math.cos(a) * len, ey = y + Math.sin(a) * len;
-    const cx = (x + ex) / 2 + Math.cos(a + Math.PI / 2) * curva, cy = (y + ey) / 2 + Math.sin(a + Math.PI / 2) * curva;
-    el("path", { d: `M${x} ${y}Q${cx} ${cy} ${ex} ${ey}`, stroke: "#5a3a22", "stroke-width": 3.2 * esc, fill: "none", "stroke-linecap": "round" }, g);
-    const pasos = Math.round(len / (5 * esc));
-    for (let i = 1; i <= pasos; i++) {
-      const t = i / pasos;
-      const px = (1 - t) * (1 - t) * x + 2 * (1 - t) * t * cx + t * t * ex, py = (1 - t) * (1 - t) * y + 2 * (1 - t) * t * cy + t * t * ey;
-      const tx = 2 * (1 - t) * (cx - x) + 2 * t * (ex - cx), ty = 2 * (1 - t) * (cy - y) + 2 * t * (ey - cy);
-      const th = Math.atan2(ty, tx), nl = (30 - 14 * t) * esc;
-      [-1, 1].forEach(lado => {
-        const na = th + lado * rad(r(42, 62));
-        el("line", { x1: px, y1: py, x2: px + Math.cos(na) * nl, y2: py + Math.sin(na) * nl, stroke: VERDES[Math.floor(rnd() * VERDES.length)], "stroke-width": 2.4 * esc, "stroke-linecap": "round" }, g);
-      });
-      if (i % 3 === 0) el("line", { x1: px, y1: py, x2: px + Math.cos(th) * nl * .8, y2: py + Math.sin(th) * nl * .8, stroke: VERDES[4], "stroke-width": 2 * esc, "stroke-linecap": "round" }, g);
+  // Casas torcidas y nevadas
+  const casas = el("g", {});
+  let x = -20, n = 0;
+  while (x < 1460) {
+    const w = r(56, 104), h = r(110, 250), base = 402, tilt = r(-7, 7);
+    if (x > 520 && x < 900) { x += r(70, 140); continue; } // hueco central para el gran abeto
+    if (x > 1040 && x < 1250) { x += r(60, 90); continue; } // hueco para el abeto pequeño
+    const g = el("g", { transform: `rotate(${tilt.toFixed(2)} ${x + w / 2} ${base})` }, casas);
+    const top = base - h, roofH = r(40, 90), apex = x + w * r(.3, .7), tip = apex + r(-10, 10);
+    const tono = ["#231e52", "#2a245e", "#1f1a48"][n % 3];
+    if (rnd() > .4) {
+      const cx = x + w * r(.6, .8), ch = r(30, 55);
+      el("rect", { x: cx, y: top - ch, width: 9, height: 50, fill: "#151230", transform: `rotate(${r(-10, 10).toFixed(1)} ${x + w * .7} ${top})` }, g);
+      el("rect", { x: cx - 2, y: top - ch - 4, width: 13, height: 5, rx: 2, fill: "#d3d4ec" }, g);
+      for (let k = 0; k < 2; k++) el("circle", { class: "smoke", cx: cx + 4.5, cy: top - ch - 8, r: 5, fill: "#a9a6cc", style: `animation-delay:${(-k * 3 - r(0, 3)).toFixed(1)}s` }, g);
     }
-    return g;
-  }
-  function bola(p, cx, cy, rr, grad, colgarDesde, cls) {
-    const g = el("g", { class: "swing " + (cls || "") }, p);
-    if (colgarDesde != null) el("line", { x1: cx, y1: colgarDesde, x2: cx, y2: cy - rr - 6, stroke: "#b58e3c", "stroke-width": 1.4 }, g);
-    el("rect", { x: cx - rr * .22, y: cy - rr - 8, width: rr * .44, height: 10, rx: 2, fill: "url(#bGold)" }, g);
-    el("circle", { cx, cy, r: rr, fill: `url(#${grad})` }, g);
-    el("ellipse", { cx: cx - rr * .35, cy: cy - rr * .4, rx: rr * .22, ry: rr * .32, fill: "#fff", opacity: .35, transform: `rotate(30 ${cx - rr * .35} ${cy - rr * .4})` }, g);
-    if (grad === "bRed") el("path", { d: `M${cx - rr} ${cy}q${rr} ${rr * .25} ${rr * 2} 0`, stroke: "#e9cf8a", "stroke-width": 1.6, fill: "none", opacity: .6 }, g);
-    return g;
-  }
-  function bayas(p, x, y, n = 3) {
-    const g = el("g", {}, p);
-    el("path", { d: `M${x} ${y}c-10-12-22-8-30-14c4 8 0 12 6 16c-4 2-2 6 4 6c4 4 12 0 20-8z`, fill: "#2a6a46" }, g);
-    el("path", { d: `M${x} ${y}c10-12 22-8 30-14c-4 8 0 12-6 16c4 2 2 6-4 6c-4 4-12 0-20-8z`, fill: "#1f5a3a" }, g);
-    for (let i = 0; i < n; i++) { const bx = x + r(-8, 8), by = y + r(-6, 6); el("circle", { cx: bx, cy: by, r: 6, fill: "#b3172c" }, g); el("circle", { cx: bx - 2, cy: by - 2, r: 1.8, fill: "#fff", opacity: .55 }, g); }
-  }
-  function estrella(p, x, y, s) {
-    const pts = []; for (let i = 0; i < 10; i++) { const rr = i % 2 ? s * .45 : s, a = rad(-90 + i * 36); pts.push(`${(x + Math.cos(a) * rr).toFixed(1)},${(y + Math.sin(a) * rr).toFixed(1)}`); }
-    el("polygon", { class: "star", points: pts.join(" "), fill: "url(#goldStar)", style: `animation-delay:${-r(0, 3).toFixed(2)}s` }, p);
-  }
-  function confeti(p, n, x0, x1, y0, y1) { for (let i = 0; i < n; i++) estrella(p, r(x0, x1), r(y0, y1), r(4, 9)); }
-  function regalo(p, x, y, w, h, rot, relleno, cinta, lazo) {
-    const g = el("g", { transform: `rotate(${rot} ${x + w / 2} ${y + h / 2})` }, p);
-    el("rect", { x: x + 6, y: y + 10, width: w, height: h, rx: 4, fill: "rgba(60,30,10,.18)" }, g);
-    el("rect", { x, y, width: w, height: h, rx: 4, fill: relleno }, g);
-    el("rect", { x, y, width: w, height: h * .2, rx: 4, fill: "rgba(0,0,0,.08)" }, g);
-    el("rect", { x: x + w * .45, y, width: w * .1, height: h, fill: cinta }, g);
-    el("rect", { x, y: y + h * .45, width: w, height: h * .1, fill: cinta }, g);
-    if (lazo) {
-      const bx = x + w * .5, by = y + 2;
-      el("path", { d: `M${bx} ${by}c-${w * .32} -${h * .38} -${w * .5} -${h * .05} -${w * .36} ${h * .1}c${w * .1} ${h * .1} ${w * .26} ${h * .04} ${w * .36} -${h * .1}z`, fill: cinta }, g);
-      el("path", { d: `M${bx} ${by}c${w * .32} -${h * .38} ${w * .5} -${h * .05} ${w * .36} ${h * .1}c-${w * .1} ${h * .1} -${w * .26} ${h * .04} -${w * .36} -${h * .1}z`, fill: cinta }, g);
-      el("path", { d: `M${bx - 3} ${by + 4}l-${w * .14} ${h * .34} 7-3 4 7 ${w * .1} -${h * .38}zM${bx + 3} ${by + 4}l${w * .14} ${h * .34} -7-3 -4 7 -${w * .1} -${h * .38}z`, fill: cinta, opacity: .9 }, g);
-      el("ellipse", { cx: bx, cy: by + 2, rx: w * .06, ry: h * .05, fill: cinta, stroke: "rgba(0,0,0,.2)" }, g);
+    el("rect", { x, y: top, width: w, height: h, fill: tono }, g);
+    const tejado = `M${x - 8} ${top + 2} Q${apex - 6} ${top - roofH * .55} ${tip} ${top - roofH} Q${apex + 8} ${top - roofH * .5} ${x + w + 8} ${top + 2}`;
+    el("path", { d: tejado + "Z", fill: "#cbcde6" }, g);
+    el("path", { d: `M${x - 8} ${top + 2} Q${apex - 6} ${top - roofH * .55} ${tip} ${top - roofH}`, stroke: "#ffffff", "stroke-width": 3, fill: "none", "stroke-linecap": "round", opacity: .8 }, g);
+    el("path", { d: tejado, stroke: "#8d88bd", "stroke-width": 1.5, fill: "none" }, g);
+    // carámbanos
+    for (let k = 0; k < Math.floor(w / 9); k++) { const ix = x - 4 + k * 9 + r(0, 3); el("path", { d: `M${ix} ${top + 4}l2.4 ${r(5, 12).toFixed(1)} 2.4 -${r(5, 12).toFixed(1)}z`, fill: "#c4c6e4", opacity: .85 }, g); }
+    // guirnalda de luces bajo el alero
+    if (rnd() > .35) {
+      const nb = Math.floor(w / 12);
+      for (let b = 0; b <= nb; b++) { const t = b / nb, bx = x - 2 + t * (w + 4), by = top + 14 + 10 * 4 * t * (1 - t); el("circle", { class: "bulb b" + (1 + b % 3), cx: bx, cy: by, r: 2.6, fill: LUCES[(b + n) % 4], style: `filter:drop-shadow(0 0 3px ${LUCES[(b + n) % 4]})` }, g); }
     }
-    return g;
-  }
-  function vela(p, x, y, w, h) {
-    const g = el("g", {}, p);
-    el("circle", { class: "candleglow", cx: x + w / 2, cy: y + h * .28, r: w * 1.5, fill: "url(#warm)" }, g);
-    el("rect", { x: x + w * .2, y: y + h * .3, width: w * .6, height: h * .68, rx: 3, fill: "#fbf3e2" }, g);
-    el("rect", { x, y: y + h * .12, width: w, height: h * .88, rx: w * .14, fill: "url(#glass)", stroke: "rgba(201,162,74,.8)", "stroke-width": 1.4 }, g);
-    for (let i = 1; i < 6; i++) el("line", { x1: x + w * i / 6, y1: y + h * .16, x2: x + w * i / 6, y2: y + h * .96, stroke: "rgba(255,240,200,.35)", "stroke-width": 1.4 }, g);
-    el("ellipse", { cx: x + w / 2, cy: y + h * .12, rx: w / 2, ry: w * .1, fill: "none", stroke: "rgba(255,230,170,.8)", "stroke-width": 1.4 }, g);
-    el("path", { class: "flame", d: `M${x + w / 2} ${y + h * .08}c${w * .09} ${h * .08} ${w * .11} ${h * .14} ${w * .05} ${h * .2}c-${w * .03} ${h * .03} -${w * .08} ${h * .03} -${w * .11} 0c-${w * .06} -${h * .06} -${w * .03} -${h * .12} ${w * .06} -${h * .2}z`, fill: "#ffcf6e" }, g);
-    el("path", { d: `M${x + w / 2} ${y + h * .27}v${h * .04}`, stroke: "#3a2416", "stroke-width": 1.6 }, g);
-  }
-  // Guirnalda de lucecitas siguiendo un trazado
-  let orden = 0;
-  function luces(p, d, n) {
-    const guia = el("path", { d, fill: "none", stroke: "#4a3a22", "stroke-width": 1.1, opacity: .7 }, p);
-    const L = guia.getTotalLength();
-    for (let i = 0; i < n; i++) {
-      const pt = guia.getPointAtLength((i + .5) / n * L), dl = (.25 + orden * .045).toFixed(2), tw = r(1.4, 3.4).toFixed(2);
-      el("circle", { class: "bulb-glow", cx: pt.x, cy: pt.y, r: 11, fill: "url(#bulbG)", style: `--d:${dl}s;--t:${tw}s` }, p);
-      el("circle", { class: "bulb", cx: pt.x, cy: pt.y, r: 3, fill: "#fff6d6", style: `--d:${dl}s;--t:${tw}s` }, p);
-      orden++;
+    // ventanas cálidas
+    const cols = w > 80 ? 3 : 2, rows = Math.floor(h / 60);
+    for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) {
+      if (rnd() < .4) continue;
+      const lit = rnd() < .7;
+      const wx = x + 10 + j * ((w - 20) / cols) + r(-2, 2), wy = top + 26 + i * 54 + r(-3, 3);
+      el("rect", { x: wx, y: wy, width: 12, height: 18, rx: 2, fill: lit ? "#ffcf6e" : "#221d48", opacity: lit ? r(.75, 1).toFixed(2) : 1, transform: `rotate(${r(-6, 6).toFixed(1)} ${wx + 6} ${wy + 9})`, style: lit ? "filter:drop-shadow(0 0 6px #ffb84a)" : "" }, g);
+      el("rect", { x: wx - 2, y: wy + 17, width: 16, height: 3, rx: 1.5, fill: "#d3d4ec", transform: `rotate(${r(-6, 6).toFixed(1)} ${wx + 6} ${wy + 18})` }, g);
     }
+    // corona en la puerta
+    if (rnd() > .45) {
+      const dx = x + w * r(.3, .6);
+      el("rect", { x: dx - 8, y: base - 30, width: 16, height: 30, rx: 7, fill: "#2a1420" }, g);
+      el("circle", { cx: dx, cy: base - 20, r: 5, fill: "none", stroke: "#1f7a4f", "stroke-width": 3 }, g);
+      el("circle", { cx: dx, cy: base - 15, r: 1.6, fill: "#e0414f" }, g);
+    }
+    x += w + r(-6, 30); n++;
   }
 
-  // ---- Esquina superior izquierda ----
-  (function () {
-    const g = el("g", {}, TL);
-    [[15, 400, 30], [34, 430, -40], [52, 380, 30], [72, 320, -20], [-4, 300, 20], [88, 240, 10]].forEach(([a, l, c]) => rama(g, -30, -20, l, a, 1.05, c));
-    rama(g, -40, 210, 260, 2, .9, -30);
-    luces(g, "M0 70C110 170 230 40 360 130S470 90 500 60", 18);
-    bayas(g, 120, 150); bayas(g, 310, 250, 4); bayas(g, 60, 320);
-    bola(g, 258, 190, 48, "bRed", 0, "");
-    bola(g, 352, 120, 30, "bGold", 0, "s2");
-    bola(g, 150, 290, 26, "bRed", 150, "s3");
-    estrella(g, 410, 260, 22); estrella(g, 230, 340, 15);
-    confeti(g, 8, 150, 480, 280, 480);
-  })();
-
-  // ---- Esquina superior derecha (espejo) ----
-  (function () {
-    const TR = $("c-tr"), g = el("g", { transform: "translate(500 0) scale(-1 1)" }, TR);
-    [[12, 420, 40], [30, 400, -30], [50, 360, 30], [70, 300, -20], [-6, 320, 10], [86, 220, 20]].forEach(([a, l, c]) => rama(g, -30, -20, l, a, 1.05, c));
-    luces(g, "M0 40C140 160 250 30 360 150S460 200 500 120", 18);
-    bayas(g, 180, 120); bayas(g, 90, 280, 4);
-    bola(g, 210, 250, 54, "bRed", 0, "s2");
-    bola(g, 318, 150, 28, "bGold", 0, "");
-    bola(g, 120, 200, 22, "bGreen", 0, "s3");
-    estrella(g, 380, 330, 20); estrella(g, 300, 400, 13);
-    confeti(g, 7, 160, 480, 300, 490);
-  })();
-
-  // ---- Esquina inferior izquierda ----
-  (function () {
-    const BL = $("c-bl"), g = el("g", {}, BL);
-    [[-12, 380, 20], [-30, 400, -30], [-52, 360, 20], [-74, 300, -10], [4, 260, 10]].forEach(([a, l, c]) => rama(g, -30, 520, l, a, 1.05, c));
-    regalo(g, 40, 220, 220, 170, -8, "url(#treesPat)", "#9b1728", true);
-    regalo(g, -40, 370, 170, 150, 6, "url(#starsPat)", "#d8ab45", false);
-    vela(g, 250, 330, 78, 120);
-    el("path", { d: "M-20 470C80 400 160 520 260 470S400 380 520 450", stroke: "url(#ribbon)", "stroke-width": 26, fill: "none", "stroke-linecap": "round" }, g);
-    el("path", { d: "M-20 466C80 396 160 516 260 466S400 376 520 446", stroke: "#e2606f", "stroke-width": 4, fill: "none", opacity: .5, "stroke-linecap": "round" }, g);
-    bayas(g, 330, 300, 4); bayas(g, 40, 200);
-    estrella(g, 360, 230, 24); estrella(g, 190, 470, 14);
-    confeti(g, 9, 120, 490, 120, 480);
-    luces(g, "M0 160C120 120 200 230 330 200S470 150 500 210", 14);
-  })();
-
-  // ---- Esquina inferior derecha ----
-  (function () {
-    const BR = $("c-br"), g = el("g", {}, BR);
-    [[-168, 380, -20], [-150, 400, 30], [-128, 360, -20], [-106, 300, 10], [176, 260, -10]].forEach(([a, l, c]) => rama(g, 530, 520, l, a, 1.05, c));
-    vela(g, 300, 280, 84, 150);
-    vela(g, 400, 230, 70, 110);
-    vela(g, 200, 360, 64, 96);
-    bola(g, 120, 440, 42, "bRed", null, "");
-    bola(g, 60, 360, 26, "bGold", null, "s2");
-    bayas(g, 250, 300, 4); bayas(g, 420, 180);
-    estrella(g, 140, 300, 20); estrella(g, 360, 470, 14);
-    confeti(g, 9, 30, 480, 140, 480);
-    luces(g, "M0 230C100 170 220 280 330 220S460 120 500 150", 14);
-  })();
-
-  // ---- Guirnalda superior entre esquinas ----
-  (function () {
-    const svg = $("lights");
-    function dibujar() {
-      svg.textContent = "";
-      const W = svg.clientWidth || innerWidth;
-      svg.setAttribute("viewBox", `0 0 ${W} 200`);
-      const n = Math.max(1, Math.round(W / 520)), paso = W / n;
-      for (let i = 0; i < n; i++) {
-        const x0 = i * paso, x1 = x0 + paso;
-        luces(svg, `M${x0} 4Q${(x0 + x1) / 2} ${70} ${x1} 4`, Math.round(paso / 34));
+  // Abeto alto, flaco e inclinado, con adornos que no pegan entre sí
+  function abeto(bx, base, alto, ancho, inclina, capas) {
+    const g = el("g", {});
+    el("path", { d: `M${bx - 6} ${base} q2 -20 ${inclina * .1} -30 h12 q-2 10 2 30z`, fill: "#4a3322" }, g);
+    const top = base - alto;
+    for (let i = 0; i < capas; i++) {
+      const t0 = i / capas, t1 = (i + 1) / capas;
+      const y0 = base - 24 - t0 * (alto - 24), y1 = base - 24 - t1 * (alto - 24) - 10;
+      const cx0 = bx + inclina * t0 * t0, cx1 = bx + inclina * t1 * t1;
+      const half = ancho * (1 - t0 * .82) / 2;
+      const d = `M${cx0 - half} ${y0} Q${cx0 - half * .4} ${y0 - 6} ${cx1 + r(-4, 4)} ${y1} Q${cx0 + half * .4} ${y0 - 8} ${cx0 + half} ${y0} q-${half * .5} 8 -${half} 2 q-${half * .5} 8 -${half} -2z`;
+      el("path", { d, fill: i % 2 ? "#16483a" : "#1c5843" }, g);
+      el("path", { d: `M${cx0 - half + 2} ${y0 - 1} q${half * .5} 7 ${half} 1 q${half * .5} 7 ${half - 2} -1`, stroke: "#d3d4ec", "stroke-width": 4, fill: "none", "stroke-linecap": "round" }, g);
+      // adornos desparejados
+      for (let k = 0; k < 3; k++) {
+        const ox = cx0 + r(-half * .7, half * .7), oy = y0 - r(4, (y0 - y1) * .7);
+        const tipo = Math.floor(rnd() * 4);
+        if (tipo === 0) el("circle", { cx: ox, cy: oy, r: r(3.5, 6), fill: ["#c8323f", "#f0c35a", "#e6eaf2"][k % 3] }, g);
+        else if (tipo === 1) el("path", { d: `M${ox} ${oy - 5}l4 5-4 7-4-7z`, fill: "#f0c35a" }, g);
+        else if (tipo === 2) el("path", { d: `M${ox - 3} ${oy + 6}v-7q0-4 3-4t3 3`, stroke: "#e6eaf2", "stroke-width": 2.4, fill: "none", "stroke-linecap": "round" }, g);
+        else el("circle", { class: "tlight", cx: ox, cy: oy, r: 2.6, fill: LUCES[k % 4], style: `animation-delay:${-r(0, 2).toFixed(2)}s;filter:drop-shadow(0 0 4px ${LUCES[k % 4]})` }, g);
       }
     }
-    dibujar();
-    let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => { orden = 0; dibujar(); }, 200); });
-  })();
+    // espumillón en espiral
+    let d = "";
+    for (let k = 0; k <= 40; k++) { const t = k / 40, y = base - 30 - t * (alto - 50), cx = bx + inclina * t * t, half = ancho * (1 - t * .82) / 2 * .9, xx = cx + Math.sin(t * Math.PI * 7) * half; d += (k ? " L" : "M") + xx.toFixed(1) + " " + y.toFixed(1); }
+    el("path", { d, stroke: "#f0c35a", "stroke-width": 1.6, fill: "none", "stroke-dasharray": "2 3", opacity: .9 }, g);
+    // estrella torcida y caída
+    const sx = bx + inclina + 6, sy = top - 4;
+    el("path", { class: "tstar", d: `M${sx} ${sy - 12}l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z`, fill: "#ffd76a", transform: `rotate(-24 ${sx} ${sy})` }, g);
+    return g;
+  }
+  abeto(712, 404, 330, 190, 46, 7);
+  abeto(1150, 404, 210, 120, -28, 5);
 
-  // ---- Pino del emblema ----
-  (function () {
-    const g = $("emblem-pine");
-    rama(g, 104, 104, 64, 192, .38, -8); rama(g, 104, 104, 54, 168, .34, 8);
-    rama(g, 116, 104, 64, -12, .38, 8); rama(g, 116, 104, 54, 12, .34, -8);
-    [[70, 104], [80, 112], [140, 104], [150, 112]].forEach(([x, y]) => { el("circle", { cx: x, cy: y, r: 4.2, fill: "#b3172c" }, g); el("circle", { cx: x - 1.4, cy: y - 1.4, r: 1.3, fill: "#fff", opacity: .55 }, g); });
-  })();
+  // Regalos altos y torcidos con lazos enormes
+  function regalo(x, y, w, h, rot, col, cinta) {
+    const g = el("g", { transform: `rotate(${rot} ${x + w / 2} ${y + h})` });
+    el("rect", { x, y, width: w, height: h, rx: 2, fill: col }, g);
+    el("rect", { x: x + w * .42, y, width: w * .16, height: h, fill: cinta }, g);
+    el("path", { d: `M${x + w / 2} ${y}c-${w * .5} -${w * .6} -${w * .9} -${w * .1} -${w * .5} ${w * .12}c${w * .2} ${w * .1} ${w * .35} 0 ${w * .5} -${w * .12}zM${x + w / 2} ${y}c${w * .7} -${w * .5} ${w} 0 ${w * .55} ${w * .16}c-${w * .2} ${w * .08} -${w * .4} 0 -${w * .55} -${w * .16}z`, fill: cinta }, g);
+    el("path", { d: `M${x + w / 2} ${y + 2}l-${w * .2} ${w * .5}M${x + w / 2} ${y + 2}l${w * .3} ${w * .4}`, stroke: cinta, "stroke-width": 3, "stroke-linecap": "round" }, g);
+  }
+  regalo(640, 352, 30, 50, -6, "#c8323f", "#f0c35a");
+  regalo(676, 338, 24, 64, 4, "#1f6b45", "#e6eaf2");
+  regalo(744, 364, 40, 38, -3, "#e6eaf2", "#c8323f");
+  regalo(790, 346, 22, 56, 8, "#f0c35a", "#1f6b45");
+  regalo(1108, 362, 30, 40, -5, "#c8323f", "#e6eaf2");
+  regalo(1182, 350, 24, 52, 6, "#1f6b45", "#f0c35a");
 
-  // ---- Destellos desenfocados ----
-  (function () {
-    const b = $("bokeh");
-    for (let i = 0; i < 22; i++) {
-      const s = r(16, 70), d = document.createElement("span");
-      d.className = "bokeh";
-      Object.assign(d.style, { width: s + "px", height: s + "px", left: r(0, 100) + "vw", top: r(0, 100) + "vh" });
-      d.style.setProperty("--d", (-r(0, 4)).toFixed(2) + "s");
-      b.append(d);
-    }
-  })();
-
-  // Encender las luces
-  requestAnimationFrame(() => setTimeout(() => document.body.classList.add("lit"), 300));
+  // Suelo nevado y valla torcida con nieve
+  el("path", { d: "M0 396 Q240 384 480 394 T960 392 T1440 390 V420 H0Z", fill: "#c9cbe4" });
+  el("path", { d: "M0 404 Q300 398 620 406 T1440 402", stroke: "#a6a6cf", "stroke-width": 4, fill: "none" });
+  const valla = el("g", {});
+  for (let i = 0; i < 30; i++) {
+    const vx = 40 + i * 46 + r(-6, 6);
+    if ((vx > 560 && vx < 880) || (vx > 1080 && vx < 1230)) continue;
+    const rot = r(-9, 9).toFixed(1);
+    el("path", { d: `M${vx} 400 l2 -34 l5 -8 l5 8 l1 34z`, fill: "#1c183c", transform: `rotate(${rot} ${vx + 6} 400)` }, valla);
+    el("path", { d: `M${vx + 1} 368 l6 -9 l6 9 q-6 3 -12 0z`, fill: "#d3d4ec", transform: `rotate(${rot} ${vx + 6} 400)` }, valla);
+  }
 })();
 
-
-/* ---------- Música: «Noche de paz» (F. X. Gruber, 1818, dominio público) con arpa, celesta y campanas ---------- */
+/* ---------- Música: vals original generado con Web Audio ---------- */
 (function musica() {
   const boton = $("musica"), txt = $("musica-txt");
   const AC = window.AudioContext || window.webkitAudioContext;
   if (!AC) { boton.hidden = true; return; }
 
-  const CORCHEA = .34, COMPAS = 6 * CORCHEA;           // 6/8 tranquilo
+  const BPM = 150, BEAT = 60 / BPM, COMPASES = 16, LOOP = COMPASES * 3 * BEAT;
   const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+
+  // Re menor: acordes por compás
   const ACORDES = {
-    C:  [48, 55, 60, 64], G: [43, 50, 55, 59], G7: [43, 50, 53, 59], F: [41, 48, 53, 57]
+    Dm: { bajo: 50, notas: [62, 65, 69] }, Gm: { bajo: 43, notas: [62, 67, 70] },
+    A7: { bajo: 45, notas: [61, 64, 67] }, Bb: { bajo: 46, notas: [62, 65, 70] },
+    F:  { bajo: 41, notas: [60, 65, 69] }, C:  { bajo: 48, notas: [60, 64, 67] },
+    A:  { bajo: 45, notas: [61, 64, 69] }
   };
-  const ARMONIA = ["C","C","C","C","G","G","C","C","F","F","C","C","F","F","C","C","G","G7","C","C","C","G7","C","C"];
-  // Melodía en corcheas: [nota midi o null, duración]
+  const PROGRESION = ["Dm","Dm","Gm","A7","Dm","Bb","Gm","A7","F","C","Dm","A","Bb","Gm","A7","Dm"];
+  // Melodía: [nota midi o null, duración en tiempos], 3 tiempos por compás
   const MELODIA = [
-    [67,3],[69,1],[67,2], [64,6], [67,3],[69,1],[67,2], [64,6],
-    [74,4],[74,2], [71,6], [72,4],[72,2], [67,6],
-    [69,4],[69,2], [72,3],[71,1],[69,2], [67,3],[69,1],[67,2], [64,6],
-    [69,4],[69,2], [72,3],[71,1],[69,2], [67,3],[69,1],[67,2], [64,6],
-    [74,4],[74,2], [77,3],[74,1],[71,2], [72,6], [76,6],
-    [72,3],[67,1],[64,2], [67,3],[65,1],[62,2], [60,6], [null,6]
+    [74,1],[77,1],[81,1],   [86,2],[85,.5],[86,.5],   [82,1],[81,1],[79,1],   [81,2],[76,1],
+    [77,1],[76,.5],[77,.5],[81,1],   [86,1.5],[84,.5],[82,1],   [79,1],[82,1],[76,1],   [73,1.5],[76,.5],[81,1],
+    [81,1],[84,1],[89,1],   [88,2],[86,.5],[84,.5],   [86,1],[81,1],[77,1],   [76,2],[73,1],
+    [74,1],[77,1],[82,1],   [86,1.5],[84,.5],[82,1],   [76,1],[79,1],[85,1],   [86,2],[null,1]
   ];
-  const LOOP = ARMONIA.length * COMPAS;
 
   let ctx = null, master = null, seco = null, eco = null, siguiente = 0, temporizador = null, sonando = false, vuelta = 0;
 
   function impulso(seg) {
     const n = Math.floor(ctx.sampleRate * seg), buf = ctx.createBuffer(2, n, ctx.sampleRate);
-    for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 2.6); }
+    for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3); }
     return buf;
   }
+
   function montar() {
     ctx = new AC();
     master = ctx.createGain(); master.gain.value = 0;
     const comp = ctx.createDynamicsCompressor();
     master.connect(comp); comp.connect(ctx.destination);
-    seco = ctx.createGain(); seco.gain.value = .7; seco.connect(master);
-    const conv = ctx.createConvolver(); conv.buffer = impulso(3.2);
-    eco = ctx.createGain(); eco.gain.value = .55; eco.connect(conv); conv.connect(master);
+    seco = ctx.createGain(); seco.gain.value = .75; seco.connect(master);
+    const conv = ctx.createConvolver(); conv.buffer = impulso(2.8);
+    eco = ctx.createGain(); eco.gain.value = .45; eco.connect(conv); conv.connect(master);
   }
+
   function salida(nodo) { nodo.connect(seco); nodo.connect(eco); }
 
-  // Celesta: la melodía
-  function celesta(m, t, vol, dur) {
+  // Caja de música
+  function cajita(m, t, vol) {
     const g = ctx.createGain(); salida(g);
-    const fin = Math.max(1.2, dur + .6);
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0008, t + fin);
-    [[1, .9], [2, .35], [3, .1], [4.02, .05]].forEach(([mul, a]) => {
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .006); g.gain.exponentialRampToValueAtTime(.0008, t + 1.6);
+    [[1, "sine", 1], [2, "sine", .28], [3.01, "triangle", .08]].forEach(([mul, tipo, a]) => {
       const o = ctx.createOscillator(), og = ctx.createGain();
-      o.type = "sine"; o.frequency.value = hz(m) * mul; og.gain.value = a;
-      o.connect(og); og.connect(g); o.start(t); o.stop(t + fin + .05);
+      o.type = tipo; o.frequency.value = hz(m) * mul; og.gain.value = a;
+      o.connect(og); og.connect(g); o.start(t); o.stop(t + 1.7);
     });
   }
-  // Arpa: arpegios suaves
-  function arpa(m, t, vol) {
+  // Pizzicato grave
+  function pizz(m, t, vol, dur) {
     const o = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain();
     o.type = "triangle"; o.frequency.value = hz(m);
-    f.type = "lowpass"; f.frequency.setValueAtTime(3000, t); f.frequency.exponentialRampToValueAtTime(600, t + 1.2);
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .006); g.gain.exponentialRampToValueAtTime(.0008, t + 1.6);
-    o.connect(f); f.connect(g); salida(g); o.start(t); o.stop(t + 1.7);
+    f.type = "lowpass"; f.frequency.setValueAtTime(1800, t); f.frequency.exponentialRampToValueAtTime(300, t + dur);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0008, t + dur);
+    o.connect(f); f.connect(g); salida(g); o.start(t); o.stop(t + dur + .05);
   }
-  // Campana tubular al empezar cada frase
-  function campana(m, t, vol) {
-    const g = ctx.createGain(); salida(g);
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .005); g.gain.exponentialRampToValueAtTime(.0005, t + 4);
-    [[1, 1], [2.76, .4], [5.4, .18], [8.93, .08]].forEach(([mul, a]) => {
-      const o = ctx.createOscillator(), og = ctx.createGain();
-      o.type = "sine"; o.frequency.value = hz(m) * mul; og.gain.value = a;
-      o.connect(og); og.connect(g); o.start(t); o.stop(t + 4.1);
-    });
-  }
-  // Cuerdas de fondo
-  function cuerdas(notas, t, dur) {
-    notas.slice(1).forEach(m => {
-      const o = ctx.createOscillator(), o2 = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain();
-      o.type = "sawtooth"; o2.type = "sawtooth"; o.frequency.value = hz(m); o2.frequency.value = hz(m) * 1.004;
-      f.type = "lowpass"; f.frequency.value = 900;
-      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.012, t + dur * .4); g.gain.linearRampToValueAtTime(0, t + dur);
-      o.connect(f); o2.connect(f); f.connect(g); salida(g);
-      o.start(t); o2.start(t); o.stop(t + dur + .05); o2.stop(t + dur + .05);
-    });
+  // Fondo inquietante
+  function niebla(m, t, dur) {
+    const o = ctx.createOscillator(), o2 = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+    o.type = "sawtooth"; o2.type = "sawtooth"; o.frequency.value = hz(m); o2.frequency.value = hz(m) * 1.006;
+    f.type = "lowpass"; f.frequency.value = 520; f.Q.value = 4;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.035, t + dur * .4); g.gain.linearRampToValueAtTime(0, t + dur);
+    o.connect(f); o2.connect(f); f.connect(g); g.connect(eco); g.connect(seco);
+    o.start(t); o2.start(t); o.stop(t + dur + .05); o2.stop(t + dur + .05);
   }
 
   function programarVuelta(t0) {
-    const oct = vuelta % 2 === 1 ? 24 : 12;
-    ARMONIA.forEach((nombre, i) => {
-      const n = ACORDES[nombre], t = t0 + i * COMPAS;
-      [0, 1, 2, 3, 2, 1].forEach((idx, k) => arpa(n[idx], t + k * CORCHEA, k === 0 ? .16 : .09));
-      if (i % 2 === 0) cuerdas(n, t, 2 * COMPAS);
-      if (i % 4 === 0) campana(n[2] + 12, t, .07);
+    const oct = vuelta % 2 === 1 ? -12 : 0; // la segunda vuelta, la melodía más grave
+    PROGRESION.forEach((nombre, i) => {
+      const a = ACORDES[nombre], t = t0 + i * 3 * BEAT;
+      pizz(a.bajo, t, .42, .7);
+      [1, 2].forEach(b => a.notas.forEach(n => pizz(n, t + b * BEAT, .07, .35)));
+      if (i % 2 === 0) niebla(a.bajo + 12, t, 6 * BEAT);
     });
     let t = t0;
     MELODIA.forEach(([m, d]) => {
-      if (m != null) celesta(m + oct, t, oct === 24 ? .13 : .2, d * CORCHEA);
-      t += d * CORCHEA;
+      if (m != null) { cajita(m + oct, t, .2); if (oct) cajita(m, t + .012, .06); }
+      t += d * BEAT;
     });
+    // destellos al final de cada frase
+    cajita(98, t0 + (8 * 3 - 1) * BEAT, .05);
+    cajita(98, t0 + (16 * 3 - 1) * BEAT, .05);
     vuelta++;
   }
 
   function vigilar() {
-    if (ctx.currentTime > siguiente - 3) { programarVuelta(siguiente); siguiente += LOOP; }
+    if (ctx.currentTime > siguiente - 2) { programarVuelta(siguiente); siguiente += LOOP; }
   }
 
   async function encender() {
@@ -950,7 +1535,7 @@ $("csv-audit").addEventListener("click", () => {
     if (ctx.state === "suspended") await ctx.resume();
     master.gain.cancelScheduledValues(ctx.currentTime);
     master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
-    master.gain.linearRampToValueAtTime(.6, ctx.currentTime + 2);
+    master.gain.linearRampToValueAtTime(.55, ctx.currentTime + 1.2);
     if (!temporizador) {
       siguiente = Math.max(siguiente, ctx.currentTime + .1);
       vigilar(); temporizador = setInterval(vigilar, 250);
@@ -962,10 +1547,10 @@ $("csv-audit").addEventListener("click", () => {
     sonando = false; pintar();
     if (!ctx) return;
     const t = ctx.currentTime;
-    master.gain.cancelScheduledValues(t); master.gain.setValueAtTime(master.gain.value, t); master.gain.linearRampToValueAtTime(0, t + .8);
+    master.gain.cancelScheduledValues(t); master.gain.setValueAtTime(master.gain.value, t); master.gain.linearRampToValueAtTime(0, t + .6);
     clearInterval(temporizador); temporizador = null;
     const viejo = ctx; ctx = null; siguiente = 0; vuelta = 0;
-    setTimeout(() => viejo.close().catch(() => {}), 900);
+    setTimeout(() => viejo.close().catch(() => {}), 700);
   }
 
   function pintar() {
@@ -978,7 +1563,7 @@ $("csv-audit").addEventListener("click", () => {
   let apagadaPorUsuario = false;
   const GESTOS = ["pointerdown", "keydown", "touchstart"];
   function alPrimerGesto(e) {
-    if (e.target && e.target.closest && e.target.closest("#musica")) return;
+    if (e.target && e.target.closest && e.target.closest("#musica")) return; // el propio botón ya decide
     quitarGestos();
     if (!apagadaPorUsuario && !sonando) encender();
   }
@@ -1003,6 +1588,29 @@ $("csv-audit").addEventListener("click", () => {
   });
 })();
 
+/* ---------- Nieve ---------- */
+(function nieve() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const c = $("snow"), ctx = c.getContext("2d");
+  let W, H, copos = [];
+  function size() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = c.clientWidth; H = c.clientHeight; c.width = W * dpr; c.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(Math.min(220, W * H / 7000));
+    copos = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 3 + .8, v: Math.random() * .6 + .25, f: Math.random() * Math.PI * 2 }));
+  }
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "rgba(255,255,255,.92)";
+    for (const p of copos) {
+      p.y += p.v; p.f += .01; p.x += Math.sin(p.f) * .35;
+      if (p.y > H + 4) { p.y = -4; p.x = Math.random() * W; }
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  size(); window.addEventListener("resize", size); requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>
